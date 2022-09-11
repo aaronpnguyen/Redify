@@ -1,0 +1,18 @@
+<form action="/submit/form/post" method="POST">
+
+    <div class="postForm">
+        <input class="credentials" type="text" spellcheck="false" name="title" placeholder="Post Name">
+    </div>
+    <div class="postForm">
+        <textarea class="credentials" type="password" name="message" placeholder="Description of your topic"></textarea>
+    </div>
+    <div class="postForm">
+        <select name="topic_id">
+            {%for topic in topics%}
+                <option value="{{topic.id}}">{{topic.title}}</option>
+            {%endfor%}
+        </select>
+    </div>
+    
+    <button type="submit">submit form</button>
+</form>

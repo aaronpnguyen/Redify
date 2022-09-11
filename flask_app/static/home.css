@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'FF Mark W05', sans-serif;
+}
+
+body {
+    background-color: #030303;
+}
+
+.navContainer {
+    border-bottom: 1px solid #282828;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.navBar {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111111;
+    height: 50px;
+    width: 100%;
+}
+
+span {
+    color: #ff0000;
+}
+
+.searchBar {
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    min-width: 500px;
+}
+
+.svgSearch {
+    filter: invert(100)
+}
+
+::placeholder {
+    color: white;
+}
+
+input:focus-visible {
+    outline-offset: 0px;
+}
+
+.svgSearch, ::placeholder {
+    opacity: 0.40;
+}
+
+.searchInput {
+    background-color: #282828;
+    border: None;
+    color: black;
+}
+
+.leftNav, .rightNav {
+    display: flex;
+    color: #1db352;
+}
+
+.leftNav {
+    margin-left: 25px;
+}
+
+.rightNav {
+    margin-right: 25px;
+    padding: 5px;
+    padding-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282828;
+    border-radius: 7px;
+}
+
+.bodyContainer {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+.bodyLeft {
+    width: 700px;
+}
+
+.messageContent {
+    background-color: antiquewhite;
+    width: 700px;
+    height: 200px;
+    margin-bottom: 25px;
+}
+
+.bodyRight {
+    display: flex;
+    width: 250px;
+}
+
+.trending {
+    background-color: green;
+    width: 250px;
+    height: 500px;
+    margin-bottom: 25px;
+}
+
+.legal {
+    background-color: green;
+    position: sticky;
+    top: 70px;
+    width: 250px;
+    height: 250px;
+}

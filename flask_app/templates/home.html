@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/home.css">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="navContainer">
+        <div class="navBar">
+            <div class="leftNav">
+                <h2><span>Red</span>ify</h2>
+                <select name="genre">
+                    <option disabled selected hidden>Genre</option>
+                    <option value="#">Test</option>
+                </select>
+            </div>
+            <div class="searchBar">
+                <label class="svgSearch" for="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 96 96">
+                        <switch>
+                            <path d="M90.829 85.172L68.128 62.471A35.846 35.846 0 0 0 76 40C76 20.118 59.883 4 40 4 20.118 4 4 20.118 4 40s16.118 36 36 36c8.5 0 16.312-2.946 22.471-7.873l22.701 22.701A3.988 3.988 0 0 0 88 92a4 4 0 0 0 2.829-6.828zM40 68c-15.464 0-28-12.536-28-28s12.536-28 28-28c15.465 0 28 12.536 28 28S55.465 68 40 68z"/>
+                        </switch>
+                    </svg>
+                </label>
+                <input class="searchInput" type="text" placeholder="Search Redify">
+            </div>
+            <div class="rightNav">
+                <h3></h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                    <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="bodyContainer">
+        <div class="bodyLeft">
+            <div class="postsContainer">
+                <div class="messageContent">
+                    create a new post
+                </div>
+                {%for post in posts%}
+                    <div class="messageContent">
+                        <div class="leftMC">
+
+                        </div>
+                        <div class="rightMC">
+                            <div class="postTitle">
+                                <h3>{{post.title}}</h3>
+                                <h3>{{post.message}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+        <div class="bodyRight">
+            <div class="information">
+                <div class="trending">
+                    <a href="/stats/short_term">hek1</a>
+                    <a href="/stats/medium_term">hek2</a>
+                    <a href="/stats/long_term">hek3</a>
+                </div>
+                <div class="legal">
+                    <div class="legalInfo">
+                        <ul>
+                            <li>About</li>
+                            <li>Help</li>
+                            <li>Terms</li>
+                            <li>Topics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5y5lQgpYeynTDyzpmYTzxO?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</body>
+</html>

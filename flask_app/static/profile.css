@@ -1,0 +1,29 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Circular,Helvetica,Arial,sans-serif;
+    background-color: #202124;
+}
+
+.artistCard {
+    display: inline-block;
+    /* border: 1px solid rgb(20 216 132); */
+    color: rgb(255 255 255);
+    background-color: rgb(40 40 40);
+    margin: 10px;
+    text-align: center;
+    border-radius: 25px;
+    padding: 15px;
+}
+
+.artistCard img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+}
+
+.artistCard h3 {
+    background-color: rgb(40 40 40);
+}

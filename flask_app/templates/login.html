@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/login.css">
+    <title>Document</title>
+</head>
+<body>
+    {%with messages = get_flashed_messages()%}
+        {%if messages %}
+            {%for message in messages%}
+                <h3 style="color:red;">{{message}}</h3>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    <form action="/login" method="POST">
+        <div class="loginTitle">
+            <h1>Sign In</h1>
+        </div>
+        <div class="loginForm">
+            <input class="credentials" type="text" spellcheck="false" name="user_name" placeholder="USERNAME">
+        </div>
+        <div class="loginForm">
+            <input class="credentials" type="password" name="password" placeholder="PASSWORD">
+        </div>
+        
+        <button type="submit" class="login">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                <path fill="none" d="M0 0h48v48h-48z"/>
+                <path d="M24 8l-2.83 2.83 11.17 11.17h-24.34v4h24.34l-11.17 11.17 2.83 2.83 16-16z"/>
+            </svg>
+        </button>
+
+        <div class="redirect">
+            <a href="#">CAN'T SIGN IN?</a>
+        </div>
+        <div class="redirect">
+            <a href="/register/user">CREATE ACCOUNT</a>
+        </div>
+    </form>
+</body>
+</html>
