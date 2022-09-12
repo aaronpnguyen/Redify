@@ -93,7 +93,6 @@ input:focus-visible {
 .messageContent {
     background-color: antiquewhite;
     width: 700px;
-    height: 200px;
     margin-bottom: 25px;
 }
 

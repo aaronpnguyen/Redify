@@ -31,3 +31,9 @@ class Topic:
             return all_topics
         
         return []
+    
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM topics WHERE title = %(title)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        return cls(results[0])
