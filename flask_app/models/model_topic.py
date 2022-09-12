@@ -31,9 +31,9 @@ class Topic:
             return all_topics
         
         return []
-    
+
     @classmethod
     def get_one(cls, data):
-        query = "SELECT * FROM topics WHERE title = %(title)s"
+        query = "SELECT * FROM topics LEFT JOIN posts on posts.topic_id LEFT JOIN users ON posts.user_id WHERE topics.title = %(title)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results[0])

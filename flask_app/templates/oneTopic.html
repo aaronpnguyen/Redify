@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1>ayo topic</h1>
+    {{topic.title}}
+    {{topic.description}}
+
+    {%for post in posts%}
+        <div>
+            <h1>{{post.title}}</h1>
+            <h1>{{post.description}}</h1>
+            <h3>{{post.user.user_name}}</h3>
+            <br>
+        </div>
+    {%endfor%}
 </body>
 </html>

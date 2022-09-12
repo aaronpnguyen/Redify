@@ -12,7 +12,6 @@ def postForm():
 def submitPost():
 
     link = request.form['link']
-
     if link:
         try:
             valid = link.index('spotify.com/')
@@ -24,6 +23,7 @@ def submitPost():
                 link = urlData[1]
         except:
             type = ""
+            link = ""
             print("not a valid link")
 
     data = {

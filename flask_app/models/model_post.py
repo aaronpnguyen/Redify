@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
+from flask_app.models import model_user
 from flask import flash
 
 class Post:
@@ -13,6 +14,7 @@ class Post:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
+        self.user = None
         self.topic_id = data['topic_id']
     
     # CREATE
@@ -27,6 +29,24 @@ class Post:
         query = "SELECT * FROM topics LEFT JOIN posts on posts.topic_id WHERE posts.user_id = %(user_id)s AND posts.title = %(title)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results[0])
+    
+    @classmethod
+    def get_post_for_topic(cls, data):
+        query = "SELECT * FROM posts LEFT JOIN users on posts.user_id WHERE topic_id = %(topic_id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        
+        if results:
+            all_posts = []
+            for data in results:
+                post = cls(data)
+                user_data = {
+                    'id': data['user_id']
+                }
+                user = model_user.User.get_user_by_id(user_data)
+                post.user = user
+                all_posts.append(post)
+            return all_posts
+        return []
 
     @classmethod
     def show_all(cls):
