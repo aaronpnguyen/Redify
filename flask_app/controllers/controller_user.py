@@ -70,6 +70,6 @@ def home():
         user = model_user.User.get_user_by_id(data)
     else:
         user = None
-    posts = model_post.Post.show_all()
+    posts = model_post.Post.get_all()
         
     return render_template('home.html', user = user, posts = posts)
