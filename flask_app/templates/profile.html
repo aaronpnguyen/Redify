@@ -4,34 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/profile.css">
-    <title>Profile Page</title>
+    <title>User Profile</title>
 </head>
 <body>
-    <h1>Working on the profile</h1>
-    <form action="/save/spotify_stats" method="POST">
-        <button type="submit">save</button>
-    </form>
-    
-    {%for track in tracks%}
-        <div>
-            <iframe style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/{{track.songId}}?utm_source=generator&theme=0"
-                width="800px" height="100px"
-                frameBorder="0"
-                allowfullscreen=""
-                allow="autoplay;clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-            </iframe>
+    <div class="userCard">
+        {{user.user_name}}
+    </div>
+    <div class="userStats">
+        <div class="topTracks">
+            <h1>Favorite songs:</h1>
+            {%for track in tracks%}
+                <h4>{{track.track_name}}</h4>
+            {%endfor%}
         </div>
-    {%endfor%}
 
-    {%for artist in artists%}
-        <div class="artistCard">
-            <img src="{{artist.artistImage}}">
-            <h3>{{artist.artistName}}</h3>
+        <div class="topArtists">
+            <h1>Favorite artists:</h1>
+            {%for artist in artists%}
+                <h4>{{artist.artist_name}}</h4>
+            {%endfor%}
         </div>
-    {%endfor%}
-
+    </div>
 </body>
 </html>

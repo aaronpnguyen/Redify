@@ -31,7 +31,6 @@ class Topic:
             for topic in results:
                 all_topics.append(topic)
             return all_topics
-        
         return []
 
     @classmethod
