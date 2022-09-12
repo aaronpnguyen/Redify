@@ -33,7 +33,7 @@ def login():
 
     print(user.id)
 
-    return redirect('/spotify/login')
+    return redirect('/home')
 
 @app.route('/register/user')
 def register_form():

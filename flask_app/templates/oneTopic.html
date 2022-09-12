@@ -15,6 +15,15 @@
         <div>
             <h1>{{post.title}}</h1>
             <h1>{{post.description}}</h1>
+            {%if post.type and post.link%}
+                <h3>post embed</h3>
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                    width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            {%endif%}
             <h3>{{post.user.user_name}}</h3>
             <br>
         </div>

@@ -8,6 +8,7 @@ class Post:
         self.id = data['id']
         self.title = data['title']
         self.message = data['message']
+        self.type = data['type']
         self.link = data['link']
         self.liked = 0
         self.genre = []
