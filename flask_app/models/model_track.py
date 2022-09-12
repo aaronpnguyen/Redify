@@ -30,7 +30,6 @@ class Track:
             for track in results:
                 all_tracks.append(track)
             return all_tracks
-        
         return []
     
     # UPDATE
