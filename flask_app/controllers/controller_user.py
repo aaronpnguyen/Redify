@@ -1,6 +1,6 @@
 from flask_app import app
 from flask import redirect, render_template, flash, session, request
-from flask_app.models import model_user, model_post
+from flask_app.models import model_user, model_post, model_track, model_artist
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -73,3 +73,10 @@ def home():
     posts = model_post.Post.get_all()
         
     return render_template('home.html', user = user, posts = posts)
+
+@app.route('/profile/<string:username>')
+def profile(username):
+    user = model_user.User.get_user_by_name({'user_name': username})
+    favorite_tracks = model_track.Track.get_all_for_user({'user_id': user.id})
+    favorite_artists = model_artist.Artist.get_all_for_user({'user_id': user.id})
+    return render_template('profile.html', user = user, tracks = favorite_tracks, artists = favorite_artists)

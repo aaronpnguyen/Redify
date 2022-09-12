@@ -87,7 +87,7 @@ def userStats(term):
         tracks.append(details)
     
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('profile.html', tracks = tracks, artists = artists)
+    return render_template('stats.html', tracks = tracks, artists = artists)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
