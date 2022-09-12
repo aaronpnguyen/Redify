@@ -128,8 +128,8 @@ def saveStats():
         for i, track in enumerate(topTracks):
             data = {
                 'id': allTracks[i]['id'],
-                'track_name': track['album']['artists'][0]['name'],
-                'track_artist': track['album']['images'][2]['url'],
+                'track_name': track['name'],
+                'track_artist': track['album']['artists'][0]['name'],
                 'track_image': track['album']['images'][2]['url'],
                 'track_id': track['id'],
             }
