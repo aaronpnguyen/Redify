@@ -6,6 +6,7 @@ from flask_app import SPOTIFY_APP_ID, SPOTIFY_APP_SECRET, app
 import time
 from flask import redirect, url_for, session, request, render_template, flash
 from flask_app.models.model_artist import Artist
+from flask_app.models.model_track import Track
 
 # SPOTIFY AUTH
 app.config['session_spotify'] = 'spotify has logged'
@@ -103,6 +104,7 @@ def saveStats():
     topTracks = request.current_user_top_tracks(5, 0, "long_term")['items']
     
     allArtists = Artist.show_all_for_user({'user_id': session['user_id']})
+    allTracks = Track.show_all_for_user({'user_id': session['user_id']})
 
     # Conditional to check whether we are updating or saving to database
     if allArtists:
@@ -121,5 +123,26 @@ def saveStats():
                 'user_id': session['user_id']
             }
             Artist.create_artist(data)
+
+    if allTracks:
+        for i, track in enumerate(topTracks):
+            data = {
+                'id': allTracks[i]['id'],
+                'track_name': track['album']['artists'][0]['name'],
+                'track_artist': track['album']['images'][2]['url'],
+                'track_image': track['album']['images'][2]['url'],
+                'track_id': track['id'],
+            }
+            Track.update_track(data)
+    else:
+        for track in topTracks:
+            data = {
+                'track_name': track['name'],
+                'track_artist': track['album']['artists'][0]['name'],
+                'track_image': track['album']['images'][2]['url'],
+                'track_id': track['id'],
+                'user_id': session['user_id']
+            }
+            Track.create_track(data)
 
     return redirect('/home')

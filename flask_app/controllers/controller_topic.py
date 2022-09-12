@@ -11,6 +11,12 @@ def allTopics():
     topics = Topic.show_all()
     return render_template('topics.html', topics = topics)
 
+@app.route('/t/<string:topicName>')
+def oneTopic(topicName):
+    topic = Topic.get_one({'title': topicName})
+    print(topic.title)
+    return render_template('oneTopic.html')
+
 @app.route('/submit/form/topic', methods=['POST'])
 def submitTopic():
     data = {
