@@ -38,7 +38,7 @@ class Artist:
         return cls(results[0])
     
     @classmethod
-    def show_all_for_user(cls, data):
+    def get_all_for_user(cls, data):
         query = "SELECT * FROM favorite_artists WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if results:

@@ -19,8 +19,10 @@ class Track:
         query = "INSERT INTO favorite_tracks (track_name, track_artist, track_image, track_id, user_id) VALUES (%(track_name)s, %(track_artist)s, %(track_image)s, %(track_id)s, %(user_id)s)"
         return connectToMySQL(DATABASE).query_db(query, data)
     
+    # GET
+
     @classmethod
-    def show_all_for_user(cls, data):
+    def get_all_for_user(cls, data):
         query = "SELECT * FROM favorite_tracks WHERE user_id = %(user_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if results:
@@ -28,9 +30,10 @@ class Track:
             for track in results:
                 all_tracks.append(track)
             return all_tracks
-        
         return []
     
+    # UPDATE
+
     @classmethod
     def update_track(cls, data):
         query = "UPDATE favorite_tracks SET track_name = %(track_name)s, track_artist = %(track_artist)s, track_image = %(track_image)s, track_id = %(track_id)s, updated_at = NOW() WHERE id = %(id)s;"
