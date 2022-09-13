@@ -15,8 +15,10 @@ class User:
         self.password = data['password'] # This should be hashed
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.posts = []
-        self.topics = []
+        self.posts = None
+        self.topics = None
+        self.favorite_tracks = None
+        self.favorite_artists = None
     
     # CREATE
 
@@ -28,9 +30,10 @@ class User:
     # GET
 
     @classmethod
-    def get_user(cls, data):
+    def get_user_by_name(cls, data):
         query = "SELECT * FROM users WHERE user_name = %(user_name)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
+
         if results:
             all_users = []
             for user in results:
@@ -39,9 +42,10 @@ class User:
         return []
 
     @classmethod
-    def get_email(cls, data):
-        query = "SELECT * FROM users WHERE user_name = %(email)s"
+    def get_user_by_email(cls, data):
+        query = "SELECT * FROM users WHERE email = %(email)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
+
         if results:
             all_users = []
             for user in results:
@@ -64,7 +68,7 @@ class User:
         if len(data['user_name']) < 2: # Checks if the user name is valid
             flash("Invalid user name, must have more than 2 characters.")
             is_valid = False
-        if User.get_email(data): # Checks if the email already exists (if its true, it exists)
+        if User.get_user_by_email(data): # Checks if the email already exists (if its true, it exists)
             flash("This email already exists.")
             is_valid = False
         if not EMAIL_REGEX.match(data['email']): # Checks if the email is valid

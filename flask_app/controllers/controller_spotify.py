@@ -1,5 +1,3 @@
-from ftplib import all_errors
-from logging import NullHandler
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask_app import SPOTIFY_APP_ID, SPOTIFY_APP_SECRET, app
@@ -89,7 +87,7 @@ def userStats(term):
         tracks.append(details)
     
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('profile.html', tracks = tracks, artists = artists)
+    return render_template('stats.html', tracks = tracks, artists = artists)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
@@ -103,8 +101,8 @@ def saveStats():
     topArtists = request.current_user_top_artists(5, 0, "long_term")['items']
     topTracks = request.current_user_top_tracks(5, 0, "long_term")['items']
     
-    allArtists = Artist.show_all_for_user({'user_id': session['user_id']})
-    allTracks = Track.show_all_for_user({'user_id': session['user_id']})
+    allArtists = Artist.get_all_for_user({'user_id': session['user_id']})
+    allTracks = Track.get_all_for_user({'user_id': session['user_id']})
 
     # Conditional to check whether we are updating or saving to database
     if allArtists:

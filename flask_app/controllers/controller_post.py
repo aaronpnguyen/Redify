@@ -1,30 +1,27 @@
 from flask_app import app
-from flask import redirect, render_template, flash, session, request
+from flask import redirect, render_template, session, request
 from flask_app.models.model_topic import Topic
 from flask_app.models.model_post import Post
 
 @app.route('/form/post')
 def postForm():
-    allTopics = Topic.show_all()
+    allTopics = Topic.get_all()
     return render_template('postForm.html', topics = allTopics)
 
 @app.route('/submit/form/post', methods=['POST'])
 def submitPost():
-
     link = request.form['link']
-
     if link:
         try:
             valid = link.index('spotify.com/')
             if valid:
                 url = link[valid + 12:]
                 urlData = url.split('/')
-                print(urlData[0], urlData[1])
                 type = urlData[0]
                 link = urlData[1]
         except:
-            type = ""
-            print("not a valid link")
+            type = "" # Set default
+            link = "" # Set default
 
     data = {
         'title': request.form['title'],
