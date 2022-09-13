@@ -6,6 +6,12 @@
     letter-spacing: 1px;
 }
 
+:root {
+    --light-red: rgba(235, 130, 130, 1);
+    --dark-red:  rgba(203, 106, 106, 1);
+    --charc: rgb(50,50,50);
+}
+
 body {
     /*background-color: #030303;*/
     background-color:  rgb(245, 245, 245);
@@ -205,7 +211,7 @@ input:focus-visible {
     background-position: center;
     background: url(pop-shapes.svg);
     background-repeat: no-repeat;
-    min-width:  60%;
+    min-width:  600px;
     max-width: 60%;
     max-height:  400px;
     margin-top: 5%;
@@ -218,10 +224,11 @@ input:focus-visible {
     min-height: 100%;
     min-width: 100%;
     padding: 4% 8%;
+    font-size: 16px;
 }
 
 .createFormTitle {
-    margin-bottom: 3%;
+    margin-bottom: 5%;
     font-size: 2rem;
 }
 
@@ -250,9 +257,55 @@ input:focus-visible {
 }
 
 .postSelectInput {
-    padding: 1% 1%;
-    margin-left: 3%;
+    padding: 1.25%;
+    border: 1px solid var(--dark-red);
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0,0,0,0.3);
+    font-size: 15px;
 }
+
+.createFormSubmit {
+    padding:  1% 2%;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--charc);
+}
+
+.createFormSubmit:hover {
+    color: white;
+    background-color: var(--charc);
+    cursor: pointer;
+    font-weight:  bold;
+}
+
+.postDescription {
+    resize: none;
+    min-height: 80px;
+}
+
+.postURL {
+    resize: none;
+    min-height: 50px;
+}
+
+/* Grow Rotate */
+.hvr-grow-rotate {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {
+  -webkit-transform: scale(1.1) rotate(4deg);
+  transform: scale(1.1) rotate(4deg);
+}
+
+/* General */
 
 .lightOpacityBg {
     background-color: rgba(255, 255, 255, 0.4);
@@ -264,6 +317,12 @@ input:focus-visible {
 .TenBorderRadius {
     border-radius: 10px;
 }
+
+.charcOutline:focus, .charcOutline:active {
+    outline: 2px solid var(--charc);
+}
+
+
 
 
 

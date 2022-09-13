@@ -43,24 +43,25 @@
                     <p class="createFormTitle"><span class="lightOpacityBg">Create a Post</span></p>
 
                 <div class="postForm">
-                    <input class="postInput" type="text" spellcheck="false" name="title" placeholder="Post Title">
+                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="title" placeholder="Post Title">
                 </div>
                 <div class="postForm">
-                    <textarea class="postInput" type="password" name="message" placeholder="Write your post description.."></textarea>
+                    <textarea class="postInput charcOutline postDescription" type="password" name="message" placeholder="Write your post description.."></textarea>
                 </div>
                 <div class="postForm">
-                    <textarea class="postInput" type="password" name="link" placeholder="Spotify URL"></textarea>
+                    <textarea class="postInput charcOutline postURL" type="password" name="link" placeholder="Spotify URL"></textarea>
                 </div>
                 <div class="postForm">
-                    <span class="postInputTopicLabel lightOpacityBg TenBorderRadius">Select a Topic:</span>
+                    <!-- <span class="postInputTopicLabel lightOpacityBg TenBorderRadius">Select a Topic:</span> -->
                     <select class="postSelectInput" name="topic_id">
+                        <option value="" disabled selected hidden>Select a Topic</option>
                         {%for topic in topics%}
                             <option class="postSelectValue" value="{{topic.id}}">{{topic.title}}</option>
                         {%endfor%}
                     </select>
                 </div>
                 
-                <button type="submit">submit form</button>
+                <button class="createFormSubmit hvr-grow-rotate" type="submit">Create Post</button>
             </form>
 
         </div>
