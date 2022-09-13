@@ -35,10 +35,11 @@
             </div>
         </div>
     </div>
+    <div class="cline"></div>
     <div class="bodyContainer">
         <div class="bodyLeft">
             <div class="postsContainer">
-                <div class="messageContent">
+                <div class="messageContent createPost">
                     <a href="/form/post">Create a new post</a>
                 </div>
                 {%for post in posts%}
@@ -48,8 +49,8 @@
                         </div>
                         <div class="rightMC">
                             <div class="postTitle">
-                                <h3>{{post.title}}</h3>
-                                <h3>{{post.message}}</h3>
+                                <h3 class="postAudioTitle">{{post.title}}</h3>
+                                <h3 class="postAudioDescription">{{post.message}}</h3>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"
                                         src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
