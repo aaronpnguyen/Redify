@@ -21,7 +21,7 @@ def login():
         'user_name': request.form['user_name'],
         'password': request.form['password']
     }
-    user = model_user.User.get_user(data)
+    user = model_user.User.get_user_by_name(data)
 
     if not user:
         flash("Invalid username")
@@ -71,7 +71,6 @@ def home():
     else:
         user = None
     posts = model_post.Post.get_all()
-        
     return render_template('home.html', user = user, posts = posts)
 
 @app.route('/profile/<string:username>')

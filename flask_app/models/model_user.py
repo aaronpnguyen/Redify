@@ -59,6 +59,10 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return User(results[0])
+    
+    @classmethod
+    def get_user_with_topics(cls, data):
+        query = "SELECT * FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id WHERE favorite_topics.user_id = %()s;"
             
     # VALIDATION
 
