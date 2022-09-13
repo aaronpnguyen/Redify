@@ -28,10 +28,14 @@
                 <input class="searchInput" type="text" placeholder="Search Redify">
             </div>
             <div class="rightNav">
-                <h3></h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
-                    <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
-                </svg>
+                {%if user%}
+                    <h3></h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                    </svg>
+                {%else%}
+                    <h3 style="color: white;">login hoe</h3>
+                {%endif%}
             </div>
         </div>
     </div>
@@ -45,16 +49,17 @@
                 {%for post in posts%}
                     <div class="messageContent">
                         <div class="leftMC">
-
                         </div>
                         <div class="rightMC">
                             <div class="postTitle">
+                                <a href="/t/{{post['topics.title']}}">t/{{post['topics.title']}}</a>
+                                <span> by p/<a href="profile/{{post.user_name}}">{{post.user_name}}</a></span>
                                 <h3 class="postAudioTitle">{{post.title}}</h3>
                                 <h3 class="postAudioDescription">{{post.message}}</h3>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"
                                         src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                        width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
                                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                                         loading="lazy">
                                     </iframe>
@@ -68,7 +73,7 @@
         <div class="bodyRight">
             <div class="information">
                 <div class="trending">
-                    {%if user.id%}
+                    {%if user%}
                         <a href="/stats/short_term">hek1</a>
                         <a href="/stats/medium_term">hek2</a>
                         <a href="/stats/long_term">hek3</a>

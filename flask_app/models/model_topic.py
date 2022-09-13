@@ -19,6 +19,11 @@ class Topic:
         query = "INSERT INTO topics (title, description, user_id) VALUES (%(title)s, %(description)s, %(user_id)s)"
         return connectToMySQL(DATABASE).query_db(query, data)
     
+    @classmethod
+    def create_favorite_topic(cls, data):
+        query = "INSERT INTO favorite_topics (topic_id, user_id) VALUES (%(id)s, %(user_id)s);"
+        return connectToMySQL(DATABASE).query_db(query, data)
+    
     # GET
 
     @classmethod

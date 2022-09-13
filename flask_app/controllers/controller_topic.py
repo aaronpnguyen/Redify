@@ -15,7 +15,6 @@ def allTopics():
 @app.route('/t/<string:topicName>')
 def oneTopic(topicName):
     topic = Topic.get_one_by_title({'title': topicName})
-    print(topic.id)
     posts = Post.get_post_for_topic({'topic_id': topic.id})
     return render_template('oneTopic.html', topic = topic, posts = posts)
 
@@ -26,5 +25,15 @@ def submitTopic():
         'description': request.form['description'],
         'user_id': session['user_id']
     }
-    Topic.create_topic(data)
+    Topic.create_favorite_topic({
+        'id': Topic.create_topic(data),
+        'user_id': session['user_id']
+    })
     return redirect('/home')
+
+# @app.route('/add/favorite/topic', methods=['POST'])
+# def addFavorite():
+#     data = {
+#         'topic_id': request.form[]
+#     }
+#     return redirect('/home')
