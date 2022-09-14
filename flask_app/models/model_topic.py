@@ -21,7 +21,7 @@ class Topic:
     
     @classmethod
     def create_favorite_topic(cls, data):
-        query = "INSERT INTO favorite_topics (topic_id, user_id) VALUES (%(id)s, %(user_id)s);"
+        query = "INSERT INTO favorite_topics (topic_id, user_id) VALUES (%(topic_id)s, %(user_id)s);"
         return connectToMySQL(DATABASE).query_db(query, data)
     
     # GET
@@ -40,12 +40,53 @@ class Topic:
 
     @classmethod
     def get_one_by_title(cls, data):
-        query = "SELECT * FROM topics LEFT JOIN posts on posts.topic_id LEFT JOIN users ON posts.user_id WHERE topics.title = %(title)s"
+        query = "SELECT * FROM topics LEFT JOIN posts on posts.topic_id = topics.id LEFT JOIN users ON posts.user_id WHERE topics.title = %(title)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-        return cls(results[0])
+        if results:
+            return cls(results[0])
+        return []
         
     @classmethod
     def get_one_by_id(cls, data):
         query = "SELECT * FROM topics WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return cls(results[0])
+    
+    @classmethod
+    def get_favorite_topics_by_user_id(cls, data):
+        query = "SELECT * FROM favorite_topics LEFT JOIN topics ON topic_id = topics.id WHERE favorite_topics.user_id = %(user_id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        if results:
+            all_favorites = []
+            for favorite in results:
+                all_favorites.append(favorite)
+            return all_favorites
+        return []
+    
+    @classmethod
+    def get_top_5_topics(cls):
+        query = "SELECT *, COUNT(topic_id) FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY topic_id ORDER BY COUNT(topic_id) DESC LIMIT 5"
+        results = connectToMySQL(DATABASE).query_db(query)
+
+        if results:
+            top_topics = []
+            for topic in results:
+                top_topics.append(topic)
+            return top_topics
+        return []
+    
+    @classmethod
+    def check_favorited(cls, data):
+        query = "SELECT * FROM favorite_topics LEFT JOIN topics on topics.id = favorite_topics.topic_id WHERE favorite_topics.user_id = %(user_id)s AND topic_id = %(topic_id)s;"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        if results:
+            return cls(results[0])
+        return None
+    
+    @classmethod
+    def delete_favorited(cls, data):
+        query = "DELETE FROM favorite_topics WHERE topic_id = %(topic_id)s AND user_id = %(user_id)s"
+        return connectToMySQL(DATABASE).query_db(query, data)
+            

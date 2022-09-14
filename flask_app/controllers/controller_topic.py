@@ -16,7 +16,11 @@ def allTopics():
 def oneTopic(topicName):
     topic = Topic.get_one_by_title({'title': topicName})
     posts = Post.get_post_for_topic({'topic_id': topic.id})
-    return render_template('oneTopic.html', topic = topic, posts = posts)
+    if 'user_id' in session:
+        favorited = Topic.check_favorited({'user_id': session['user_id'], 'topic_id': topic.id})
+    else:
+        favorited = None
+    return render_template('oneTopic.html', topic = topic, posts = posts, favorited = favorited)
 
 @app.route('/submit/form/topic', methods=['POST'])
 def submitTopic():
@@ -31,9 +35,22 @@ def submitTopic():
     })
     return redirect('/home')
 
-# @app.route('/add/favorite/topic', methods=['POST'])
-# def addFavorite():
-#     data = {
-#         'topic_id': request.form[]
-#     }
-#     return redirect('/home')
+@app.route('/add/favorite/topic/<int:id>', methods=['POST'])
+def addFavorite(id):
+    data = {
+        'topic_id': id,
+        'user_id': session['user_id']
+    }
+    Topic.create_favorite_topic(data)
+    topic = Topic.get_one_by_id({'id': id})
+    return redirect(f'/t/{topic.title}')
+
+@app.route('/remove/favorite/topic/<int:topic_id>', methods = ['POST'])
+def removeFavorite(topic_id):
+    data = {
+        'topic_id': topic_id,
+        'user_id': session['user_id']
+    }
+    Topic.delete_favorited(data)
+    topic = Topic.get_one_by_id({'id': topic_id})
+    return redirect(f'/t/{topic.title}')

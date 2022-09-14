@@ -37,7 +37,7 @@ class Post:
     
     @classmethod
     def get_post_for_topic(cls, data):
-        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id WHERE topic_id = %(topic_id)s"
+        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id WHERE topic_id = %(topic_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         
         if results:
