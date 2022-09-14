@@ -9,12 +9,13 @@
 :root {
     --light-red: rgba(235, 130, 130, 1);
     --dark-red:  rgba(203, 106, 106, 1);
+    --dark-charc: rgb(15,15,15);
     --charc: rgb(50,50,50);
     --light-charc:  rgb(100,100,100);
     --soft-white: rgb(247, 247, 247);
 }
 
-body {
+#body {
     background-color: rgb(225, 225, 225);
     /*background-color:  #DAE0E6;*/
 }
@@ -100,6 +101,7 @@ input:focus-visible {
     align-items: center;
     background-color: #282828;
     border-radius: 7px;
+    border: none;
 }
 
 .rightNav:hover {
@@ -111,8 +113,33 @@ input:focus-visible {
     height: 25px;
 }
 
+.navDropdownContainer {
+    background-color: #3c3c3c;
+    max-width: 200px;
+    min-width: 200px;
+    text-align: center;
+    position: fixed;
+    z-index: 5;
+    right: 5%;
+    top: 40px;
+}
+
+.navDropdownContainer > a {
+    text-decoration: none;
+}
+
+.navDropdownCard:hover {
+    background-color: var(--light-charc);
+}
+
+.navDropdownLink {
+    color: var(--soft-white);
+    line-height: 2;
+}
 
 
+
+/* Body Container */
 .bodyContainer {
     max-width: 100%;
     min-height: 93vh;
@@ -245,6 +272,7 @@ input:focus-visible {
     max-width: 100%;
     height: auto;
     margin-bottom: 25px;
+    padding: 1% 1% 3% 1%;
     display:  flex;
     flex-direction: column;
     align-items: center;
@@ -275,7 +303,7 @@ input:focus-visible {
 }
 
 .trendingTableTopicList > li:nth-child(5) > .topicCardHoldingLink > .trendingTopicCard {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 10px 10px;
 }
 
 .trendingTopicCard {
@@ -286,7 +314,7 @@ input:focus-visible {
     min-width: 100%;
     padding: 4% 2% 4% 10%;
     background-color: var(--soft-white);
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--dark-red);
 }
 
 .trendingTopicCircleNumber {
@@ -439,6 +467,10 @@ input:focus-visible {
 
 .charcOutline:focus, .charcOutline:active {
     outline: 2px solid var(--charc);
+}
+
+.hidden {
+    display: none;
 }
 
 
