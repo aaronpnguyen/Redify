@@ -12,6 +12,7 @@
     --dark-charc: rgb(15,15,15);
     --charc: rgb(50,50,50);
     --light-charc:  rgb(100,100,100);
+    --light-gray: rgba(180,180,180,1);
     --soft-white: rgb(247, 247, 247);
 }
 
