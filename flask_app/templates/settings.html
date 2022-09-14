@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hek update page corbin you'll prob be mad if you see this so hekxd</title>
+</head>
+<body>
+    {%with messages = get_flashed_messages()%}
+        {%if messages %}
+            {%for message in messages%}
+                <h3 style="color:red;">{{message}}</h3>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    <!--Username should not be updated-->
+    <h1>Username: {{user.user_name}}</h1>
+
+    <form action="/update/email/{{user.id}}" method="POST">
+        <h3>Change Email</h3>
+        <div class="updateSetting">
+            <input type="email" name="email" value="{{user.email}}">
+        </div>
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    <form action="/update/password/{{user.id}}" method="POST">
+        <h3>Change Password</h3>
+        <div class="updateSetting">
+            <input type="password" name="old_password" placeholder="Current Password">
+        </div>
+        <div class="updateSetting">
+            <input type="password" name="new_password" placeholder="New Password">
+        </div>
+        <div class="updateSetting">
+            <input type="password" name="confirm_new" placeholder="Confirm New Password">
+        </div>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
