@@ -25,13 +25,11 @@ def login():
 
     if not user:
         flash("Invalid username")
-        return redirect('/')
+        return redirect('/login/user')
     if not bcrypt.check_password_hash(user.password, request.form['password']):
         flash("Invalid password")
-        return redirect('/')
+        return redirect('/login/user')
     session['user_id'] = user.id
-
-    print(user.id)
 
     return redirect('/home')
 
@@ -72,8 +70,6 @@ def home():
     else:
         user = None
         topics = model_topic.Topic.get_top_5_topics()
-        for topic in topics:
-            print(topic['title'])
         
     posts = model_post.Post.get_all()
     return render_template('home.html', user = user, posts = posts, topics = topics)
@@ -84,3 +80,49 @@ def profile(username):
     favorite_tracks = model_track.Track.get_all_for_user({'user_id': user.id})
     favorite_artists = model_artist.Artist.get_all_for_user({'user_id': user.id})
     return render_template('profile.html', user = user, tracks = favorite_tracks, artists = favorite_artists)
+
+@app.route('/settings/<string:username>')
+def settings(username):
+    if 'user_id' not in session:
+        return redirect('/home')
+
+    user = model_user.User.get_user_by_name({'user_name': username})
+    if session['user_id'] is not user.id:
+        return redirect('/home')
+        
+    return render_template('settings.html', user = user)
+
+@app.route('/update/email/<int:id>', methods = ['POST'])
+def updateEmail(id):
+    user = model_user.User.get_user_by_id({'id': id})
+
+    if 'user_id' in session != user.id:
+        return redirect(f'/settings/{user.user_name}')
+
+    if not model_user.User.validate_email_update(request.form):
+        return redirect(f'/settings/{user.user_name}')
+
+    model_user.User.update_email({
+        'id': id,
+        'email': request.form['email']
+    })
+    return redirect(f'/settings/{user.user_name}')
+
+@app.route('/update/password/<int:id>', methods = ['POST'])
+def updatePassword(id):
+    user = model_user.User.get_user_by_id({'id': id})
+
+    if 'user_id' in session != user.id:
+        return redirect('home')
+    if not model_user.User.validate_password_update(request.form):
+        return redirect(f'/settings/{user.user_name}')
+    if not bcrypt.check_password_hash(user.password, request.form['old_password']):
+        flash("Invalid password")
+        return redirect(f'/settings/{user.user_name}')
+
+    pw_hash = bcrypt.generate_password_hash(request.form['new_password'])
+    model_user.User.update_password({
+        'id': id,
+        'password': pw_hash
+    })
+    return redirect(f'/settings/{user.user_name}')
