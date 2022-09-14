@@ -8,6 +8,16 @@
 </head>
 <body>
     <h1>t/{{topic.title}}</h1>
+    <!--Button to follow/save topic-->
+    {%if favorited%}
+        <form action="/remove/favorite/topic/{{topic.id}}" method="POST">
+            <button type="submit">Remove from favorites?</button>
+        </form>
+    {%elif not favorited and 'user_id' in session%}
+        <form action="/add/favorite/topic/{{topic.id}}" method="POST">
+            <button type="submit">Add to favorite?</button>
+        </form>
+    {%endif%}
 
     {%for post in posts%}
         <div class="post">
