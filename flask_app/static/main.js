@@ -28,3 +28,35 @@ function navDropdownRehide() {
 	x.style.display = "none";
 	a.style.backgroundColor = "#282828";
 }
+
+function showArtistsTab() {
+	var artistsContent = document.getElementById("favoriteArtists");
+	var tracksContent = document.getElementById("favoriteTracks");
+	var artistsTab = document.getElementById("artistsTab");
+	var tracksTab = document.getElementById("tracksTab");
+
+	artistsContent.classList.add("activeTab");
+	tracksContent.classList.remove("activeTab");
+
+	tracksContent.classList.add("hidden");
+	artistsContent.classList.remove("hidden");
+
+	artistsTab.classList.add("activeTab");
+	tracksTab.classList.remove("activeTab");
+}
+
+function showTracksTab() {
+	var artistsContent = document.getElementById("favoriteArtists");
+	var tracksContent = document.getElementById("favoriteTracks");
+	var artistsTab = document.getElementById("artistsTab");
+	var tracksTab = document.getElementById("tracksTab");
+
+	artistsContent.classList.remove("activeTab");
+	tracksContent.classList.add("activeTab");
+
+	artistsContent.classList.add("hidden");
+	tracksContent.classList.remove("hidden");
+
+	artistsTab.classList.remove("activeTab");
+	tracksTab.classList.add("activeTab");
+}

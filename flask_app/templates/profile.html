@@ -80,6 +80,7 @@
                     <p class="userCardInfoText">Number of Posts: ##</p>
                 </div>
             </div>
+
         </div>
 
 
@@ -88,25 +89,32 @@
 
                 <!-- Stats Tabs -->
                 <div class="userStatsTabContainer">
-                    <div class="userStatsTab">
+                    <div class="userStatsTab leftRad activeTab" id="artistsTab" onclick="showArtistsTab()">
                         <span class="userStatsTabText">Artist</span>
                     </div>
-                    <div class="userStatsTab">
+                    <div class="userStatsTab rightRad" id="tracksTab" onclick="showTracksTab()">
                         <span class="userStatsTabText">Tracks</span>
                     </div>
                 </div>
 
-                <div class="topTracks">
-                    {%for track in tracks%}
-                        <h4>{{track.track_name}}</h4>
-                    {%endfor%}
-                </div>
-
-                <div class="topArtists">
+                <div class="topArtists" id="favoriteArtists">
                     {%for artist in artists%}
                         <h4>{{artist.artist_name}}</h4>
                     {%endfor%}
+
+                    <!-- This is just here for testing -->
+                    <p>TopArtists</p>
                 </div>
+
+                <div class="topTracks hidden" id="favoriteTracks">
+                    {%for track in tracks%}
+                        <h4>{{track.track_name}}</h4>
+                    {%endfor%}
+
+                    <!-- This is just here for testing -->
+                    <p>TopTracks</p>
+                </div>
+
             </div>
         </div>
     </div>
