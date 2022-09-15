@@ -2,9 +2,13 @@ from flask import redirect, session, render_template, request
 from flask_app import app
 from flask_app.models.model_topic import Topic
 from flask_app.models.model_post import Post
+from flask_app.models.model_user import User
+from flask_app.models.model_comment import Comment
 
 @app.route('/form/topic')
 def topicForm():
+    if 'user_id' not in session:
+        return redirect('/home')
     return render_template('topicForm.html')
 
 @app.route('/all/topics')
@@ -15,15 +19,23 @@ def allTopics():
 @app.route('/t/<string:topicName>')
 def oneTopic(topicName):
     topic = Topic.get_one_by_title({'title': topicName})
-    posts = Post.get_post_for_topic({'topic_id': topic.id})
+    if topic:
+        posts = Post.get_post_for_topic({'topic_id': topic.id})
+    else:
+        return redirect('/home')
     if 'user_id' in session:
         favorited = Topic.check_favorited({'user_id': session['user_id'], 'topic_id': topic.id})
+        user = User.get_user_by_id({'id': session['user_id']})
     else:
         favorited = None
-    return render_template('oneTopic.html', topic = topic, posts = posts, favorited = favorited)
+        user = None
+    return render_template('oneTopic.html', topic = topic, posts = posts, favorited = favorited, user = user)
 
 @app.route('/submit/form/topic', methods=['POST'])
 def submitTopic():
+    if 'user_id' not in session:
+        return redirect('/home')
+        
     data = {
         'title': request.form['title'],
         'description': request.form['description'],
@@ -37,6 +49,9 @@ def submitTopic():
 
 @app.route('/add/favorite/topic/<int:id>', methods=['POST'])
 def addFavorite(id):
+    if 'user_id' not in session:
+        return redirect('/home')
+
     data = {
         'topic_id': id,
         'user_id': session['user_id']
@@ -47,6 +62,9 @@ def addFavorite(id):
 
 @app.route('/remove/favorite/topic/<int:topic_id>', methods = ['POST'])
 def removeFavorite(topic_id):
+    if 'user_id' not in session:
+        return redirect('/home')
+
     data = {
         'topic_id': topic_id,
         'user_id': session['user_id']

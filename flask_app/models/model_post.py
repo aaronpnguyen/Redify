@@ -11,8 +11,6 @@ class Post:
         self.message = data['message']
         self.type = data['type']
         self.link = data['link']
-        self.liked = 0
-        self.genre = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -33,7 +31,25 @@ class Post:
     def get_one(cls, data):
         query = "SELECT * FROM topics LEFT JOIN posts ON posts.topic_id WHERE posts.user_id = %(user_id)s AND posts.title = %(title)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-        return cls(results[0])
+        return Post(results[0])
+    
+    @classmethod
+    def get_one_by_id(cls, data):
+        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN topics ON posts.topic_id = topics.id WHERE posts.id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        if results:
+            post = cls(results[0])
+            user_data = {
+                'id': post.user_id
+            }
+            topic_data = {
+                'id': post.topic_id
+            }
+            post.user = model_user.User.get_user_by_id(user_data)
+            post.topic = model_topic.Topic.get_one_by_id(topic_data)
+            return post
+        return Post(results[0])
     
     @classmethod
     def get_post_for_topic(cls, data):
@@ -45,7 +61,7 @@ class Post:
             for data in results:
                 post = cls(data)
                 user_data = {
-                    'id': data['user_id']
+                    'id': data['users.id']
                 }
                 user = model_user.User.get_user_by_id(user_data)
                 post.user = user

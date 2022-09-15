@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+<body>
+    <h1>Post Page</h1>
+    <div class="post">
+        <h1>t/{{post.topic.title}}</h1>
+        <h1>{{post.title}}</h1>
+        <h1>{{post.user.user_name}}</h1>
+        <h1>{{comments | length}}</h1>
+    </div>
+    {%for comment in comments%}
+        <div>
+            <h3>{{comment.message}}</h3>
+            <h3>{{comment.user.user_name}}</h3>
+        </div>
+    {%endfor%}
+</body>
+</html>
