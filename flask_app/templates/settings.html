@@ -4,39 +4,161 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hek update page corbin you'll prob be mad if you see this so hekxd</title>
+    <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/profile.css">
+        <link rel="stylesheet" href="../static/settings.css">
+    <title>User Profile</title>
 </head>
-<body>
-    {%with messages = get_flashed_messages()%}
-        {%if messages %}
-            {%for message in messages%}
-                <h3 style="color:red;">{{message}}</h3>
-            {%endfor%}
-        {%endif%}
-    {%endwith%}
-    <!--Username should not be updated-->
-    <h1>Username: {{user.user_name}}</h1>
-    
-    <form action="/update/email/{{user.id}}" method="POST">
-        <h3>Change Email</h3>
-        <div class="updateSetting">
-            <input type="email" name="email" value="{{user.email}}">
+<body id="body">
+    <div id="accountOverview"></div>
+
+    <div class="navContainer">
+        <div class="navBar">
+            <div class="leftNav">
+                <h2><span>Red</span>ify</h2>
+
+                <!-- Light and Dark mode button here -->
+                <div class="lightDarkBtn" onclick="lightDark()">
+                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                </div>
+            </div>
+            <div class="searchBar">
+                <label class="svgSearch" for="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 96 96">
+                        <switch>
+                            <path d="M90.829 85.172L68.128 62.471A35.846 35.846 0 0 0 76 40C76 20.118 59.883 4 40 4 20.118 4 4 20.118 4 40s16.118 36 36 36c8.5 0 16.312-2.946 22.471-7.873l22.701 22.701A3.988 3.988 0 0 0 88 92a4 4 0 0 0 2.829-6.828zM40 68c-15.464 0-28-12.536-28-28s12.536-28 28-28c15.465 0 28 12.536 28 28S55.465 68 40 68z"/>
+                        </switch>
+                    </svg>
+                </label>
+                <input class="searchInput" type="text" placeholder="Search Redify">
+            </div>
+            <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                {%if session['user_id']%}
+                <div class="rightNavDropdown">                    
+                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                    </svg>
+                </div>
+                {%else%}
+                    <h3 style="color: white;">login hoe</h3>
+                {%endif%}
+            </button>
         </div>
-        <button type="submit">Save Changes</button>
-    </form>
-    
-    <form action="/update/password/{{user.id}}" method="POST">
-        <h3>Change Password</h3>
-        <div class="updateSetting">
-            <input type="password" name="old_password" placeholder="Current Password">
+    </div>
+
+    <!-- Right Dropdown Nav -->
+    <div class="navDropdownContainer hidden" id="navDropdown" onmouseover="navDropdown()" onmouseout="navDropdownRehide()">
+        <a href="/logout">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Logout</p>
+            </div>
+        </a>
+        <a href="/profile/{{user.user_name}}">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Profile</p>
+            </div>
+        </a>
+        <a href="#">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Settings</p>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="bodyContainer settingsContainer">
+
+        <div class="fixedLeftBody">
+            <div class="fixedLeftLinkContainer">
+                <!-- <p class=""><a href="#">Account Ownership</a></p> -->
+                <p class=""><a href="#accountOverview">Account Overview</a></p>
+                <p class=""><a href="#redifyEmail">Redify Email</a></p>
+                <p class=""><a href="#managePassword">Manage Password</a></p>
+                <p class=""><a href="#">Linked Spotify</a></p>
+            </div>
+
         </div>
-        <div class="updateSetting">
-            <input type="password" name="new_password" placeholder="New Password">
-        </div>
-        <div class="updateSetting">
-            <input type="password" name="confirm_new" placeholder="Confirm New Password">
-        </div>
-        <button type="submit">Save Changes</button>
-    </form>
+
+
+        <div class="rightBody">        
+            {%with messages = get_flashed_messages()%}
+                {%if messages %}
+                    {%for message in messages%}
+                        <h3 style="color:red;">{{message}}</h3>
+                    {%endfor%}
+                {%endif%}
+            {%endwith%}
+
+
+            <div class="settingsCard">
+                <div class="settingsCardDescription">
+                    <p class="settingsCardDescriptionTitle">Account Overview</p>
+                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                </div>
+                <div class="settingsCardActions">
+                    <!--Username should not be updated-->
+                    <h1>Username: {{user.user_name}}</h1>
+                    <div class="settingsCardInnerContainer">
+                        <p class="settingsCardListP">First Name:</p> 
+                        <p class="settingsCardListP">Last Name:</p>
+                    </div>
+                    <p class="settingsCardListP">Created On:</p>
+                </div>
+                <div id="redifyEmail"></div>
+            </div>
+
+
+            <!-- Change Email -->
+            <div class="settingsCard">
+                <div class="settingsCardDescription">
+                    <p class="settingsCardDescriptionTitle">Redify Email</p>
+                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                </div>
+                <div class="settingsCardActions">
+                    <h1>Change Email</h1>
+                    <form action="/update/email/{{user.id}}" method="POST">
+                        <div class="updateSetting">
+                            <input type="email" name="email" value="{{user.email}}">
+                        </div>
+                        <button type="submit" class="createFormSubmit hvr-grow-rotate">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+            <div id="managePassword"></div>
+
+
+            <!-- Change Password -->
+            <div class="settingsCard">
+                <div class="settingsCardDescription">
+                    <p class="settingsCardDescriptionTitle">Manage Password</p>
+                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                </div>
+                <div class="settingsCardActions">
+                    <h1>Change Password</h1>
+                    <form action="/update/password/{{user.id}}" method="POST">
+                        <div class="updateSetting">
+                            <input type="password" name="old_password" placeholder="Current Password">
+                        </div>
+                        <div class="updateSetting">
+                            <input type="password" name="new_password" placeholder="New Password">
+                        </div>
+                        <div class="updateSetting">
+                            <input type="password" name="confirm_new" placeholder="Confirm New Password">
+                        </div>
+                        <button type="submit" class="createFormSubmit hvr-grow-rotate">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="../static/main.js"></script>
+
 </body>
 </html>

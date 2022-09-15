@@ -1,0 +1,159 @@
+.settingsContainer {
+
+}
+
+.fixedLeftBody {
+	background-color: var(--charc);
+	padding: 5%;
+	display: flex;
+	flex-direction: column;
+	max-height: 500px;
+	min-height:500px;
+	min-width: 300px;
+	max-width:  300px;
+	margin-top: 50px;
+	position: fixed;
+	left: 10%;
+	border-radius: 15px;
+	box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+.fixedLeftLinkContainer {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.fixedLeftLinkContainer > p {
+	margin-bottom: 10px;
+}
+
+.fixedLeftLinkContainer > p > a {
+	color: rgba(210,210,210,1);
+}
+
+/*Right Body*/
+.rightBody {
+	margin-top: 50px;
+	margin-left: 310px;
+	padding-bottom: 50px;
+	min-width: 75%;
+}
+
+.settingsCard {
+	min-width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+	margin-bottom: 10%;
+}
+
+.settingsCardDescription {
+	background-color: var(--charc);
+	color: rgba(210,210,210,1);
+	max-width: 37%;
+	min-width: 37%;
+	padding: 6% 4% 8% 4%;
+	border-radius: 15px 0 0 15px;
+}
+
+.settingsCardDescriptionTitle {
+	margin-bottom: 30px;
+	font-size: 1.3rem;
+	font-weight: 500;
+}
+
+.settingsCardActions {
+	display: flex;
+	flex-direction: column;
+	min-width: 63%;
+	max-width: 63%;
+	padding: 6% 4% 8% 4%;
+}
+
+.settingsCardActions > h1 {
+	margin-bottom: 30px;
+}
+
+.settingsCardListP {
+	padding-bottom: 10px;
+}
+
+.settingsCardActions > form {
+	background-color: tan;
+	padding: 2%;
+	border-radius: 5px;
+	background-color: var(--light-gray);
+}
+
+.settingsCardActions > form > .updateSetting > input {
+	min-width: 100%;
+	padding: 2% 1%;
+	font-size: 1.1rem;
+	border-radius: 5px;
+	border: none;
+	outline: 1px solid var(--charc);
+	margin-bottom: 10px;
+}
+
+.settingsCardActions > form > .updateSetting > input:focus {
+	outline: 3px solid var(--charc);
+}
+
+.btnSaveChanges {
+	background-color:  var(--charc);
+	padding:  1% 2%;
+	border: none;
+	box-shadow:  0 0 8px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+/*.settingsCardInnerContainer{
+	display: flex;
+	justify-content: space-between;
+	color: black;
+}*/
+
+/*.settingsCardInnerContainer > p {
+	min-width: 50%;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
