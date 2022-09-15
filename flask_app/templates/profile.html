@@ -13,7 +13,7 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()">
@@ -56,7 +56,7 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href="#">
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -83,10 +83,18 @@
 
             <div class="postContainer">
                 {%for post in posts%}
-                    <div class="post">
-                        <h3>t/{{post.topic.title}}</h3>
-                        <h3>p/{{post.user.user_name}}</h3>
-                        <h3>{{post.title}}</h3>
+                    <div class="post messageContent">
+
+                        <div class="postTopInfo">
+                            <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                            <span class="postTopSpan">&nbsp;posted on&nbsp; {{post.user.created_at}}</span>
+                            <!-- <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a> -->
+                        </div>
+
+
+                        <h3 class="postAudioTitle">{{post.title}}</h3>
+                        <h3 class="postAudioDescription">{{post.message}}</h3>
+
                         {%if post.type and post.link%}
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"

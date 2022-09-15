@@ -14,7 +14,7 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()">
@@ -52,14 +52,12 @@
                 <p class="navDropdownLink">Logout</p>
             </div>
         </a>
-
-        <!-- Will need to fix controller for access to user -->
-        <a href='#'>
+        <a href='/profile/{{user.user_name}}'>
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href="#">
+        <a href='/settings/{{user.user_name}}'>
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>

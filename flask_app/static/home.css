@@ -4,6 +4,7 @@
     font-family: 'FF Mark W05', sans-serif;
     box-sizing: border-box;
     letter-spacing: 1px;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -42,6 +43,12 @@
 
 span {
     color: #ff0000;
+}
+
+.logo > a {
+    text-decoration: none;
+    color: inherit;
+
 }
 
 .searchBar {
