@@ -1,0 +1,65 @@
+.innerBodyContainer {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* View One Topic */
+.topicTop {
+	/*background-color: var(--light-green);*/
+	background-color: var(--soft-white);
+	background-repeat: no-repeat;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 3% 0;
+	border-radius: 15px;
+    box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
+    min-width: 100%;
+   	margin-bottom: 50px;
+}
+
+.topicTopTitle {
+	font-size: 2.7rem;
+}
+
+.topicTop > form {
+	min-width: 250px;
+	padding-left: 20px;
+}
+
+.topicTop > form > button {
+	padding: 3% 6%;
+	font-size: 1rem;
+	border-radius: 15px;
+	/*border: 1px solid var(--charc);*/
+	border: none;
+	box-shadow:  0 0 7px 1px rgba(0, 0, 0, 0.2);
+	/*box-shadow: 2px 2px rgba(0,0,0,0.3);*/
+	background-color:  var();
+}
+
+.topicAboutContainer {
+	padding-bottom: 5%;
+}
+
+.topicAboutTitle {
+	background-color: tan;
+	font-size: 1.7rem;
+	text-align: center;
+	border-radius:  15px 15px 0 0;
+	padding: 8% 0 3% 0;
+	margin-bottom: 5%;
+}
+
+.topicAboutText {
+	padding: 4%;
+	text-align: center;
+}
+
+/* Kind of General  */
+.padding-fiftypx {
+	min-width: 100%;
+	min-height: 50px;
+	display: block;
+}
