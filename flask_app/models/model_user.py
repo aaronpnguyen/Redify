@@ -33,7 +33,6 @@ class User:
     def get_user_by_name(cls, data):
         query = "SELECT * FROM users WHERE user_name = %(user_name)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-
         if results:
             return User(results[0])
         return []

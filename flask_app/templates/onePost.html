@@ -72,14 +72,14 @@
 
         <div class="topicTop">
 
-            <h1 class="topicTopTitle">t/{{topic.title}}</h1>
+            <h1 class="topicTopTitle">t/{{post.topic.title}}</h1>
             <!--Button to follow/save topic-->
             {%if favorited%}
-                <form action="/remove/favorite/topic/{{topic.id}}" method="POST">
+                <form action="/remove/favorite/topic/{{post.topic.id}}" method="POST">
                     <button type="submit">Remove from favorites?</button>
                 </form>
             {%elif not favorited and 'user_id' in session%}
-                <form action="/add/favorite/topic/{{topic.id}}" method="POST">
+                <form action="/add/favorite/topic/{{post.topic.id}}" method="POST">
                     <button type="submit">Join the Conversation?</button>
                 </form>
             {%endif%}
@@ -90,9 +90,34 @@
             <div class="profileBodyLeft">
 
                 <!-- Create Post -->
+                <div class="post">
+                    
+                </div>
                 <div class="messageContent createPost">
                     <a href="/form/post">Create a new post</a>
                 </div>
+
+                <form action="/submit/form/comment/{{post.id}}" method="POST">
+                    <h3>message</h3>
+                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="message" placeholder="Comment message">
+                    <h3>spotify url</h3>
+                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                    <button type="submit">submit comment</button>
+                </form>
+                {%for comment in comments%}
+                    <div class="comments">
+                        <h3>{{comment.message}}</h3>
+                        <h3>{{comment.user.user_name}}</h3>
+                        {%if comment.type and comment.link%}
+                            <iframe style="border-radius:12px"
+                                src="https://open.spotify.com/embed/{{comment.type}}/{{comment.link}}?utm_source=generator"
+                                width="400" height="{{100 if comment.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        {%endif%}
+                    </div>
+                {%endfor%}
 
 
                 {%for post in posts%}
@@ -119,9 +144,9 @@
             <div class="profileBodyRight">
                 <div class="topicAboutContainer messageContent noPadding">
                     <p class="topicAboutTitle">About</p>
-                    <p class="topicAboutText">Description: {{topic.description}}</p>
-                    <p class="topicAboutText">Active Users: ###</p>
-                    <p class="topicAboutText">Creator: {{topic.user_id}}</p>
+                    <p class="topicAboutText">Description: {{post.topic.description}}</p>
+                    <p class="topicAboutText">Active Users: {{activeCount}}</p>
+                    <p class="topicAboutText">Creator: {{post.user.user_name}}</p>
                 </div>
             </div>
         </div>

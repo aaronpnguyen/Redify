@@ -77,8 +77,26 @@
                 <div class="userCardInfo">
                     <p class="userCardInfoText">Following: ##</p>
                     <p class="userCardInfoText">Followers: ##</p>
-                    <p class="userCardInfoText">Number of Posts: ##</p>
+                    <p class="userCardInfoText">Number of Posts: {{posts | length}}</p>
                 </div>
+            </div>
+
+            <div class="postContainer">
+                {%for post in posts%}
+                    <div class="post">
+                        <h3>t/{{post.topic.title}}</h3>
+                        <h3>p/{{post.user.user_name}}</h3>
+                        <h3>{{post.title}}</h3>
+                        {%if post.type and post.link%}
+                            <iframe style="border-radius:12px"
+                                src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        {%endif%}
+                    </div>
+                {%endfor%}
             </div>
 
         </div>
@@ -99,7 +117,12 @@
 
                 <div class="topArtists" id="favoriteArtists">
                     {%for artist in artists%}
-                        <h4>{{artist.artist_name}}</h4>
+                        <div class="artistCard">
+                            <img width="100" src="{{artist.artist_image}}">
+                            <h4>{{artist.artist_name}}</h4>
+                            <h5>Current followers: {{"{:,}".format(artist.followers | int)}}</h5>
+                            <h5>Genre: {{artist.genre}}</h5>
+                        </div>
                     {%endfor%}
 
                     <!-- This is just here for testing -->
@@ -108,11 +131,30 @@
 
                 <div class="topTracks hidden" id="favoriteTracks">
                     {%for track in tracks%}
-                        <h4>{{track.track_name}}</h4>
+                        <iframe style="border-radius:12px"
+                            src="https://open.spotify.com/embed/track/{{track.track_id}}?utm_source=generator"
+                            width="100%" height="{{100}}" frameBorder="0" allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
                     {%endfor%}
 
                     <!-- This is just here for testing -->
                     <p>TopTracks</p>
+                </div>
+
+                <!-- Conditional rendering for user to save/update their stats -->
+                <div>
+                    {%if user.id == session['user_id']%}
+                    <form action="/save/spotify_stats" method="POST">
+                        {%if artists%}
+                            <button type="submit">update</button>
+                        {%else%}
+                            <h3>Get your top 5 stats</h3>
+                            <button type="submit">Save</button>
+                        {%endif%}
+                        </form>
+                    {%endif%}
                 </div>
 
             </div>

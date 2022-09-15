@@ -17,7 +17,7 @@ class Comment:
 
     @classmethod
     def create_comment(cls, data):
-        query = "INSERT INTO comments (message, type, link, user_id, post_id) VALUES (%(message)s, %(type)s, %(link)s, %(user_id)s, %(topic_id)s)"
+        query = "INSERT INTO comments (message, type, link, user_id, post_id) VALUES (%(message)s, %(type)s, %(link)s, %(user_id)s, %(post_id)s)"
         return connectToMySQL(DATABASE).query_db(query, data)
     
     @classmethod

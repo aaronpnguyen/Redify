@@ -5,6 +5,7 @@ import time
 from flask import redirect, url_for, session, request, render_template, flash
 from flask_app.models.model_artist import Artist
 from flask_app.models.model_track import Track
+from flask_app.models.model_user import User
 
 # SPOTIFY AUTH
 app.config['session_spotify'] = 'spotify has logged'
@@ -147,4 +148,5 @@ def saveStats():
                 'user_id': session['user_id']
             }
             Track.create_track(data)
-    return redirect('/home')
+    user = User.get_user_by_id({'id': session['user_id']})
+    return redirect(f'/profile/{user.user_name}')
