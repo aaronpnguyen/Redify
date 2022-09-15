@@ -93,7 +93,7 @@
 }
 
 .activeTab {
-    background-color: var(--light-gray);
+    background-color: var(--light-red);
 }
 
 /* I don't think this is in use or needed */

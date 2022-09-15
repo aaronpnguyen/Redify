@@ -4,37 +4,167 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Topic</title>
+    <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/view.css">
+    <link rel="stylesheet" href="../static/profile.css">
+    <title>User Profile</title>
 </head>
-<body>
-    <h1>t/{{topic.title}}</h1>
-    <!--Button to follow/save topic-->
-    {%if favorited%}
-        <form action="/remove/favorite/topic/{{topic.id}}" method="POST">
-            <button type="submit">Remove from favorites?</button>
-        </form>
-    {%elif not favorited and 'user_id' in session%}
-        <form action="/add/favorite/topic/{{topic.id}}" method="POST">
-            <button type="submit">Add to favorite?</button>
-        </form>
-    {%endif%}
+<body id="body">
+    <div class="navContainer">
+        <div class="navBar">
+            <div class="leftNav">
+                <h2><span>Red</span>ify</h2>
 
-    {%for post in posts%}
-        <div class="post">
-            <h1>{{post.title}}</h1>
-            <h1>{{post.description}}</h1>
-            {%if post.type and post.link%}
-                <h3>post embed</h3>
-                <iframe style="border-radius:12px"
-                    src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                    width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                    loading="lazy">
-                </iframe>
-            {%endif%}
-            <h3>{{post.user.user_name}}</h3>
-            <br>
+                <!-- Light and Dark mode button here -->
+                <div class="lightDarkBtn" onclick="lightDark()">
+                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                </div>
+            </div>
+            <div class="searchBar">
+                <label class="svgSearch" for="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 96 96">
+                        <switch>
+                            <path d="M90.829 85.172L68.128 62.471A35.846 35.846 0 0 0 76 40C76 20.118 59.883 4 40 4 20.118 4 4 20.118 4 40s16.118 36 36 36c8.5 0 16.312-2.946 22.471-7.873l22.701 22.701A3.988 3.988 0 0 0 88 92a4 4 0 0 0 2.829-6.828zM40 68c-15.464 0-28-12.536-28-28s12.536-28 28-28c15.465 0 28 12.536 28 28S55.465 68 40 68z"/>
+                        </switch>
+                    </svg>
+                </label>
+                <input class="searchInput" type="text" placeholder="Search Redify">
+            </div>
+            <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                {%if session['user_id']%}
+                <div class="rightNavDropdown">                    
+                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                    </svg>
+                </div>
+                {%else%}
+                    <h3 style="color: white;">login hoe</h3>
+                {%endif%}
+            </button>
         </div>
-    {%endfor%}
+    </div>
+
+    <!-- Right Dropdown Nav -->
+    <div class="navDropdownContainer hidden" id="navDropdown" onmouseover="navDropdown()" onmouseout="navDropdownRehide()">
+        <a href="/logout">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Logout</p>
+            </div>
+        </a>
+
+        <!-- Will need to fix controller for access to user -->
+        <a href='#'>
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Profile</p>
+            </div>
+        </a>
+        <a href="#">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Settings</p>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="bodyContainer" id="columnContainer">
+        <div class="padding-fiftypx"></div>
+
+        <div class="topicTop">
+
+            <h1 class="topicTopTitle">t/{{topic.title}}</h1>
+            <!--Button to follow/save topic-->
+            {%if favorited%}
+                <form action="/remove/favorite/topic/{{topic.id}}" method="POST">
+                    <button type="submit">Remove from favorites?</button>
+                </form>
+            {%elif not favorited and 'user_id' in session%}
+                <form action="/add/favorite/topic/{{topic.id}}" method="POST">
+                    <button type="submit">Join the Conversation?</button>
+                </form>
+            {%endif%}
+
+        </div>
+
+        <div class="innerBodyContainer">
+            <div class="profileBodyLeft">
+
+                <!-- Create Post -->
+                <div class="messageContent createPost">
+                    <a href="/form/post">Create a new post</a>
+                </div>
+
+
+                {%for post in posts%}
+                    <div class="post messageContent">
+                        <h1>{{post.title}}</h1>
+                        <h1>{{post.description}}</h1>
+                        {%if post.type and post.link%}
+                            <br>
+                            <iframe style="border-radius:12px"
+                                src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        {%endif%}
+                        <h3>{{post.user.user_name}}</h3>
+                        <br>
+                    </div>
+                {%endfor%}
+            </div>
+
+
+            <!-- Profile Body Right -->
+            <div class="profileBodyRight">
+                <div class="topicAboutContainer messageContent noPadding">
+                    <p class="topicAboutTitle">About</p>
+                    <p class="topicAboutText">Description: {{topic.description}}</p>
+                    <p class="topicAboutText">Active Users: ###</p>
+                    <p class="topicAboutText">Creator: {{topic.user_id}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<script src="../static/main.js"></script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,7 @@
     --light-charc:  rgb(100,100,100);
     --light-gray: rgba(180,180,180,1);
     --soft-white: rgb(247, 247, 247);
+    --light-green: rgb(210,255,195);
 }
 
 #body {
@@ -453,6 +454,8 @@ input:focus-visible {
   transform: scale(1.1) rotate(4deg);
 }
 
+/* End of Create Post ^^ */
+
 /* General */
 
 .lightOpacityBg {
@@ -470,8 +473,18 @@ input:focus-visible {
     outline: 2px solid var(--charc);
 }
 
+#columnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .hidden {
     display: none;
+}
+
+.noPadding {
+    padding: 0;
+    border: none;
 }
 
 
