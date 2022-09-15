@@ -73,9 +73,9 @@
                             <div class="postTitle">
                                 <!-- Post Topic and Author -->
                                 <div class="postTopInfo">
-                                    <a href="/t/{{post['topics.title']}}" class="postTopTopic">t/{{post['topics.title']}}</a>
+                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
                                     <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
-                                    <a href="profile/{{post.user_name}}" class="postTopAuthor">p/{{post.user_name}}</a>
+                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                                 </div>
                                 <!-- Post Content -->
                                 <h3 class="postAudioTitle">{{post.title}}</h3>

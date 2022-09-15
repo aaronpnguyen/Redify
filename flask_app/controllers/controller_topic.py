@@ -21,15 +21,17 @@ def oneTopic(topicName):
     topic = Topic.get_one_by_title({'title': topicName})
     if topic:
         posts = Post.get_post_for_topic({'topic_id': topic.id})
+        activeCount = Topic.get_active({'id': topic.id})
     else:
         return redirect('/home')
+        
     if 'user_id' in session:
         favorited = Topic.check_favorited({'user_id': session['user_id'], 'topic_id': topic.id})
         user = User.get_user_by_id({'id': session['user_id']})
     else:
         favorited = None
         user = None
-    return render_template('oneTopic.html', topic = topic, posts = posts, favorited = favorited, user = user)
+    return render_template('oneTopic.html', topic = topic, posts = posts, favorited = favorited, user = user, activeCount = activeCount)
 
 @app.route('/submit/form/topic', methods=['POST'])
 def submitTopic():
@@ -42,7 +44,7 @@ def submitTopic():
         'user_id': session['user_id']
     }
     Topic.create_favorite_topic({
-        'id': Topic.create_topic(data),
+        'topic_id': Topic.create_topic(data),
         'user_id': session['user_id']
     })
     return redirect('/home')

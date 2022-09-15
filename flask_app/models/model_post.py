@@ -68,6 +68,27 @@ class Post:
                 all_posts.append(post)
             return all_posts
         return []
+    
+    @classmethod
+    def get_posts_for_user(cls, data):
+        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN topics ON posts.topic_id = topics.id WHERE users.id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        if results:
+            all_posts = []
+            for data in results:
+                post = cls(data)
+                user_data = {
+                    'id': data['users.id']
+                }
+                topic_data = {
+                    'id': data['topics.id']
+                }
+                post.user = model_user.User.get_user_by_id(user_data)
+                post.topic = model_topic.Topic.get_one_by_id(topic_data)
+                all_posts.append(post)
+            return all_posts
+        return []
 
     @classmethod
     def get_all(cls):
@@ -88,6 +109,6 @@ class Post:
                 topic = model_topic.Topic.get_one_by_id(topic_data)
                 post.user = user
                 post.topic = topic
-                all_posts.append(data)
+                all_posts.append(post)
             return all_posts
         return []

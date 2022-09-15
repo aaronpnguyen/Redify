@@ -26,8 +26,8 @@ def submitPost():
                 type = urlData[0]
                 link = urlData[1]
         except:
-            type = type
-            link = link
+            type = ""
+            link = ""
     else:
         type = ""
         link = ""
@@ -46,8 +46,40 @@ def submitPost():
 @app.route('/post/<int:id>')
 def viewPost(id):
     post = Post.get_one_by_id({'id': id})
-    if post:
-        comments = Comment.get_comments_for_post({'post_id': id})
-    else:
+
+    if not post:
         return redirect('/home')
-    return render_template('onePost.html', post = post, comments = comments)
+    
+    comments = Comment.get_comments_for_post({'post_id': id})
+    activeCount = Topic.get_active({'id': post.topic_id})
+
+    return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount)
+
+@app.route('/submit/form/comment/<int:post_id>', methods=['POST'])
+def submitComment(post_id):
+    link = request.form['link']
+
+    if link:
+        try:
+            valid = link.index('spotify.com/')
+            if valid:
+                url = link[valid + 12:]
+                urlData = url.split('/')
+                type = urlData[0]
+                link = urlData[1]
+        except:
+            type = ""
+            link = ""
+    else:
+        type = ""
+        link = ""
+
+    data = {
+        'message': request.form['message'],
+        'type': type,
+        'link': link,
+        'post_id': post_id,
+        'user_id': session['user_id']
+    }
+    Comment.create_comment(data)
+    return redirect(f'/post/{post_id}')

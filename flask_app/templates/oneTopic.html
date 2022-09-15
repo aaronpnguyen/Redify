@@ -97,10 +97,10 @@
 
                 {%for post in posts%}
                     <div class="post messageContent">
+                        <a href="/t/{{topic.title}}">t/{{topic.title}}</a>
                         <h1>{{post.title}}</h1>
                         <h1>{{post.description}}</h1>
                         {%if post.type and post.link%}
-                            <br>
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
                                 width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
@@ -109,7 +109,6 @@
                             </iframe>
                         {%endif%}
                         <h3>{{post.user.user_name}}</h3>
-                        <br>
                     </div>
                 {%endfor%}
             </div>
@@ -120,8 +119,8 @@
                 <div class="topicAboutContainer messageContent noPadding">
                     <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{topic.description}}</p>
-                    <p class="topicAboutText">Active Users: ###</p>
-                    <p class="topicAboutText">Creator: {{topic.user_id}}</p>
+                    <p class="topicAboutText">Active Users: {{activeCount}}</p>
+                    <p class="topicAboutText">Creator: <a href="/profile/{{topic.user.user_name}}">{{topic.user.user_name}}</a></p>
                 </div>
             </div>
         </div>

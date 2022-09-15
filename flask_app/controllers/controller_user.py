@@ -79,7 +79,8 @@ def profile(username):
     user = model_user.User.get_user_by_name({'user_name': username})
     favorite_tracks = model_track.Track.get_all_for_user({'user_id': user.id})
     favorite_artists = model_artist.Artist.get_all_for_user({'user_id': user.id})
-    return render_template('profile.html', user = user, tracks = favorite_tracks, artists = favorite_artists)
+    posts = model_post.Post.get_posts_for_user({'id': user.id})
+    return render_template('profile.html', user = user, tracks = favorite_tracks, artists = favorite_artists, posts = posts)
 
 @app.route('/settings/<string:username>')
 def settings(username):

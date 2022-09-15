@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
+from flask_app.models import model_user
 
 class Topic:
     def __init__(self, data):
@@ -10,7 +11,7 @@ class Topic:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
-        self.genres = []
+        self.user = None
 
     # CREATE
 
@@ -40,10 +41,15 @@ class Topic:
 
     @classmethod
     def get_one_by_title(cls, data):
-        query = "SELECT * FROM topics LEFT JOIN posts on posts.topic_id = topics.id LEFT JOIN users ON posts.user_id WHERE topics.title = %(title)s"
+        query = "SELECT * FROM topics LEFT JOIN users ON topics.user_id = users.id WHERE topics.title = %(title)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if results:
-            return cls(results[0])
+            topic = cls(results[0])
+            user_data = {
+                'id': topic.user_id
+            }
+            topic.user = model_user.User.get_user_by_id(user_data)
+            return topic
         return []
         
     @classmethod
@@ -75,7 +81,7 @@ class Topic:
                 top_topics.append(topic)
             return top_topics
         return []
-    
+
     @classmethod
     def check_favorited(cls, data):
         query = "SELECT * FROM favorite_topics LEFT JOIN topics on topics.id = favorite_topics.topic_id WHERE favorite_topics.user_id = %(user_id)s AND topic_id = %(topic_id)s;"
@@ -85,6 +91,14 @@ class Topic:
             return Topic(results[0])
         return None
     
+    @classmethod
+    def get_active(cls, data):
+        query = "SELECT * FROM favorite_topics WHERE topic_id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        print(results)
+
+        return len(results)
+
     @classmethod
     def delete_favorited(cls, data):
         query = "DELETE FROM favorite_topics WHERE topic_id = %(topic_id)s AND user_id = %(user_id)s"
