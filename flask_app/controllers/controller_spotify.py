@@ -72,9 +72,10 @@ def userStats(term):
     for item in topArtists:
         details = {
             'artistName': item['name'],
-            'artistImage': item['images'][0]['url']
+            'artistImage': item['images'][0]['url'],
+            'followers': item['followers']['total'],
+            'genre': item['genres'][0]
         }
-
         artists.append(details)
 
     for item in topTracks:
@@ -110,7 +111,9 @@ def saveStats():
             data = {
                 'id': allArtists[i]['id'],
                 'artist_name': artist['name'],
-                'artist_image': artist['images'][0]['url']
+                'artist_image': artist['images'][0]['url'],
+                'followers': artist['followers']['total'],
+                'genre': artist['genres'][0]
             }
             Artist.update_artist(data)
     else:
@@ -118,7 +121,9 @@ def saveStats():
             data = {
                 'artist_name': artist['name'],
                 'artist_image': artist['images'][0]['url'],
-                'user_id': session['user_id']
+                'user_id': session['user_id'],
+                'followers': artist['followers']['total'],
+                'genre': artist['genres'][0]
             }
             Artist.create_artist(data)
 
@@ -142,5 +147,4 @@ def saveStats():
                 'user_id': session['user_id']
             }
             Track.create_track(data)
-
     return redirect('/home')

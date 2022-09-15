@@ -8,6 +8,8 @@ class Artist:
         self.id = data['id']
         self.artist_name = data['artist_name']
         self.artist_image = data['artist_image']
+        self.followers = data['followers']
+        self.genre = data['genre']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -16,7 +18,7 @@ class Artist:
 
     @classmethod
     def create_artist(cls, data):
-        query = "INSERT INTO favorite_artists (artist_name, artist_image, user_id) VALUES (%(artist_name)s, %(artist_image)s, %(user_id)s)"
+        query = "INSERT INTO favorite_artists (artist_name, artist_image, followers, genre, user_id) VALUES (%(artist_name)s, %(artist_image)s, %(followers)s, %(genre)s, %(user_id)s)"
         return connectToMySQL(DATABASE).query_db(query, data)
 
     @classmethod
@@ -46,11 +48,10 @@ class Artist:
             for artist in results:
                 all_artists.append(artist)
             return all_artists
-        
         return []
 
     @classmethod
     def update_artist(cls, data):
-        query = "UPDATE favorite_artists SET artist_name = %(artist_name)s, artist_image = %(artist_image)s, updated_at = NOW() WHERE id = %(id)s;"
+        query = "UPDATE favorite_artists SET artist_name = %(artist_name)s, artist_image = %(artist_image)s, followers = %(followers)s, genre = %(genre)s, updated_at = NOW() WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
         

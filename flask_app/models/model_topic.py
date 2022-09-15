@@ -82,7 +82,7 @@ class Topic:
         results = connectToMySQL(DATABASE).query_db(query, data)
 
         if results:
-            return cls(results[0])
+            return Topic(results[0])
         return None
     
     @classmethod
