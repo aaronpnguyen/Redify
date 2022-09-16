@@ -87,17 +87,20 @@
         <div class="innerBodyContainer">
             <div class="profileBodyLeft">
 
-                <!-- Create Post -->
-                <div class="messageContent createPost">
-                    <a href="/form/post">Create a new post</a>
-                </div>
-
 
                 {%for post in posts%}
                     <div class="post messageContent">
-                        <a href="/t/{{topic.title}}">t/{{topic.title}}</a>
-                        <h1>{{post.title}}</h1>
-                        <h1>{{post.description}}</h1>
+                        
+                        <div class="postTopInfo">
+                            <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{topic.title}}</a>
+                            <span class="postTopSpan">&nbsp;created by&nbsp;</span>
+                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                        </div>
+
+
+                        <h3 class="postAudioTitle">{{post.title}}</h3>
+                        <h3 class="postAudioDescription">{{post.message}}</h3>
+                        
                         {%if post.type and post.link%}
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
@@ -106,7 +109,6 @@
                                 loading="lazy">
                             </iframe>
                         {%endif%}
-                        <h3>{{post.user.user_name}}</h3>
                     </div>
                 {%endfor%}
             </div>
@@ -119,6 +121,13 @@
                     <p class="topicAboutText">Description: {{topic.description}}</p>
                     <p class="topicAboutText">Active Users: {{activeCount}}</p>
                     <p class="topicAboutText">Creator: <a href="/profile/{{topic.user.user_name}}">{{topic.user.user_name}}</a></p>
+
+                    <!-- Create Post -->
+                    <div class="topicCreatePostContainer">
+                        <button class="topicCreatePost createFormSubmit hvr-grow-rotate">
+                            <a href="/form/post">Create a new post</a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

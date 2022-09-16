@@ -212,6 +212,11 @@ input:focus-visible {
     box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
 }
 
+.createPostTopicContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
 .createPost > a {
     color: rgb(40, 40, 40);
     text-decoration: none;
@@ -220,6 +225,11 @@ input:focus-visible {
 .createPost > a:hover {
     cursor:  pointer;
 }
+
+.homeCreateBtn {
+    max-width: 45%;
+}
+
 
 /* USER POSTS */
 .postTopInfo {
