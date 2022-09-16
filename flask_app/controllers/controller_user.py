@@ -67,12 +67,14 @@ def home():
         }
         user = model_user.User.get_user_by_id(data)
         topics = model_topic.Topic.get_favorite_topics_by_user_id({'user_id': session['user_id']})
+        userFeed = model_post.Post.show_favorite_posts(data)
     else:
         user = None
         topics = model_topic.Topic.get_top_5_topics()
+        userFeed = None
         
     posts = model_post.Post.get_all()
-    return render_template('home.html', user = user, posts = posts, topics = topics)
+    return render_template('home.html', user = user, posts = posts, topics = topics, userFeed = userFeed)
 
 @app.route('/profile/<string:username>')
 def profile(username):

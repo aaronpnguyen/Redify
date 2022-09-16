@@ -112,3 +112,26 @@ class Post:
                 all_posts.append(post)
             return all_posts
         return []
+
+    @classmethod
+    def show_favorite_posts(cls, data):
+        query = "SELECT * FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id LEFT JOIN posts ON posts.topic_id = favorite_topics.topic_id WHERE favorite_topics.user_id = %(id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        
+        if results:
+            all_posts = []
+            for data in results:
+                post = Post(data)
+                topic_data = {
+                    'id': data['topic_id']
+                }
+                user_data = {
+                    'id': data['user_id']
+                }
+                post.topic = model_topic.Topic.get_one_by_id(topic_data)
+                post.user = model_user.User.get_user_by_id(user_data)
+                all_posts.append(post)
+                print(post.user.user_name)
+                print(post.topic.title)
+            return all_posts
+        return []
