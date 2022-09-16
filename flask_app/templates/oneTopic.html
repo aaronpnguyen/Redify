@@ -78,7 +78,7 @@
                 </form>
             {%elif not favorited and 'user_id' in session%}
                 <form action="/add/favorite/topic/{{topic.id}}" method="POST">
-                    <button type="submit">Join the Conversation?</button>
+                    <button type="submit">Add to Favorites?</button>
                 </form>
             {%endif%}
 
