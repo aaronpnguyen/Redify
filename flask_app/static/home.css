@@ -4,6 +4,7 @@
     font-family: 'FF Mark W05', sans-serif;
     box-sizing: border-box;
     letter-spacing: 1px;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -42,6 +43,12 @@
 
 span {
     color: #ff0000;
+}
+
+.logo > a {
+    text-decoration: none;
+    color: inherit;
+
 }
 
 .searchBar {
@@ -205,6 +212,11 @@ input:focus-visible {
     box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
 }
 
+.createPostTopicContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
 .createPost > a {
     color: rgb(40, 40, 40);
     text-decoration: none;
@@ -213,6 +225,11 @@ input:focus-visible {
 .createPost > a:hover {
     cursor:  pointer;
 }
+
+.homeCreateBtn {
+    max-width: 45%;
+}
+
 
 /* USER POSTS */
 .postTopInfo {
