@@ -3,13 +3,15 @@ from flask import redirect, render_template, session, request
 from flask_app.models.model_topic import Topic
 from flask_app.models.model_post import Post
 from flask_app.models.model_comment import Comment
+from flask_app.models.model_user import User
 
 @app.route('/form/post')
 def postForm():
     if 'user_id' not in session:
         return redirect('/home')
+    user = User.get_user_by_id({'id': session['user_id']})
     allTopics = Topic.get_all()
-    return render_template('postForm.html', topics = allTopics)
+    return render_template('postForm.html', topics = allTopics, user = user)
 
 @app.route('/submit/form/post', methods=['POST'])
 def submitPost():

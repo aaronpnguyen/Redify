@@ -12,7 +12,7 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()">
@@ -49,18 +49,13 @@
             </div>
         </a>
 
-
-
-
-
-        <!-- THIS IS BUG -->
-        <!-- WILL NEED TO INSERT USER INTO THE CONTROLLER TO IMPORT HERE -->
-        <a href="#">
+        <!-- Getting a User Error here -->
+        <a href="/profile/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href="#">
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -71,7 +66,7 @@
         <div class="createFormContainer">
             <form action="/submit/form/post" method="POST" class="createForm">
 
-                    <p class="createFormTitle"><span class="lightOpacityBg">Create a Post</span></p>
+                <p class="createFormTitle"><span class="lightOpacityBg">Create a Post</span></p>
 
                 <div class="postForm">
                     <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="title" placeholder="Post Title">

@@ -12,7 +12,7 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()">
@@ -51,7 +51,7 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href="#">
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -62,8 +62,13 @@
     <div class="bodyContainer">
         <div class="bodyLeft">
             <div class="postsContainer"> 
-                <div class="messageContent createPost">
-                    <a href="/form/post">Create a new post</a>
+                <div class="createPostTopicContainer"> 
+                    <div class="messageContent createPost homeCreateBtn">
+                        <a href="/form/topic">Create a Topic</a>
+                    </div>
+                    <div class="messageContent createPost homeCreateBtn">
+                        <a href="/form/post">Create a New Post</a>
+                    </div>
                 </div>
                 {%for post in posts%}
                     <div class="messageContent">
@@ -102,7 +107,11 @@
                         <p class="trendingTableTitle">Your Topics</p>
                         <ul class="trendingTableTopicList">
 
-                        <!-- Will have to put a for here and also insert a variable that is being incremented into the number circle text -------------------->
+
+
+
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <!-- THIS PART IS INCOMPLETE -->
 
                             <li>
                                 <a class="topicCardHoldingLink" href="">
@@ -116,6 +125,9 @@
                                     </div>
                                 </a>
                             </li>
+
+
+
 
 
                         </ul>

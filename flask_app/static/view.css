@@ -57,6 +57,36 @@
 	text-align: center;
 }
 
+.topicAboutText > a {
+	color: var(--charc);
+}
+
+.topicAboutText > a:hover {
+	color: var(--light-gray);
+}
+
+.topicCreatePostContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5% 0 5% 0 ;
+}
+
+.topicCreatePost {
+	background-color: rgba(230, 230, 230, 1.0);
+	min-width: auto;
+	display: flex;
+}
+
+.topicCreatePost > a {
+	color: var(--charc);
+	text-decoration: none;
+}
+
+.topicCreatePost:hover > a {
+	color: var(--soft-white);
+}
+
 /* Kind of General  */
 .padding-fiftypx {
 	min-width: 100%;
