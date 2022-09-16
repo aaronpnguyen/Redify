@@ -16,6 +16,7 @@ def create_spotify_oauth():
     return SpotifyOAuth(
         client_id = SPOTIFY_APP_ID,
         client_secret = SPOTIFY_APP_SECRET,
+        show_dialog = True,
         redirect_uri = url_for('spotifyRedirect', _external = True),
         scope = scope
     )
@@ -71,11 +72,15 @@ def userStats(term):
 
     # Parse out data to easily access
     for item in topArtists:
+        if item['genres']:
+            genre = item['genres'][0]
+        else:
+            genre = ""
         details = {
             'artistName': item['name'],
             'artistImage': item['images'][0]['url'],
             'followers': item['followers']['total'],
-            'genre': item['genres'][0]
+            'genre': genre
         }
         artists.append(details)
 
