@@ -9,7 +9,8 @@ from flask_app.models.model_comment import Comment
 def topicForm():
     if 'user_id' not in session:
         return redirect('/home')
-    return render_template('topicForm.html')
+    user = User.get_user_by_id({'id': session['user_id']})
+    return render_template('topicForm.html', user = user)
 
 @app.route('/all/topics')
 def allTopics():
