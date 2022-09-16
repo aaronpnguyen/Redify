@@ -106,18 +106,18 @@
 
                             <li>
                                 <a class="topicCardHoldingLink" href="">
-                                    <div class="trendingTopicCard">
-                                        <div class="trendingTopicCircleNumber">
-                                            <span class="trendingTopicCircleNumberText">1</span>
+                                    {%for i in range(topics | length)%}
+                                        <div class="trendingTopicCard">
+                                            <div class="trendingTopicCircleNumber">
+                                                <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
+                                            </div>
+                                            <div class="trendingTopicCardText">
+                                                <span>t/{{topics[i].title}}</span>
+                                            </div>
                                         </div>
-                                        <div class="trendingTopicCardText">
-                                            <span>t/TestingExample</span>
-                                        </div>
-                                    </div>
+                                    {%endfor%}
                                 </a>
                             </li>
-
-
                         </ul>
 
                     {%else%}
@@ -126,8 +126,9 @@
 
                         <p class="trendingTableTitle">Trending Topics</p>
                         <ul class="trendingTableTopicList">
-                            {%for topic in topics%}
-                                <li><a href="/t/{{topic.title}}">{{topic.title}}</a></li>
+                            {%for i in range(topics | length)%}
+                                <p>{{i + 1}}</p>
+                                <li><a href="/t/{{topics[i].title}}">{{topics[i].title}}</a></li>
                             {%endfor%}
                         </ul>
                     {%endif%}
