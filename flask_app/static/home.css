@@ -297,6 +297,7 @@ input:focus-visible {
     align-items: center;
     border: 10px solid var(--dark-red);
     border-radius:  20px;
+    box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.2);
 }
 
 .trendingTableTitle {
@@ -315,15 +316,10 @@ input:focus-visible {
 .trendingTableTopicList {
     list-style: none;
     min-width: 100%;
+    background-color: var(--soft-white);
+    border-radius: 10px;
 }
 
-.trendingTableTopicList > li:nth-child(1) > .topicCardHoldingLink > .trendingTopicCard {
-    border-radius: 10px 10px 0 0;
-}
-
-.trendingTableTopicList > li:nth-child(5) > .topicCardHoldingLink > .trendingTopicCard {
-    border-radius: 0 0 10px 10px;
-}
 
 .trendingTopicCard {
     display: flex;
@@ -332,7 +328,7 @@ input:focus-visible {
     justify-content: flex-start;
     min-width: 100%;
     padding: 4% 2% 4% 10%;
-    background-color: var(--soft-white);
+    /*background-color: var(--soft-white);*/
     border-bottom: 1px solid var(--dark-red);
 }
 
@@ -357,18 +353,30 @@ input:focus-visible {
 
 .legal {
     background-color: #111111;
+    padding: 10% 2%;
+    border-radius: 20px;
+    box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.2);
+    background-color: ;
     position: sticky;
     top: 70px;
     color: white;
-}
-
-.legalInfo {
-/*    position: sticky;
-    top: 70px;*/
+    display: flex;
+    justify-content: center;
 }
 
 .legalInfo > ul  {
     list-style: none;
+}
+
+.legalInfo > ul > li {
+    margin-bottom: 10px;
+}
+
+.legalInfo > ul > li > a {
+    color:  var(--soft-white); 
+    text-decoration: none;
+    font-size: 1rem;
+
 }
 
 
@@ -376,6 +384,18 @@ input:focus-visible {
 .createFormContainer {
     background-position: center;
     background: url(pop-shapes.svg);
+    background-repeat: no-repeat;
+    min-width:  600px;
+    max-width: 60%;
+    max-height:  400px;
+    margin-top: 5%;
+    border-radius: 20px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
+}
+
+.createFormTopicContainer {
+    background-position: center;
+    background: url(green-pop-shapes.svg);
     background-repeat: no-repeat;
     min-width:  600px;
     max-width: 60%;
@@ -493,6 +513,7 @@ input:focus-visible {
 #columnContainer {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .hidden {

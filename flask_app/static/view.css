@@ -16,7 +16,7 @@
 	border-radius: 15px;
     box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
     min-width: 100%;
-   	margin-bottom: 50px;
+   	margin-bottom: 0px;
 }
 
 .topicTopTitle {
@@ -88,8 +88,8 @@
 }
 
 /* Kind of General  */
-.padding-fiftypx {
+.padding-thirtypx {
 	min-width: 100%;
-	min-height: 50px;
+	min-height: 30px;
 	display: block;
 }
