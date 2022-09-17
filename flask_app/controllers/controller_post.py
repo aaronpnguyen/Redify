@@ -10,7 +10,7 @@ def postForm():
     if 'user_id' not in session:
         return redirect('/home')
     user = User.get_user_by_id({'id': session['user_id']})
-    allTopics = Topic.get_all()
+    allTopics = Topic.get_favorite_topics_by_user_id({'user_id': session['user_id']})
     return render_template('postForm.html', topics = allTopics, user = user)
 
 @app.route('/submit/form/post', methods=['POST'])

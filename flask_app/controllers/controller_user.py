@@ -1,7 +1,10 @@
 from flask_app import app
 from flask import redirect, render_template, flash, session, request
+from flask_app.controllers.controller_spotify import TOKEN_INFO
 from flask_app.models import model_user, model_post, model_track, model_artist, model_topic
 from flask_bcrypt import Bcrypt
+import os
+
 bcrypt = Bcrypt(app)
 
 @app.route('/')
@@ -52,11 +55,13 @@ def register_user():
     user_id = model_user.User.create_user(data)
     session['user_id'] = user_id
 
-    return redirect('/spotify/login')
+    return redirect('/home')
 
 @app.route('/logout')
 def logout():
     session.clear()
+    if os.path.exists(".cache"):
+        os.remove(".cache")
     return redirect('/')
 
 @app.route('/home')
@@ -67,12 +72,14 @@ def home():
         }
         user = model_user.User.get_user_by_id(data)
         topics = model_topic.Topic.get_favorite_topics_by_user_id({'user_id': session['user_id']})
+        userFeed = model_post.Post.show_favorite_posts(data)
     else:
         user = None
         topics = model_topic.Topic.get_top_5_topics()
+        userFeed = None
         
     posts = model_post.Post.get_all()
-    return render_template('home.html', user = user, posts = posts, topics = topics)
+    return render_template('home.html', user = user, posts = posts, topics = topics, userFeed = userFeed)
 
 @app.route('/profile/<string:username>')
 def profile(username):
