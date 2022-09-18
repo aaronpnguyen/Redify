@@ -230,6 +230,18 @@ input:focus-visible {
     max-width: 45%;
 }
 
+.homeLoginBtn {
+    background-color:  var(--charc);
+    padding: 0.6% 1.5%;
+    border-radius: 20px;
+    border-radius: 0 0 7px 1px black;
+    color: var(--soft-white);
+    text-decoration: none;
+}
+
+.homeLoginBtn:hover {
+    background-color: #1db352;
+}
 
 /* USER POSTS */
 .postTopInfo {
@@ -393,6 +405,18 @@ input:focus-visible {
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
 }
 
+.createTopicContainer {
+    background-position: center;
+    background: url(green-pop-shapes.svg);
+    background-repeat: no-repeat;
+    min-width:  600px;
+    max-width: 60%;
+    max-height:  400px;
+    margin-top: 5%;
+    border-radius: 20px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
+}
+
 .createFormTopicContainer {
     background-position: center;
     background: url(green-pop-shapes.svg);
@@ -514,6 +538,10 @@ input:focus-visible {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.alignCenter {
+    align-items: center;
 }
 
 .hidden {
