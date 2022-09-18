@@ -49,7 +49,7 @@ class Post:
             post.user = model_user.User.get_user_by_id(user_data)
             post.topic = model_topic.Topic.get_one_by_id(topic_data)
             return post
-        return Post(results[0])
+        return []
     
     @classmethod
     def get_post_for_topic(cls, data):
