@@ -14,10 +14,10 @@
 	[] When the topic has only one entry the spacing is wack
 
 #### View Post
-	[]
+	[] !! THIS NEEDS DONE STILL
 
 #### View Stats
-	[] Tab Pages
+	[] Tab system needs polished
 
 #### View Settings
 	[] Account settings box spacing is poop
@@ -36,5 +36,5 @@
 	[] The stats page doesn't have access to user
 	[] Trending board is currently broken, save results in redirect for permision but then redirects back to home page still containing the save button not tracks
 	[] Stats page can only show up to 50 cards at a time (at least when not premium)
-	[] 
+	[] Currently can view the -- View One Post -- Page
 
