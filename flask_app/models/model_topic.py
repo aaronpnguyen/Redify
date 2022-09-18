@@ -98,6 +98,18 @@ class Topic:
         print(results)
 
         return len(results)
+    
+    @classmethod
+    def get_topics_user_created(cls, data):
+        query = "SELECT * FROM topics WHERE user_id = %(user_id)s"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        if results:
+            all_topics = []
+            for topic in results:
+                all_topics.append(topic)
+            return all_topics
+        return []
 
     @classmethod
     def delete_favorited(cls, data):
