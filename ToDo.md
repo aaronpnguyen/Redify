@@ -35,5 +35,5 @@
 #### Strictly Backend
 	[] The stats page doesn't have access to user
 	[] Trending board is currently broken, save results in redirect for permision but then redirects back to home page still containing the save button not tracks
-	[] Currently can view the -- View One Post -- Page
+	[] Currently cant view the -- View One Post -- it gives a tuplex out of order error
 
