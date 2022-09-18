@@ -35,6 +35,5 @@
 #### Strictly Backend
 	[] The stats page doesn't have access to user
 	[] Trending board is currently broken, save results in redirect for permision but then redirects back to home page still containing the save button not tracks
-	[] Stats page can only show up to 50 cards at a time (at least when not premium)
 	[] Currently can view the -- View One Post -- Page
 
