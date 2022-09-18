@@ -2,6 +2,7 @@
 
 #### Finish Dark Mode
 	[] Should target cards and text
+	[] Button needs to change 
 
 #### Home Page
 	[] Style “Create a Post”
@@ -12,11 +13,13 @@
 
 #### View Topic
 	[] When the topic has only one entry the spacing is wack
+	[] The track card is not proper width
 
 #### View Post
 	[] !! THIS NEEDS DONE STILL
 
 #### View Stats
+	[] Currently no button or link to it
 	[] Tab system needs polished
 
 #### View Settings
@@ -36,4 +39,5 @@
 	[] The stats page doesn't have access to user
 	[] Trending board is currently broken, save results in redirect for permision but then redirects back to home page still containing the save button not tracks
 	[] Currently cant view the -- View One Post -- it gives a tuplex out of order error
+	[] Profile Page -> Number of Topics card and the other ???
 
