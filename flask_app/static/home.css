@@ -16,6 +16,9 @@
     --light-gray: rgba(180,180,180,1);
     --soft-white: rgb(247, 247, 247);
     --light-green: rgb(210,255,195);
+    --green: #1db352;
+    --purple: #7D38A6;
+    --light-btn:  #FBD38D;
 }
 
 #body {
@@ -28,6 +31,7 @@
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 2;
 }
 
 .navBar {
@@ -187,7 +191,7 @@ input:focus-visible {
     justify-content: center;
     align-items: center;
     margin-left: 25%;
-    background-color: #7D38A6;
+    background-color: var(--purple);
     color: rgb(250, 250, 250);
 }
 
@@ -200,6 +204,7 @@ input:focus-visible {
 .bodyLeft {
     min-width: 55%;
     max-width: 55%;
+    margin-top: 50px;
 }
 
 .messageContent {
@@ -217,12 +222,16 @@ input:focus-visible {
     justify-content: space-between;
 }
 
-.createPost > a {
+.createPost {
+    text-decoration: none;
+}
+
+.createPost > p {
     color: rgb(40, 40, 40);
     text-decoration: none;
 }
 
-.createPost > a:hover {
+.createPost:hover {
     cursor:  pointer;
 }
 
@@ -289,6 +298,8 @@ input:focus-visible {
     display: flex;
     max-width: 30%;
     min-width: 30%;
+    margin-top: 50px;
+
 }
 
 .information {
@@ -554,6 +565,22 @@ input:focus-visible {
 }
 
 
+/* Bounce In */
+.hvr-bounce-in {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+}
 
 
 

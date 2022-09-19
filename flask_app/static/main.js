@@ -1,13 +1,19 @@
 function lightDark() {
 	var a = document.getElementById("body");
-	// var b = document.getElementById(" ");
-	// var c = document.getElementById(" ");
-	// var d = document.getElementById(" ");
+	var b = document.getElementById("lightDarkIconBtn");
+	var c = document.getElementById("lightDarkIconMoon");
+	var d = document.getElementById("lightDarkIconSun");
 
 	if (a.style.backgroundColor !== "var(--dark-charc)") {
 		a.style.backgroundColor = "var(--dark-charc)";
+		b.style.backgroundColor = "var(--light-btn)"
+		c.classList.add = "hidden";
+		d.classList.remove = "hidden";
     } else {
-    		a.style.backgroundColor = "rgb(225, 225, 225)";
+    	a.style.backgroundColor = "rgb(225, 225, 225)";
+    	b.style.backgroundColor = "var(--purple)"
+		c.classList.remove = "hidden";
+		d.classList.add = "hidden";
     }
 
 }
@@ -35,8 +41,8 @@ function showArtistsTab() {
 	var artistsTab = document.getElementById("artistsTab");
 	var tracksTab = document.getElementById("tracksTab");
 
-	artistsContent.classList.add("activeTab");
-	tracksContent.classList.remove("activeTab");
+	// artistsContent.classList.add("activeTab");
+	// tracksContent.classList.remove("activeTab");
 
 	tracksContent.classList.add("hidden");
 	artistsContent.classList.remove("hidden");
@@ -51,8 +57,8 @@ function showTracksTab() {
 	var artistsTab = document.getElementById("artistsTab");
 	var tracksTab = document.getElementById("tracksTab");
 
-	artistsContent.classList.remove("activeTab");
-	tracksContent.classList.add("activeTab");
+	// artistsContent.classList.remove("activeTab");
+	// tracksContent.classList.add("activeTab");
 
 	artistsContent.classList.add("hidden");
 	tracksContent.classList.remove("hidden");

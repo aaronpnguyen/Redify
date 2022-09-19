@@ -17,8 +17,9 @@
                 <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
-                <div class="lightDarkBtn" onclick="lightDark()">
-                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
+                    <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    <i class="fa-solid fa-sun hidden" id="lightDarkIconSun"></i>
                 </div>
             </div>
             <div class="searchBar">
@@ -39,7 +40,7 @@
                     </svg>
                 </div>
                 {%else%}
-                    <h3 style="color: white;">login hoe</h3>
+                    <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
                 {%endif%}
             </button>
         </div>
@@ -104,7 +105,7 @@
                         {%if post.type and post.link%}
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                width="100%" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
                                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                                 loading="lazy">
                             </iframe>

@@ -1,21 +1,18 @@
 # Redify Todo
 
 #### Finish Dark Mode
-	[] Should target cards and text
-	[] Button needs to change 
+	[] Button icon currently isn't changing correctly
+	[] Minor color changes still needed
 
 #### Home Page
-	[] Style “Create a Post”
 	[] Fix Sticky Box
 
 #### User Profile
 	[] Sticky position favorites table
-    [] # of Topics created
-    [] # of Topics favorited
+    [] Favorites Board - tracks needs better styled
 
 #### View Topic
-	[] When the topic has only one entry the spacing is wack
-	[] The track card is not proper width
+	[] Tan Heading Needs changed
 
 #### View Post
 	[] !! THIS NEEDS DONE STILL
@@ -24,14 +21,11 @@
 	[] Currently no button or link to it
 	[] Tab system needs polished
 
-#### View Settings
-	[] Account settings box spacing is poop
-	[] Title needs cleaned up a bit and single line
-
 ## Features
 - Clicking the search icon should result in triggering the text input field
 — The search should maybe contain like the topics and appear after a letter or two
 
 
 #### Strictly Backend
-	[] Trending board is currently broken ???
+	[] Stats controller that renders the stats page -- doesnt have access to user, if you put the link to "user/{{user.user_name}}"
+	[] Cant access "/post/1" it redirects back home
