@@ -11,12 +11,14 @@ from flask_app.models.model_user import User
 app.config['session_spotify'] = 'spotify has logged'
 TOKEN_INFO = "session_token"
 
+last_route = ""
+
 def create_spotify_oauth():
     scope = "user-library-read user-top-read"
     return SpotifyOAuth(
         client_id = SPOTIFY_APP_ID,
         client_secret = SPOTIFY_APP_SECRET,
-        show_dialog = True,
+        show_dialog = False,
         redirect_uri = url_for('spotifyRedirect', _external = True),
         scope = scope
     )
@@ -45,7 +47,8 @@ def spotifyRedirect():
     token = sp_oauth.get_access_token(code)
     session[TOKEN_INFO] = token
     print(token['access_token'])
-    return redirect(url_for('home', _external = False))
+    return redirect(session['last_route'])
+    # return redirect(url_for('home', _external = False))
 
 # This is a user's profile
 @app.route('/stats/<string:term>')
@@ -54,6 +57,7 @@ def userStats(term):
         token = getToken()
     except:
         print("spotify has not logged")
+        session['last_route'] = "/stats/short_term"
         return redirect(url_for('spotifyLogin', _external = False))
     request = spotipy.Spotify(auth = token['access_token'])
 
@@ -98,10 +102,12 @@ def userStats(term):
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
+    user = User.get_user_by_id({'id': session['user_id']})
     try:
         token = getToken()
     except:
         print("spotify has not logged")
+        session['last_route'] = f'/profile/{user.user_name}'
         return redirect(url_for('spotifyLogin', _external = False))
     request = spotipy.Spotify(auth = token['access_token'])
 
@@ -153,5 +159,4 @@ def saveStats():
                 'user_id': session['user_id']
             }
             Track.create_track(data)
-    user = User.get_user_by_id({'id': session['user_id']})
     return redirect(f'/profile/{user.user_name}')
