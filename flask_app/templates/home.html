@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/home.css">
     <title>Home Page</title>
 </head>
-<body>
+<body id="body">
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
-                <select name="genre">
-                    <option disabled selected hidden>Genre</option>
-                    <option value="#">Test</option>
-                </select>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
+
+                <!-- Light and Dark mode button here -->
+                <div class="lightDarkBtn" onclick="lightDark()">
+                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                </div>
             </div>
             <div class="searchBar">
                 <label class="svgSearch" for="Search">
@@ -27,34 +29,75 @@
                 </label>
                 <input class="searchInput" type="text" placeholder="Search Redify">
             </div>
-            <div class="rightNav">
-                <h3></h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
-                    <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
-                </svg>
-            </div>
+
+            {%if session['user_id']%}
+            <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                <div class="rightNavDropdown">                    
+                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                    </svg>
+                </div>
+            </button>
+            {%else%}
+                <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
+            {%endif%}
         </div>
     </div>
-    <div class="cline"></div>
+
+    <!-- Right Dropdown Nav -->
+    <div class="navDropdownContainer hidden" id="navDropdown" onmouseover="navDropdown()" onmouseout="navDropdownRehide()">
+        <a href="/logout">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Logout</p>
+            </div>
+        </a>
+        <a href="/profile/{{user.user_name}}">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Profile</p>
+            </div>
+        </a>
+        <a href="/settings/{{user.user_name}}">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Settings</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Body Container -->
     <div class="bodyContainer">
         <div class="bodyLeft">
-            <div class="postsContainer">
-                <div class="messageContent createPost">
-                    <a href="/form/post">Create a new post</a>
+            <div class="postsContainer"> 
+                <div class="createPostTopicContainer"> 
+                    <div class="messageContent createPost homeCreateBtn">
+                        <a href="/form/topic">Create a Topic</a>
+                    </div>
+                    <div class="messageContent createPost homeCreateBtn">
+                        <a href="/form/post">Create a New Post</a>
+                    </div>
                 </div>
+
+                <!-- All posts -->
+
+                
                 {%for post in posts%}
                     <div class="messageContent">
                         <div class="leftMC">
-
                         </div>
                         <div class="rightMC">
                             <div class="postTitle">
+                                <!-- Post Topic and Author -->
+                                <div class="postTopInfo">
+                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                                    <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                                </div>
+                                <!-- Post Content -->
                                 <h3 class="postAudioTitle">{{post.title}}</h3>
                                 <h3 class="postAudioDescription">{{post.message}}</h3>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"
                                         src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                        width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
                                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                                         loading="lazy">
                                     </iframe>
@@ -63,32 +106,113 @@
                         </div>
                     </div>
                 {%endfor%}
+
+                <!-- This is the user's feed -->
+                {#
+                {%for post in userFeed%}
+                    <div class="messageContent">
+                        <div class="leftMC">
+                        </div>
+                        <div class="rightMC">
+                            <div class="postTitle">
+                                <!-- Post Topic and Author -->
+                                <div class="postTopInfo">
+                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                                    <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                                </div>
+                                <!-- Post Content -->
+                                <h3 class="postAudioTitle">{{post.title}}</h3>
+                                <h3 class="postAudioDescription">{{post.message}}</h3>
+                                {%if post.type and post.link%}
+                                    <iframe style="border-radius:12px"
+                                        src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                        loading="lazy">
+                                    </iframe>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                {%endfor%}#}
             </div>
         </div>
         <div class="bodyRight">
             <div class="information">
                 <div class="trending">
-                    {%if user.id%}
-                        <a href="/stats/short_term">hek1</a>
-                        <a href="/stats/medium_term">hek2</a>
-                        <a href="/stats/long_term">hek3</a>
+
+                    {%if session['user_id']%}
+                        <p class="trendingTableTitle">Your Topics</p>
+                        <ul class="trendingTableTopicList">
+
+
+
+
+                        <!-- ---------------------------------------------------------------------------------------------------- -->
+                        <!-- THIS PART IS INCOMPLETE -->
+
+                            <li>
+                                <a class="topicCardHoldingLink" href="">
+                                    {%for i in range(topics | length)%}
+                                        <div class="trendingTopicCard">
+                                            <div class="trendingTopicCircleNumber">
+                                                <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
+                                            </div>
+                                            <div class="trendingTopicCardText">
+                                                <span>t/{{topics[i].title}}</span>
+                                            </div>
+                                        </div>
+                                    {%endfor%}
+                                </a>
+                            </li>
+                        </ul>
+
                     {%else%}
-                        <h1>not logged in!</h1>
+
+                    <!-- Maybe a please login to view person topics here -->
+
+                        <p class="trendingTableTitle">Trending Topics</p>
+                        <ul class="trendingTableTopicList">
+                            {%for i in range(topics | length)%}
+                                <p>{{i + 1}}</p>
+                                <li><a href="/t/{{topics[i].title}}">{{topics[i].title}}</a></li>
+                            {%endfor%}
+                        </ul>
                     {%endif%}
 
                 </div>
                 <div class="legal">
                     <div class="legalInfo">
                         <ul>
-                            <li>About</li>
-                            <li>Help</li>
-                            <li>Terms</li>
-                            <li>Topics</li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/about">Help</a></li>
+                            <li><a href="/about">Terms</a></li>
+                            <li><a href="/about">Topics</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<script src="../static/main.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

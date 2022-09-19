@@ -33,11 +33,7 @@ class User:
     def get_user_by_name(cls, data):
         query = "SELECT * FROM users WHERE user_name = %(user_name)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-
         if results:
-            all_users = []
-            for user in results:
-                all_users.append(cls(user))
             return User(results[0])
         return []
 
@@ -59,7 +55,17 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return User(results[0])
-            
+    
+    @classmethod
+    def update_email(cls, data):
+        query = "UPDATE users SET email = %(email)s, updated_at = NOW() WHERE id = %(id)s;"
+        return connectToMySQL(DATABASE).query_db(query, data)
+
+    @classmethod
+    def update_password(cls, data):
+        query = "UPDATE users SET password = %(password)s, updated_at = NOW() WHERE id = %(id)s;"
+        return connectToMySQL(DATABASE).query_db(query, data)
+        
     # VALIDATION
 
     @staticmethod
@@ -82,3 +88,26 @@ class User:
             is_valid = False
         
         return is_valid
+    
+    @staticmethod
+    def validate_email_update(data):
+        is_valid = True
+        if User.get_user_by_email(data):
+            flash("This email is already in use.")
+            is_valid = False
+        if not EMAIL_REGEX.match(data['email']): # Checks if the email is valid
+            flash("Invalid email, please try again.")
+            is_valid = False
+        return is_valid
+    
+    @staticmethod
+    def validate_password_update(data):
+        is_valid = True
+        if data['new_password'] != data['confirm_new']:
+            flash("Passwords do not match")
+            is_valid = False
+        if len(data['new_password']) < 8:
+            flash("Invalid password, must be longer than 8 characters.")
+            is_valid = False
+        return is_valid
+

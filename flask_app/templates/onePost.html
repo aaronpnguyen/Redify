@@ -14,7 +14,7 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
+                <h2><span>Red</span>ify</h2>
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()">
@@ -31,17 +31,17 @@
                 </label>
                 <input class="searchInput" type="text" placeholder="Search Redify">
             </div>
+            {%if session['user_id']%}
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
-                {%if session['user_id']%}
                 <div class="rightNavDropdown">                    
                     <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
                         <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
                     </svg>
                 </div>
-                {%else%}
-                    <h3 style="color: white;">login hoe</h3>
-                {%endif%}
             </button>
+            {%else%}
+                <h1>ADD LOGIN/LOGOUT</h1>
+            {%endif%}
         </div>
     </div>
 
@@ -52,12 +52,14 @@
                 <p class="navDropdownLink">Logout</p>
             </div>
         </a>
-        <a href='/profile/{{user.user_name}}'>
+
+        <!-- Will need to fix controller for access to user -->
+        <a href='#'>
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href='/settings/{{user.user_name}}'>
+        <a href="#">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -66,19 +68,19 @@
 
 
     <div class="bodyContainer" id="columnContainer">
-        <div class="padding-thirtypx"></div>
+        <div class="padding-fiftypx"></div>
 
         <div class="topicTop">
 
-            <h1 class="topicTopTitle">t/{{topic.title}}</h1>
+            <h1 class="topicTopTitle">t/{{post.topic.title}}</h1>
             <!--Button to follow/save topic-->
             {%if favorited%}
-                <form action="/remove/favorite/topic/{{topic.id}}" method="POST">
+                <form action="/remove/favorite/topic/{{post.topic.id}}" method="POST">
                     <button type="submit">Remove from favorites?</button>
                 </form>
             {%elif not favorited and 'user_id' in session%}
-                <form action="/add/favorite/topic/{{topic.id}}" method="POST">
-                    <button type="submit">Add to Favorites?</button>
+                <form action="/add/favorite/topic/{{post.topic.id}}" method="POST">
+                    <button type="submit">Join the Conversation?</button>
                 </form>
             {%endif%}
 
@@ -87,21 +89,43 @@
         <div class="innerBodyContainer">
             <div class="profileBodyLeft">
 
+                <!-- Create Post -->
+                <div class="post">
+                    
+                </div>
+                <div class="messageContent createPost">
+                    <a href="/form/post">Create a new post</a>
+                </div>
+
+                <form action="/submit/form/comment/{{post.id}}" method="POST">
+                    <h3>message</h3>
+                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="message" placeholder="Comment message">
+                    <h3>spotify url</h3>
+                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                    <button type="submit">submit comment</button>
+                </form>
+                {%for comment in comments%}
+                    <div class="comments">
+                        <h3>{{comment.message}}</h3>
+                        <h3>{{comment.user.user_name}}</h3>
+                        {%if comment.type and comment.link%}
+                            <iframe style="border-radius:12px"
+                                src="https://open.spotify.com/embed/{{comment.type}}/{{comment.link}}?utm_source=generator"
+                                width="400" height="{{100 if comment.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        {%endif%}
+                    </div>
+                {%endfor%}
+
 
                 {%for post in posts%}
                     <div class="post messageContent">
-                        
-                        <div class="postTopInfo">
-                            <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{topic.title}}</a>
-                            <span class="postTopSpan">&nbsp;created by&nbsp;</span>
-                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
-                        </div>
-
-
-                        <h3 class="postAudioTitle">{{post.title}}</h3>
-                        <h3 class="postAudioDescription">{{post.message}}</h3>
-                        
+                        <h1>{{post.title}}</h1>
+                        <h1>{{post.description}}</h1>
                         {%if post.type and post.link%}
+                            <br>
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
                                 width="400" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
@@ -109,6 +133,8 @@
                                 loading="lazy">
                             </iframe>
                         {%endif%}
+                        <h3>{{post.user.user_name}}</h3>
+                        <br>
                     </div>
                 {%endfor%}
             </div>
@@ -118,59 +144,14 @@
             <div class="profileBodyRight">
                 <div class="topicAboutContainer messageContent noPadding">
                     <p class="topicAboutTitle">About</p>
-                    <p class="topicAboutText">Description: {{topic.description}}</p>
+                    <p class="topicAboutText">Description: {{post.topic.description}}</p>
                     <p class="topicAboutText">Active Users: {{activeCount}}</p>
-                    <p class="topicAboutText">Creator: <a href="/profile/{{topic.user.user_name}}">{{topic.user.user_name}}</a></p>
-
-                    <!-- Create Post -->
-                    <div class="topicCreatePostContainer">
-                        <button class="topicCreatePost createFormSubmit hvr-grow-rotate">
-                            <a href="/form/post">Create a new post</a>
-                        </button>
-                    </div>
+                    <p class="topicAboutText">Creator: {{post.user.user_name}}</p>
                 </div>
             </div>
         </div>
 
     </div>
 <script src="../static/main.js"></script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

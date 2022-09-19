@@ -1,29 +1,119 @@
-* {
+/* Body Left */
+.profileBodyLeft {
+    min-width: 65%;
+    max-width: 65%;
+    margin-top: 50px;
+}
+
+/* User Card */
+.userCard {
+    background-color: rgb(247, 247, 247);
+    border-radius:20px;
+    border:  1px solid rgb(240,240,240);
+    width: 100%;
+    padding: 2% 4%;
+    margin-bottom: 25px;
+    box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
+}
+
+.userCardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userCardTitle {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.userCardMemberSince {
+    color: var(--light-charc);
+}
+
+.userCardInfo {
+    display: flex;
+    justify-content: space-between;
+    min-width: 100%;
+    margin-top: 50px;
+}
+
+.userCardInfoText {
+    background-color: rgba(240, 240, 240, 0.5);
+    /*background-color: var(--light-red);*/
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    padding: 1% 2.5%;
+    border-radius: 15px;
+}
+
+
+
+/* Body Right */
+.profileBodyRight {
+    min-width:28%;
+    max-width: 28%;
+    margin-top: 50px;
+    /*background-color: tan;*/
+}
+
+.userStats {
+    border-radius: 15px;
+    background-color: var(--soft-white);
+    min-height: 200px;
+    position: sticky;
+}
+
+.userStatsTabContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userStatsTab {
+    min-width: 50%;
+    max-width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    padding: 3%;
+}
+
+.userStatsTab:hover {
+    cursor: pointer;
+}
+
+.userStatsTabText {
+    color: var(--charc);
+}
+
+.leftRad {
+    border-radius: 15px 0 0 0 ;
+}
+
+.rightRad {
+    border-radius: 0 15px 0 0 ;
+}
+
+.activeTab {
+    background-color: var(--light-red);
+}
+
+/* I don't think this is in use or needed */
+
+/** {
     margin: 0px;
     padding: 0px;
     font-family: Circular,Helvetica,Arial,sans-serif;
     background-color: #202124;
-}
-
-.artistCard {
-    display: inline-block;
-    /* border: 1px solid rgb(20 216 132); */
-    color: rgb(255 255 255);
-    background-color: rgb(40 40 40);
-    margin: 10px;
-    text-align: center;
-    border-radius: 25px;
-    padding: 15px;
-}
-
-.artistCard img {
+}*/
+ 
+/*.artistCard img {
     border-radius: 50%;
     object-fit: cover;
     width: 150px;
     height: 150px;
     margin: 10px;
-}
+}*/
 
-.artistCard h3 {
+/*.artistCard h3 {
     background-color: rgb(40 40 40);
-}
+}*/
+

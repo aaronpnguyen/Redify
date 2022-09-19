@@ -1,0 +1,152 @@
+.statsContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.statsTabContainer {
+	display:  flex;
+	flex-direction: column;
+	background-color:  var(--light-gray);
+	margin-top: 50px;
+	border-radius: 10px;
+	min-width: 100%;
+}
+
+.statsTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.statsTab {
+	background-color: var(--charc);
+	width: 33.33334%;
+	text-align: center;
+	padding: 2% 5%;
+	text-decoration: none;
+}
+
+.statsTab:hover {
+	cursor: pointer;
+	background-color: var(--light-gray);
+}
+
+.statsTab > p {
+	color: var(--soft-white);
+	font-size: 1.5rem;
+}
+
+.firstTab {
+	border-radius:  10px 0 0 0 ;
+}
+
+.lastTab {
+	border-radius: 0 10px 0 0;
+}
+
+
+.innerStatsContainer {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	background-color: var(--soft-white);
+	padding: 1% 4%;
+}
+
+.statsColumn {
+	display: flex;
+	flex-direction: column;
+	max-width: 45%;
+	min-width: 45%;
+	margin-top: 50px;
+}
+
+.statsTitle {
+	font-size: 1.7rem;
+	text-align: center;
+	margin-bottom: 30px;
+	font-weight: 500;
+	color: var(--light-charc);
+}
+
+/* Stats Artists */
+.statsArtistCard {
+	display: flex;
+	align-items: center;
+	background-color: var(--light-red);
+	margin-bottom: 4%;
+	max-height: 80px;
+	min-height: 80px;
+	padding: 0 1.5%;
+	border-radius: 10px;
+}
+
+.statsArtistCard > img {
+	width: auto;
+	height: 70px;
+	border-radius: 10px;
+	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+	object-fit: cover;
+}
+
+.statsArtistCardText {
+	padding: 5px 15px 0 15px;
+	min-height: 90px;
+}
+
+.artistCardName {
+	font-size: 1.3rem;
+	font-weight: 600;
+	line-height: 1.6;
+}
+
+.artistCardInfo {
+	font-size: 1rem;
+	color: var(--charc);
+	margin-bottom: 3px;
+}
+
+
+
+/*Stats Tracks*/
+
+.statsTrackCard {
+	max-height: 80px;
+	min-height: 80px;
+	border-radius: 10px;
+	margin-bottom: 4%;
+	box-sizing: !important none;
+}
+
+#trackCardiFrame {
+	max-height: 100px;
+	min-height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
