@@ -35,5 +35,3 @@
 
 #### Strictly Backend
 	[] Trending board is currently broken ???
-    [] Save results in redirect for permision but then redirects back to home page still containing the save button not tracks ???
-
