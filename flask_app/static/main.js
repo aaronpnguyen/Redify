@@ -66,3 +66,63 @@ function showTracksTab() {
 	artistsTab.classList.remove("activeTab");
 	tracksTab.classList.add("activeTab");
 }
+
+
+function shortStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	a.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	c.classList.remove("activeStatsTab");
+}
+
+function medStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	b.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	a.classList.remove("activeStatsTab");
+}
+
+function longStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	c.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	a.classList.remove("activeStatsTab");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

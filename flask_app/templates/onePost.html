@@ -60,6 +60,11 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
+        <a href="/stats/short_term">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Stats</p>
+            </div>
+        </a>
         <a href="#">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
@@ -71,10 +76,10 @@
     <div class="bodyContainer" id="columnContainer">
         <div class="padding-fiftypx"></div>
 
-        <div class="topicTop">
+            <!-- <div class="topicTop">
 
             <h1 class="topicTopTitle">t/{{post.topic.title}}</h1>
-            <!--Button to follow/save topic-->
+            Button to follow/save topic
             {%if favorited%}
                 <form action="/remove/favorite/topic/{{post.topic.id}}" method="POST">
                     <button type="submit">Remove from favorites?</button>
@@ -85,30 +90,47 @@
                 </form>
             {%endif%}
 
-        </div>
+            </div> -->
 
         <div class="innerBodyContainer">
-            <div class="profileBodyLeft">
+            <div class="commentBodyLeft">
 
                 <!-- Create Post -->
-                <div class="post">
-                    
-                </div>
-                <div class="messageContent createPost">
-                    <a href="/form/post">Create a new post</a>
+                <div class="onePostContainer messageContent">
+
+                    <div class="postTopInfo">
+                        <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                        <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                        <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                    </div>
+
+                    <p class="postAudioTitle">{{post.title}}</p>
+                    <p class="postAudioDescription">{{post.message}}</p>
                 </div>
 
-                <form action="/submit/form/comment/{{post.id}}" method="POST">
-                    <h3>message</h3>
-                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="message" placeholder="Comment message">
-                    <h3>spotify url</h3>
-                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
-                    <button type="submit">submit comment</button>
-                </form>
+
+
+                <div class="postCommentContainer messageContent">
+                    <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
+                        <h3 class="newCommentTitle">New Comment</h3>
+                        <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
+                        <!-- <h3>spotify url</h3> -->
+                        <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                        <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
+                    </form>
+                </div>
+
+
                 {%for comment in comments%}
-                    <div class="comments">
-                        <h3>{{comment.message}}</h3>
-                        <h3>{{comment.user.user_name}}</h3>
+                    <div class="comments messageContent">
+                        <div class="postTopInfo">
+                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
+                            <span class="postTopSpan">&nbsp;on&nbsp; {{comment.created_at}}</span>
+                            <!-- <span href="profile/{{post.user.user_name}}" class="postTopAuthor">{{comment.created_at}}</a> -->
+                        </div>
+
+                        <p>{{comment.message}}</p>
+
                         {%if comment.type and comment.link%}
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{comment.type}}/{{comment.link}}?utm_source=generator"
@@ -120,7 +142,7 @@
                     </div>
                 {%endfor%}
 
-
+<!-- 
                 {%for post in posts%}
                     <div class="post messageContent">
                         <h1>{{post.title}}</h1>
@@ -137,12 +159,12 @@
                         <h3>{{post.user.user_name}}</h3>
                         <br>
                     </div>
-                {%endfor%}
+                {%endfor%} -->
             </div>
 
 
             <!-- Profile Body Right -->
-            <div class="profileBodyRight">
+            <div class="commentBodyRight">
                 <div class="topicAboutContainer messageContent noPadding">
                     <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{post.topic.description}}</p>

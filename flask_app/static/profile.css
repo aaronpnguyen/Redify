@@ -83,7 +83,7 @@
 }
 
 .userStatsTabText {
-    color: var(--charc);
+    color: black;
 }
 
 .leftRad {
@@ -96,9 +96,12 @@
 
 .activeTab {
     background-color: var(--light-charc);
-    color: var(--soft-white);
 }
 
+/*.activeTab > * {
+    color: var(--soft-white);
+}
+*/
 /* I don't think this is in use or needed */
 
 /** {
