@@ -98,7 +98,7 @@
                                     <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                                 </div>
                                 <!-- Post Content -->
-                                <div class="postAudioTitle"><a href="/post/{{post.id}}">{{post.title}}</a></div>
+                                <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
                                 <div class="postAudioDescription">{{post.message}}</div>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"

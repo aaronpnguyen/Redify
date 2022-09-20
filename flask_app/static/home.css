@@ -303,6 +303,7 @@ input:focus-visible {
 .postAudioTitle > a {
     color: var(--charc);
     text-decoration: none;
+    font-weight: 500;
 }
 
 .postAudioDescription {
