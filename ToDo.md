@@ -1,11 +1,9 @@
 # Redify Todo
 
 #### Finish Dark Mode
-	[] Button icon currently isn't changing correctly
 	[] Minor color changes still needed
 
 #### Home Page
-	[] Title can overlap box
 	[] Fix Sticky Box
 
 #### User Profile
@@ -16,7 +14,7 @@
 	[] Tan Heading Needs changed
 
 #### View Stats
-	[] Tab system isn't syncing with routes currently
+	[] Tabs work but doesn't have a style indicator for which one you are one, this part is remaining cause the javascript refreshes to original state when a route is clicked
 
 ## Features
 - Clicking the search icon should result in triggering the text input field

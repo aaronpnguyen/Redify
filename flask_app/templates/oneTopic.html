@@ -18,8 +18,12 @@
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
-                    <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
-                    <i class="fa-solid fa-sun hidden" id="lightDarkIconSun"></i>
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -104,7 +108,7 @@
                         </div>
 
 
-                        <h3 class="postAudioTitle">{{post.title}}</h3>
+                        <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
                         <h3 class="postAudioDescription">{{post.message}}</h3>
                         
                         {%if post.type and post.link%}

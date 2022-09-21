@@ -1,19 +1,19 @@
 function lightDark() {
 	var a = document.getElementById("body");
 	var b = document.getElementById("lightDarkIconBtn");
-	var c = document.getElementById("lightDarkIconMoon");
-	var d = document.getElementById("lightDarkIconSun");
+	var c = document.getElementById("lightBtnCase");
+	var d = document.getElementById("darkBtnCase");
 
 	if (a.style.backgroundColor !== "var(--dark-charc)") {
 		a.style.backgroundColor = "var(--dark-charc)";
 		b.style.backgroundColor = "var(--light-btn)"
-		c.classList.add = "hidden";
-		d.classList.remove = "hidden";
+		c.style.display = "none";
+		d.style.display = "inline-block";
     } else {
     	a.style.backgroundColor = "rgb(225, 225, 225)";
     	b.style.backgroundColor = "var(--purple)"
-		c.classList.remove = "hidden";
-		d.classList.add = "hidden";
+		c.style.display = "inline-block";
+		d.style.display = "none";
     }
 
 }

@@ -26,6 +26,11 @@
     /*background-color:  #DAE0E6;*/
 }
 
+.darkBtnCase {
+    display: none;
+    padding: ;
+}
+
 .navContainer {
     border-bottom: 1px solid #282828;
     position: sticky;
@@ -300,8 +305,13 @@ input:focus-visible {
     min-width: 100%;
 }
 
+.postAudioTitle > * {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
 .postAudioTitle > a {
-    color: var(--charc);
+    color: rgb(10, 10, 10);
     text-decoration: none;
     font-weight: 500;
 }

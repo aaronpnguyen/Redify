@@ -16,8 +16,12 @@
 
                 <!-- Light and Dark mode button here -->
                 <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
-                    <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
-                    <i class="fa-solid fa-sun hidden" id="lightDarkIconSun"></i>
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -159,8 +163,9 @@
                         <!-- THIS PART IS INCOMPLETE -->
 
                             <li>
-                                <a class="topicCardHoldingLink" href="">
-                                    {%for i in range(topics | length)%}
+                                {%for i in range(topics | length)%}
+                                <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
+
                                         <div class="trendingTopicCard">
                                             <div class="trendingTopicCircleNumber">
                                                 <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
@@ -169,8 +174,10 @@
                                                 <span>t/{{topics[i].title}}</span>
                                             </div>
                                         </div>
-                                    {%endfor%}
+
                                 </a>
+                                {%endfor%}
+
                             </li>
                         </ul>
 
