@@ -18,7 +18,7 @@ def create_spotify_oauth():
     return SpotifyOAuth(
         client_id = SPOTIFY_APP_ID,
         client_secret = SPOTIFY_APP_SECRET,
-        show_dialog = False,
+        show_dialog = True,
         redirect_uri = url_for('spotifyRedirect', _external = True),
         scope = scope
     )
@@ -97,8 +97,10 @@ def userStats(term):
         }
         tracks.append(details)
     
+    user = User.get_user_by_id({'id': session['user_id']})
+
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('stats.html', tracks = tracks, artists = artists)
+    return render_template('stats.html', tracks = tracks, artists = artists, user = user)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
@@ -120,22 +122,30 @@ def saveStats():
     # Conditional to check whether we are updating or saving to database
     if allArtists:
         for i, artist in enumerate(topArtists):
+            if artist['genres']:
+                genre = artist['genres'][0]
+            else:
+                genre = "Unkown genre!"
             data = {
                 'id': allArtists[i]['id'],
                 'artist_name': artist['name'],
                 'artist_image': artist['images'][0]['url'],
                 'followers': artist['followers']['total'],
-                'genre': artist['genres'][0]
+                'genre': genre
             }
             Artist.update_artist(data)
     else:
         for artist in topArtists:
+            if artist['genres']:
+                genre = artist['genres'][0]
+            else:
+                genre = "Unkown genre!"
             data = {
                 'artist_name': artist['name'],
                 'artist_image': artist['images'][0]['url'],
                 'user_id': session['user_id'],
                 'followers': artist['followers']['total'],
-                'genre': artist['genres'][0]
+                'genre': genre
             }
             Artist.create_artist(data)
 
