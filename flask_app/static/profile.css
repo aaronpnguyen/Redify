@@ -1,7 +1,7 @@
 /* Body Left */
 .profileBodyLeft {
-    min-width: 65%;
-    max-width: 65%;
+    min-width: 60%;
+    max-width: 60%;
     margin-top: 50px;
 }
 
@@ -50,8 +50,8 @@
 
 /* Body Right */
 .profileBodyRight {
-    min-width:28%;
-    max-width: 28%;
+    min-width:36%;
+    max-width: 36%;
     margin-top: 50px;
     /*background-color: tan;*/
 }
@@ -59,8 +59,10 @@
 .userStats {
     border-radius: 15px;
     background-color: var(--soft-white);
+    border: 3px solid var(--light-charc);
     min-height: 200px;
     position: sticky;
+    box-shadow: 0 0 9px 3px rgb(0 0 0 / 20%);
 }
 
 .userStatsTabContainer {
@@ -72,8 +74,8 @@
     min-width: 50%;
     max-width: 50%;
     text-align: center;
-    border: 1px solid black;
-    padding: 3%;
+    /*border-bottom: 3px solid var(--light-charc);*/
+    padding: 4%;
 }
 
 .userStatsTab:hover {
@@ -81,21 +83,25 @@
 }
 
 .userStatsTabText {
-    color: var(--charc);
+    color: black;
 }
 
 .leftRad {
-    border-radius: 15px 0 0 0 ;
+    border-radius: 10px 0 0 0 ;
 }
 
 .rightRad {
-    border-radius: 0 15px 0 0 ;
+    border-radius: 0 10px 0 0 ;
 }
 
 .activeTab {
-    background-color: var(--light-red);
+    background-color: var(--light-charc);
 }
 
+/*.activeTab > * {
+    color: var(--soft-white);
+}
+*/
 /* I don't think this is in use or needed */
 
 /** {
@@ -104,16 +110,96 @@
     font-family: Circular,Helvetica,Arial,sans-serif;
     background-color: #202124;
 }*/
+
+.artistCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border-bottom: 2px solid var(--light-charc);*/
+    padding-top: 10px;
+}
+
+.artistCard:nth-child(odd) {
+    background-color: rgba(220, 220, 220, 0.4);
+}
  
-/*.artistCard img {
+.artistCard img {
     border-radius: 50%;
     object-fit: cover;
-    width: 150px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     margin: 10px;
-}*/
+}
 
-/*.artistCard h3 {
-    background-color: rgb(40 40 40);
-}*/
+.artistCardInfo {
+    min-width: 70%;
+}
+
+.artistCard > iframe {
+    background-color: transparent;
+}
+
+.favoritesBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.favoritesBtn {
+    padding: 2% 6%;
+    margin: 4% 0;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--charc);
+    color: var(--soft-white);
+    font-size: 1.2rem;
+}
+
+.favoritesBtn:hover {
+    background-color: #1db352;
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

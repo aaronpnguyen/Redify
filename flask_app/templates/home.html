@@ -15,8 +15,13 @@
                 <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
-                <div class="lightDarkBtn" onclick="lightDark()">
-                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -56,6 +61,11 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
+        <a href="/stats/short_term">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Stats</p>
+            </div>
+        </a>
         <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
@@ -68,12 +78,12 @@
         <div class="bodyLeft">
             <div class="postsContainer"> 
                 <div class="createPostTopicContainer"> 
-                    <div class="messageContent createPost homeCreateBtn">
-                        <a href="/form/topic">Create a Topic</a>
-                    </div>
-                    <div class="messageContent createPost homeCreateBtn">
-                        <a href="/form/post">Create a New Post</a>
-                    </div>
+                    <a href="/form/topic" class="hvr-bounce-in messageContent createPost homeCreateBtn">
+                        <p>Create a Topic</p>
+                    </a>
+                    <a href="/form/post" class="hvr-bounce-in messageContent createPost homeCreateBtn">
+                        <p>Create a New Post</p>
+                    </a>
                 </div>
 
                 <!-- All posts -->
@@ -84,7 +94,7 @@
                         <div class="leftMC">
                         </div>
                         <div class="rightMC">
-                            <div class="postTitle">
+                            <div class="postContainer">
                                 <!-- Post Topic and Author -->
                                 <div class="postTopInfo">
                                     <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
@@ -92,8 +102,8 @@
                                     <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                                 </div>
                                 <!-- Post Content -->
-                                <h3 class="postAudioTitle">{{post.title}}</h3>
-                                <h3 class="postAudioDescription">{{post.message}}</h3>
+                                <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
+                                <div class="postAudioDescription">{{post.message}}</div>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"
                                         src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
@@ -122,8 +132,8 @@
                                     <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                                 </div>
                                 <!-- Post Content -->
-                                <h3 class="postAudioTitle">{{post.title}}</h3>
-                                <h3 class="postAudioDescription">{{post.message}}</h3>
+                                <div class="postAudioDescription postAudioTitle">{{post.title}}</div>
+                                <div class="postAudioDescription">{{post.message}}</div>
                                 {%if post.type and post.link%}
                                     <iframe style="border-radius:12px"
                                         src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
@@ -153,8 +163,9 @@
                         <!-- THIS PART IS INCOMPLETE -->
 
                             <li>
-                                <a class="topicCardHoldingLink" href="">
-                                    {%for i in range(topics | length)%}
+                                {%for i in range(topics | length)%}
+                                <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
+
                                         <div class="trendingTopicCard">
                                             <div class="trendingTopicCircleNumber">
                                                 <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
@@ -163,8 +174,10 @@
                                                 <span>t/{{topics[i].title}}</span>
                                             </div>
                                         </div>
-                                    {%endfor%}
+
                                 </a>
+                                {%endfor%}
+
                             </li>
                         </ul>
 

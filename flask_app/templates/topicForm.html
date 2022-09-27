@@ -13,10 +13,14 @@
         <div class="navBar">
             <div class="leftNav">
                 <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
-
                 <!-- Light and Dark mode button here -->
-                <div class="lightDarkBtn" onclick="lightDark()">
-                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -53,6 +57,11 @@
         <a href="/profile/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Profile</p>
+            </div>
+        </a>
+        <a href="/stats/short_term">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Stats</p>
             </div>
         </a>
         <a href="/settings/{{user.user_name}}">
