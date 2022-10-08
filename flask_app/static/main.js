@@ -4,16 +4,20 @@ function lightDark() {
 	var c = document.getElementById("lightBtnCase");
 	var d = document.getElementById("darkBtnCase");
 
+	var legal = document.getElementById("legal");
+
 	if (a.style.backgroundColor !== "var(--dark-charc)") {
 		a.style.backgroundColor = "var(--dark-charc)";
 		b.style.backgroundColor = "var(--light-btn)"
 		c.style.display = "none";
 		d.style.display = "inline-block";
+		legal.style.backgroundColor = "rgb(100,100,100)"
     } else {
-    	a.style.backgroundColor = "rgb(225, 225, 225)";
-    	b.style.backgroundColor = "var(--purple)"
+    a.style.backgroundColor = "rgb(225, 225, 225)";
+    b.style.backgroundColor = "var(--purple)"
 		c.style.display = "inline-block";
 		d.style.display = "none";
+		legal.style.backgroundColor = "#111111"
     }
 
 }
