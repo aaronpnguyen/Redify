@@ -19,8 +19,13 @@
                 <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
-                <div class="lightDarkBtn" onclick="lightDark()">
-                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -35,13 +40,14 @@
             </div>
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
                 {%if session['user_id']%}
-                <div class="rightNavDropdown">                    
-                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
-                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
-                    </svg>
-                </div>
+                    <p class="userName">{{user.user_name}}</p>
+                    <div class="rightNavDropdown">                    
+                        <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                            <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                        </svg>
+                    </div>
                 {%else%}
-                    <h3 style="color: white;">login hoe</h3>
+                    <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
                 {%endif%}
             </button>
         </div>
@@ -59,7 +65,12 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
-        <a href="#">
+        <a href="/stats/short_term">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Stats</p>
+            </div>
+        </a>
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -71,7 +82,7 @@
 
         <div class="fixedLeftBody">
             <div class="fixedLeftLinkContainer">
-                <h1>Account Settings</h1>
+                <h1 class="settingsTitle">Account Settings</h1>
                 <!-- <p class=""><a href="#">Account Ownership</a></p> -->
                 <p class=""><a href="#accountOverview">Account Overview</a></p>
                 <p class=""><a href="#redifyEmail">Redify Email</a></p>
@@ -104,7 +115,7 @@
                         <!-- <p class="settingsCardListP">First Name:</p> 
                         <p class="settingsCardListP">Last Name:</p> -->
                     </div>
-                    <p class="settingsCardListP">Created On:</p>
+                    <p class="settingsCardListP">Created On: {{user.created_at}}</p>
                 </div>
                 <div id="redifyEmail"></div>
             </div>

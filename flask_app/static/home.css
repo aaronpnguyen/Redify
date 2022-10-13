@@ -16,6 +16,9 @@
     --light-gray: rgba(180,180,180,1);
     --soft-white: rgb(247, 247, 247);
     --light-green: rgb(210,255,195);
+    --green: #1db352;
+    --purple: #7D38A6;
+    --light-btn:  #FBD38D;
 }
 
 #body {
@@ -23,11 +26,17 @@
     /*background-color:  #DAE0E6;*/
 }
 
+.darkBtnCase {
+    display: none;
+    /* padding: ; */
+}
+
 .navContainer {
     border-bottom: 1px solid #282828;
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 2;
 }
 
 .navBar {
@@ -101,7 +110,7 @@ input:focus-visible {
     margin-left: 25px;
 }
 
-/* Rigth Nav */
+/* Right Nav */
 .rightNav {
     margin-right: 25px;
     padding: 5px;
@@ -111,6 +120,14 @@ input:focus-visible {
     background-color: #282828;
     border-radius: 7px;
     border: none;
+}
+
+.rightNav > .userName {
+    font-family: 'FF Mark W05', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--soft-white);
+    padding-left: 10px;
 }
 
 .rightNav:hover {
@@ -187,7 +204,7 @@ input:focus-visible {
     justify-content: center;
     align-items: center;
     margin-left: 25%;
-    background-color: #7D38A6;
+    background-color: var(--purple);
     color: rgb(250, 250, 250);
 }
 
@@ -195,11 +212,19 @@ input:focus-visible {
     cursor: pointer;
 }
 
+.postContainer {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 /* BODY LEFT */
 
 .bodyLeft {
     min-width: 55%;
     max-width: 55%;
+    margin-top: 50px;
 }
 
 .messageContent {
@@ -207,9 +232,14 @@ input:focus-visible {
     border-radius:20px;
     border:  1px solid rgb(240,240,240);
     width: 100%;
+    max-width: 100%;
     padding: 2% 4%;
     margin-bottom: 25px;
     box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
+}
+
+.rightMC {
+    max-width: 100%;
 }
 
 .createPostTopicContainer {
@@ -217,12 +247,16 @@ input:focus-visible {
     justify-content: space-between;
 }
 
-.createPost > a {
+.createPost {
+    text-decoration: none;
+}
+
+.createPost > p {
     color: rgb(40, 40, 40);
     text-decoration: none;
 }
 
-.createPost > a:hover {
+.createPost:hover {
     cursor:  pointer;
 }
 
@@ -273,6 +307,21 @@ input:focus-visible {
 .postAudioTitle {
     margin-bottom:  3%;
     font-size: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.postAudioTitle > * {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.postAudioTitle > a {
+    color: rgb(10, 10, 10);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .postAudioDescription {
@@ -289,6 +338,8 @@ input:focus-visible {
     display: flex;
     max-width: 30%;
     min-width: 30%;
+    margin-top: 50px;
+
 }
 
 .information {
@@ -368,7 +419,6 @@ input:focus-visible {
     padding: 10% 2%;
     border-radius: 20px;
     box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.2);
-    background-color: ;
     position: sticky;
     top: 70px;
     color: white;
@@ -481,7 +531,12 @@ input:focus-visible {
     border: 1px solid var(--charc);
 }
 
-.createFormSubmit:hover {
+.createFormSubmit > a {
+    text-decoration: none;
+    color: var(--charc);
+}
+
+.createFormSubmit:hover, .createFormSubmit > a:hover {
     color: white;
     background-color: var(--charc);
     cursor: pointer;
@@ -554,6 +609,22 @@ input:focus-visible {
 }
 
 
+/* Bounce In */
+.hvr-bounce-in {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+}
 
 
 

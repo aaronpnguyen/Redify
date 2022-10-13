@@ -38,7 +38,10 @@ def oneTopic(topicName):
 def submitTopic():
     if 'user_id' not in session:
         return redirect('/home')
-        
+    
+    if not Topic.validate_topic(request.form):
+        return redirect('/form/topic')
+
     data = {
         'title': request.form['title'],
         'description': request.form['description'],

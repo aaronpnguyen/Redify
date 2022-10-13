@@ -109,6 +109,10 @@
 	margin-bottom: 10px;
 }
 
+.settingsCardActions > form > .updateSetting > input::placeholder {
+	color: var(--charc);
+}
+
 .settingsCardActions > form > .updateSetting > input:focus {
 	outline: 3px solid var(--charc);
 }

@@ -1,13 +1,23 @@
 function lightDark() {
 	var a = document.getElementById("body");
-	// var b = document.getElementById(" ");
-	// var c = document.getElementById(" ");
-	// var d = document.getElementById(" ");
+	var b = document.getElementById("lightDarkIconBtn");
+	var c = document.getElementById("lightBtnCase");
+	var d = document.getElementById("darkBtnCase");
+
+	var legal = document.getElementById("legal");
 
 	if (a.style.backgroundColor !== "var(--dark-charc)") {
 		a.style.backgroundColor = "var(--dark-charc)";
+		b.style.backgroundColor = "var(--light-btn)"
+		c.style.display = "none";
+		d.style.display = "inline-block";
+		legal.style.backgroundColor = "rgb(100,100,100)"
     } else {
-    		a.style.backgroundColor = "rgb(225, 225, 225)";
+    a.style.backgroundColor = "rgb(225, 225, 225)";
+    b.style.backgroundColor = "var(--purple)"
+		c.style.display = "inline-block";
+		d.style.display = "none";
+		legal.style.backgroundColor = "#111111"
     }
 
 }
@@ -35,8 +45,8 @@ function showArtistsTab() {
 	var artistsTab = document.getElementById("artistsTab");
 	var tracksTab = document.getElementById("tracksTab");
 
-	artistsContent.classList.add("activeTab");
-	tracksContent.classList.remove("activeTab");
+	// artistsContent.classList.add("activeTab");
+	// tracksContent.classList.remove("activeTab");
 
 	tracksContent.classList.add("hidden");
 	artistsContent.classList.remove("hidden");
@@ -51,8 +61,8 @@ function showTracksTab() {
 	var artistsTab = document.getElementById("artistsTab");
 	var tracksTab = document.getElementById("tracksTab");
 
-	artistsContent.classList.remove("activeTab");
-	tracksContent.classList.add("activeTab");
+	// artistsContent.classList.remove("activeTab");
+	// tracksContent.classList.add("activeTab");
 
 	artistsContent.classList.add("hidden");
 	tracksContent.classList.remove("hidden");
@@ -60,3 +70,63 @@ function showTracksTab() {
 	artistsTab.classList.remove("activeTab");
 	tracksTab.classList.add("activeTab");
 }
+
+
+function shortStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	a.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	c.classList.remove("activeStatsTab");
+}
+
+function medStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	b.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	a.classList.remove("activeStatsTab");
+}
+
+function longStatsTab() {
+	var a = document.getElementById("shortStatsTab");
+	var b = document.getElementById("medStatsTab");
+	var c = document.getElementById("longStatsTab");
+
+	c.classList.add("activeStatsTab");
+	b.classList.remove("activeStatsTab");
+	a.classList.remove("activeStatsTab");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

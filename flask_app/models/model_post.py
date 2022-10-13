@@ -135,3 +135,6 @@ class Post:
                 print(post.topic.title)
             return all_posts
         return []
+    
+    # @staticmethod
+    # def validate_post(data):

@@ -26,7 +26,6 @@ class Topic:
         return connectToMySQL(DATABASE).query_db(query, data)
     
     # GET
-
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM topics"
@@ -95,8 +94,6 @@ class Topic:
     def get_active(cls, data):
         query = "SELECT * FROM favorite_topics WHERE topic_id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-        print(results)
-
         return len(results)
     
     @classmethod
@@ -115,4 +112,17 @@ class Topic:
     def delete_favorited(cls, data):
         query = "DELETE FROM favorite_topics WHERE topic_id = %(topic_id)s AND user_id = %(user_id)s"
         return connectToMySQL(DATABASE).query_db(query, data)
-            
+
+    @staticmethod
+    def validate_topic(data):
+        is_valid = True
+        if Topic.get_one_by_title(data):
+            flash("This topic name already exists!")
+            is_valid = False
+        if len(data['title']) < 5:
+            flash("Topic name must contain more than 5 characters!")
+            is_valid = False
+        if len(data['description']) < 2:
+            flash("Topic description must contain more than 2 characters!")
+            is_valid = False
+        return is_valid

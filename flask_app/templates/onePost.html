@@ -14,11 +14,16 @@
     <div class="navContainer">
         <div class="navBar">
             <div class="leftNav">
-                <h2><span>Red</span>ify</h2>
+                <h2 class="logo"><a href="/home"><span>Red</span>ify</a></h2>
 
                 <!-- Light and Dark mode button here -->
-                <div class="lightDarkBtn" onclick="lightDark()">
-                    <i class="fa-solid fa-moon" id="lightDarkIcon"></i>
+                <div class="lightDarkBtn" onclick="lightDark()" id="lightDarkIconBtn">
+                    <div class="lightBtnCase" id="lightBtnCase">
+                        <i class="fa-solid fa-moon" id="lightDarkIconMoon"></i>
+                    </div>
+                    <div class="darkBtnCase" id="darkBtnCase">
+                        <i class="fa-solid fa-sun" id="lightDarkIconSun"></i>
+                    </div>
                 </div>
             </div>
             <div class="searchBar">
@@ -33,6 +38,7 @@
             </div>
             {%if session['user_id']%}
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                <p class="userName">{{user.user_name}}</p>
                 <div class="rightNavDropdown">                    
                     <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
                         <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
@@ -40,7 +46,7 @@
                 </div>
             </button>
             {%else%}
-                <h1>ADD LOGIN/LOGOUT</h1>
+                <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
             {%endif%}
         </div>
     </div>
@@ -59,6 +65,11 @@
                 <p class="navDropdownLink">Profile</p>
             </div>
         </a>
+        <a href="/stats/short_term">
+            <div class="navDropdownCard">
+                <p class="navDropdownLink">Stats</p>
+            </div>
+        </a>
         <a href="#">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
@@ -70,10 +81,10 @@
     <div class="bodyContainer" id="columnContainer">
         <div class="padding-fiftypx"></div>
 
-        <div class="topicTop">
+            <!-- <div class="topicTop">
 
             <h1 class="topicTopTitle">t/{{post.topic.title}}</h1>
-            <!--Button to follow/save topic-->
+            Button to follow/save topic
             {%if favorited%}
                 <form action="/remove/favorite/topic/{{post.topic.id}}" method="POST">
                     <button type="submit">Remove from favorites?</button>
@@ -84,34 +95,61 @@
                 </form>
             {%endif%}
 
-        </div>
+            </div> -->
 
         <div class="innerBodyContainer">
-            <div class="profileBodyLeft">
+            <div class="commentBodyLeft">
 
                 <!-- Create Post -->
-                <div class="post">
+                <div class="onePostContainer messageContent">
+
+                    <div class="postTopInfo">
+                        <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                        <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                        <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                    </div>
+
+                    <p class="postAudioTitle">{{post.title}}</p>
+                    <p class="postAudioDescription">{{post.message}}</p>
+
                     
-                </div>
-                <div class="messageContent createPost">
-                    <a href="/form/post">Create a new post</a>
+                    {%if post.type and post.link%}
+                        <iframe style="border-radius:12px"
+                            src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                            width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
+                    {%endif%}
                 </div>
 
-                <form action="/submit/form/comment/{{post.id}}" method="POST">
-                    <h3>message</h3>
-                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="message" placeholder="Comment message">
-                    <h3>spotify url</h3>
-                    <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
-                    <button type="submit">submit comment</button>
-                </form>
+
+
+                <div class="postCommentContainer messageContent">
+                    <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
+                        <h3 class="newCommentTitle">New Comment</h3>
+                        <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
+                        <!-- <h3>spotify url</h3> -->
+                        <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                        <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
+                    </form>
+                </div>
+
+
                 {%for comment in comments%}
-                    <div class="comments">
-                        <h3>{{comment.message}}</h3>
-                        <h3>{{comment.user.user_name}}</h3>
+                    <div class="comments messageContent">
+                        <div class="postTopInfo">
+                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
+                            <span class="postTopSpan">&nbsp;on&nbsp; {{comment.created_at}}</span>
+                            <!-- <span href="profile/{{post.user.user_name}}" class="postTopAuthor">{{comment.created_at}}</a> -->
+                        </div>
+
+                        <p class="postAudioDescription">{{comment.message}}</p>
+
                         {%if comment.type and comment.link%}
                             <iframe style="border-radius:12px"
                                 src="https://open.spotify.com/embed/{{comment.type}}/{{comment.link}}?utm_source=generator"
-                                width="400" height="{{100 if comment.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                width="100%" height="{{100 if comment.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
                                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                                 loading="lazy">
                             </iframe>
@@ -119,7 +157,7 @@
                     </div>
                 {%endfor%}
 
-
+<!-- 
                 {%for post in posts%}
                     <div class="post messageContent">
                         <h1>{{post.title}}</h1>
@@ -136,12 +174,12 @@
                         <h3>{{post.user.user_name}}</h3>
                         <br>
                     </div>
-                {%endfor%}
+                {%endfor%} -->
             </div>
 
 
             <!-- Profile Body Right -->
-            <div class="profileBodyRight">
+            <div class="commentBodyRight">
                 <div class="topicAboutContainer messageContent noPadding">
                     <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{post.topic.description}}</p>

@@ -98,7 +98,7 @@ def userStats(term):
         tracks.append(details)
     
     user = User.get_user_by_id({'id': session['user_id']})
-
+    
     # return request.current_user_top_artists(50, 0, term) # Show JSON
     return render_template('stats.html', tracks = tracks, artists = artists, user = user)
 
@@ -118,6 +118,9 @@ def saveStats():
     
     allArtists = Artist.get_all_for_user({'user_id': session['user_id']})
     allTracks = Track.get_all_for_user({'user_id': session['user_id']})
+    print("xxxx")
+    print(allArtists)
+    print("xxxx")
 
     # Conditional to check whether we are updating or saving to database
     if allArtists:
