@@ -127,6 +127,11 @@
 
                     {%if session['user_id']%}
                         <p class="trendingTableTitle">Your Topics</p>
+
+                        {%if not topics%}
+                            <p>Browse some topics!</p>
+                        {%endif%}
+
                         <ul class="trendingTableTopicList">
 
                         <!-- ---------------------------------------------------------------------------------------------------- -->
