@@ -110,7 +110,7 @@ input:focus-visible {
     margin-left: 25px;
 }
 
-/* Rigth Nav */
+/* Right Nav */
 .rightNav {
     margin-right: 25px;
     padding: 5px;
@@ -120,6 +120,14 @@ input:focus-visible {
     background-color: #282828;
     border-radius: 7px;
     border: none;
+}
+
+.rightNav > .userName {
+    font-family: 'FF Mark W05', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--soft-white);
+    padding-left: 10px;
 }
 
 .rightNav:hover {
@@ -523,7 +531,12 @@ input:focus-visible {
     border: 1px solid var(--charc);
 }
 
-.createFormSubmit:hover {
+.createFormSubmit > a {
+    text-decoration: none;
+    color: var(--charc);
+}
+
+.createFormSubmit:hover, .createFormSubmit > a:hover {
     color: white;
     background-color: var(--charc);
     cursor: pointer;
