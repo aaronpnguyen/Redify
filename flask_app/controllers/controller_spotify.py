@@ -18,7 +18,7 @@ def create_spotify_oauth():
     return SpotifyOAuth(
         client_id = SPOTIFY_APP_ID,
         client_secret = SPOTIFY_APP_SECRET,
-        show_dialog = False,
+        show_dialog = True,
         redirect_uri = url_for('spotifyRedirect', _external = True),
         scope = scope
     )
@@ -97,8 +97,9 @@ def userStats(term):
         }
         tracks.append(details)
     
+    user = User.get_user_by_id({'id': session['user_id']})
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('stats.html', tracks = tracks, artists = artists)
+    return render_template('stats.html', tracks = tracks, artists = artists, user = user)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
@@ -116,6 +117,9 @@ def saveStats():
     
     allArtists = Artist.get_all_for_user({'user_id': session['user_id']})
     allTracks = Track.get_all_for_user({'user_id': session['user_id']})
+    print("xxxx")
+    print(allArtists)
+    print("xxxx")
 
     # Conditional to check whether we are updating or saving to database
     if allArtists:

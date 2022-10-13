@@ -54,8 +54,9 @@ def viewPost(id):
     
     comments = Comment.get_comments_for_post({'post_id': id})
     activeCount = Topic.get_active({'id': post.topic_id})
+    user = User.get_user_by_id({'id': session['user_id']})
 
-    return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount)
+    return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount, user = user)
 
 @app.route('/submit/form/comment/<int:post_id>', methods=['POST'])
 def submitComment(post_id):
