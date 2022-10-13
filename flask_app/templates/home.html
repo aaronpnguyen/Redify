@@ -119,36 +119,6 @@
                         </div>
                     </div>
                 {%endfor%}
-
-                <!-- This is the user's feed -->
-                {#
-                {%for post in userFeed%}
-                    <div class="messageContent">
-                        <div class="leftMC">
-                        </div>
-                        <div class="rightMC">
-                            <div class="postTitle">
-                                <!-- Post Topic and Author -->
-                                <div class="postTopInfo">
-                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
-                                    <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
-                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="postAudioDescription postAudioTitle">{{post.title}}</div>
-                                <div class="postAudioDescription">{{post.message}}</div>
-                                {%if post.type and post.link%}
-                                    <iframe style="border-radius:12px"
-                                        src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                        loading="lazy">
-                                    </iframe>
-                                {%endif%}
-                            </div>
-                        </div>
-                    </div>
-                {%endfor%}#}
             </div>
         </div>
         <div class="bodyRight">
