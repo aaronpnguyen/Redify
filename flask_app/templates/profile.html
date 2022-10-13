@@ -95,7 +95,8 @@
             </div>
 
             <div class="postContainer">
-                {%for post in posts%}
+                {%if posts%}
+                    {%for post in posts%}
                     <div class="post messageContent">
 
                         <div class="postTopInfo">
@@ -116,8 +117,17 @@
                                 loading="lazy">
                             </iframe>
                         {%endif%}
+
                     </div>
-                {%endfor%}
+                    {%endfor%}
+
+                {%else%}
+                    <div class="post messageContent">
+                        <p class="no-posts">You have no posts! <a href="/">Create Post</a></p>
+                    </div>
+                {%endif%}
+                    
+                    
             </div>
 
         </div>
@@ -172,8 +182,10 @@
                         {%if artists%}
                             <button class="favoritesBtn hvr-grow" type="submit">Update</button>
                         {%else%}
+                        <div class="columnStats">    
                             <p>Get your top 5 stats.</p>
-                            <button class="favoritesBtn hvr-grow" type="submit">Save</button>
+                                <button class="favoritesBtn hvr-grow" type="submit">Get Stats</button>
+                            </div>
                         {%endif%}
                         </form>
                     {%endif%}

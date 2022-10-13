@@ -2,6 +2,20 @@
     font-family: 'FF Mark W05', sans-serif;
 }
 
+:root {
+    --light-red: rgba(235, 130, 130, 1);
+    --dark-red:  rgba(203, 106, 106, 1);
+    --dark-charc: rgb(15,15,15);
+    --charc: rgb(50,50,50);
+    --light-charc:  rgb(100,100,100);
+    --light-gray: rgba(180,180,180,1);
+    --soft-white: rgb(247, 247, 247);
+    --light-green: rgb(210,255,195);
+    --green: #1db352;
+    --purple: #7D38A6;
+    --light-btn:  #FBD38D;
+}
+
 body {
     padding: 200px;
     background-color: #202124;
@@ -70,4 +84,25 @@ a {
     font-family: 'FF Mark W05', sans-serif;
     font-weight: bold;
     color: #3f3f3f
+}
+
+
+/* ERROR CONTAINER */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-box {
+    background-color: var(--light-red);
+    width: 400px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.error-alert {
+    color: rgba(0,0,0,0.5);
+    font-size: 1.2rem;
 }

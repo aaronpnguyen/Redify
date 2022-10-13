@@ -1,15 +1,13 @@
 # Redify Todo
 
 #### Home Page:
-- Add conditional for user if there are no posts
-- Have trending table sticky
-    - If user does not have any topics favorited, show ("Browse topics!")
+- Add conditional for user if there are no posts  -  (???)
+    --> A brand new profile currently sees all posts on the home page I believe, currently if I create a new profile I see all the previous profiles posts at the home page
 
-#### Profile
-- Add conditional if user does not have posts ("Create your first post!") under user header
+- Have trending table sticky
 
 #### ALL FORMS
-- Display validations in a NEAT fashion for users
+- Error Messages needed on topic and post form 
 
 #### Extra
 - Add all topics page for users to browse?

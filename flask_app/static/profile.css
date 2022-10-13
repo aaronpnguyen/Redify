@@ -160,6 +160,16 @@
     background-color: #1db352;
 }
 
+.columnStats {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.no-posts > a {
+    color: rgb(40, 100, 250);
+}
+
 .hvr-grow {
   display: inline-block;
   vertical-align: middle;
