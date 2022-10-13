@@ -26,7 +26,6 @@ class Topic:
         return connectToMySQL(DATABASE).query_db(query, data)
     
     # GET
-
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM topics"

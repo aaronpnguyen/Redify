@@ -156,12 +156,33 @@
                         <p class="trendingTableTitle">Your Topics</p>
                         <ul class="trendingTableTopicList">
 
-
-
-
                         <!-- ---------------------------------------------------------------------------------------------------- -->
                         <!-- THIS PART IS INCOMPLETE -->
 
+                            <li>
+                                {%for i in range(topics | length)%}
+                                <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
+
+                                    <div class="trendingTopicCard">
+                                        <div class="trendingTopicCircleNumber">
+                                            <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
+                                        </div>
+                                        <div class="trendingTopicCardText">
+                                            <span>t/{{topics[i].title}}</span>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                {%endfor%}
+                            </li>
+                        </ul>
+
+                    {%else%}
+
+                    <!-- Maybe a please login to view person topics here -->
+
+                        <p class="trendingTableTitle">Trending Topics</p>
+                        <ul class="trendingTableTopicList">
                             <li>
                                 {%for i in range(topics | length)%}
                                 <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
@@ -177,25 +198,12 @@
 
                                 </a>
                                 {%endfor%}
-
                             </li>
-                        </ul>
-
-                    {%else%}
-
-                    <!-- Maybe a please login to view person topics here -->
-
-                        <p class="trendingTableTitle">Trending Topics</p>
-                        <ul class="trendingTableTopicList">
-                            {%for i in range(topics | length)%}
-                                <p>{{i + 1}}</p>
-                                <li><a href="/t/{{topics[i].title}}">{{topics[i].title}}</a></li>
-                            {%endfor%}
                         </ul>
                     {%endif%}
 
                 </div>
-                <div class="legal">
+                <div class="legal" id="legal">
                     <div class="legalInfo">
                         <ul>
                             <li><a href="/about">About</a></li>
