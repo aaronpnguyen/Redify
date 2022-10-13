@@ -55,7 +55,8 @@ class Topic:
     def get_one_by_id(cls, data):
         query = "SELECT * FROM topics WHERE id = %(id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
-        return cls(results[0])
+        if results: return cls(results[0])
+        return []
     
     @classmethod
     def get_favorite_topics_by_user_id(cls, data):
@@ -117,12 +118,15 @@ class Topic:
     def validate_topic(data):
         is_valid = True
         if Topic.get_one_by_title(data):
-            flash("This topic name already exists!")
+            flash("This topic name already exists!", "title")
+            is_valid = False
+        elif ' ' in data['title']:
+            flash("Topic titles cannot contain spaces!", "title")
             is_valid = False
         if len(data['title']) < 5:
-            flash("Topic name must contain more than 5 characters!")
+            flash("Topic name must contain more than 5 characters!", "title")
             is_valid = False
         if len(data['description']) < 2:
-            flash("Topic description must contain more than 2 characters!")
+            flash("Topic description must contain more than 2 characters!", "description")
             is_valid = False
         return is_valid

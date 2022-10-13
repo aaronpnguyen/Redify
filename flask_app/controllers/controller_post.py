@@ -17,7 +17,10 @@ def postForm():
 def submitPost():
     if 'user_id' not in session:
         return redirect('/home')
-        
+    
+    if not Post.validate_post(request.form):
+        return redirect('/form/post')
+
     link = request.form['link']
     if link:
         try:

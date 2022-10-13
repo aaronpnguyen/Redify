@@ -35,3 +35,15 @@ class Comment:
                 all_comments.append(comment)
             return all_comments
         return []
+    
+    @staticmethod
+    def validate_comment(data):
+        is_valid = True
+        if len(data['message']) < 2:
+            flash("Message must contain more than 2 characters!", "message")
+            is_valid = False
+        if data['link']:
+            if 'spotify' not in data['link']:
+                flash("Invalid spotify link!", "link")
+                is_valid = False
+        return is_valid

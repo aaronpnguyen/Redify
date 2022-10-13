@@ -94,7 +94,6 @@
                     <div class="postForm">
                         <!-- <span class="postInputTopicLabel lightOpacityBg TenBorderRadius">Select a Topic:</span> -->
                         <select class="postSelectInput" name="topic_id">
-                            <option value="" disabled selected hidden>Select a Topic</option>
                             {%for topic in topics%}
                                 <option class="postSelectValue" value="{{topic.id}}">{{topic.title}}</option>
                             {%endfor%}
