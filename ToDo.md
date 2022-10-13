@@ -1,17 +1,16 @@
 # Redify Todo
 
-#### Home Page
-	[] Fix Sticky Box
+#### Home Page:
+- Add conditional for user if there are no posts
+- Have trending table sticky
+    - If user does not have any topics favorited, show ("Browse topics!")
 
-#### User Profile
-	[] Sticky position favorites table
+#### Profile
+- Add conditional if user does not have posts ("Create your first post!") under user header
 
-#### View Stats
-	[] Tabs work but doesn't have a style indicator for which one you are one, this part is remaining cause the javascript refreshes to original state when a route is clicked
+#### ALL FORMS
+- Display validations in a NEAT fashion for users
 
-## Features
-	- Make Text Input field functional
-
-
-#### Controller
-	[] Stats controller that renders the stats page -- doesnt have access to user, if you put the link to "user/{{user.user_name}}"
+#### Extra
+- Add all topics page for users to browse?
+- Bring back legal?
