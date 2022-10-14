@@ -70,20 +70,18 @@
                 <p class="navDropdownLink">Stats</p>
             </div>
         </a>
-        <a href="/">
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
         </a>
     </div>
 
-
-
     <div id="columnContainer" class="alignCenter bodyContainer statsContainer">
 
         <div class="statsTabContainer">
             <div class="statsTop">
-                <a class="statsTab firstTab activeStatsTab"  href="/stats/short_term" id="shortStatsTab">
+                <a class="statsTab firstTab activeStatsTab" href="/stats/short_term" id="shortStatsTab">
                     <p>Short</p>
                 </a>
                 <a class="statsTab middleTab" href="/stats/medium_term" id="medStatsTab">
@@ -95,10 +93,7 @@
             </div>
         </div>
 
-
-
         <div class="innerStatsContainer">
-            
             <div class="statsColumn">
                 <!-- Tracks -->
                 <p class="statsTitle">Tracks</p>
@@ -118,8 +113,6 @@
                 {%endfor%}
             </div>
 
-
-
             <div class="statsColumn">
                 <!-- Artist -->
                 <p class="statsTitle">Artists</p>
@@ -128,18 +121,13 @@
                     <img src="{{artist.artistImage}}">
                     <div class="statsArtistCardText">
                         <p class="artistCardName">{{artist.artistName}}</p>
-                        <p class="artistCardInfo"><strong>Total Followers:</strong> {{"{:,}".format(artist.followers | int)}}</p>
+                        <p class="artistCardInfo"><strong>Total Followers:</strong> {{"{:,}".format(artist.followers | int)}}</p> <!-- Follower count format-->
                         <p class="artistCardInfo"><strong>Genre:</strong> {{artist.genre}}</p>
                     </div>
                 </div>
                 {%endfor%}
             </div>
-
-
-
         </div>
-
-
     </div>
 
 <script src="../static/main.js"></script>

@@ -1,17 +1,14 @@
 # Redify Todo
 
-#### Home Page
-	[] Fix Sticky Box
+#### Home Page:
+- Add conditional for user if there are no posts  -  (???)
+    --> A brand new profile currently sees all posts on the home page I believe, currently if I create a new profile I see all the previous profiles posts at the home page
 
-#### User Profile
-	[] Sticky position favorites table
+- Have trending table sticky
 
-#### View Stats
-	[] Tabs work but doesn't have a style indicator for which one you are one, this part is remaining cause the javascript refreshes to original state when a route is clicked
+#### ALL FORMS
+- Error Messages needed on topic and post form 
 
-## Features
-	- Make Text Input field functional
-
-
-#### Controller
-	[] Stats controller that renders the stats page -- doesnt have access to user, if you put the link to "user/{{user.user_name}}"
+#### Extra
+- Add all topics page for users to browse?
+- Bring back legal?

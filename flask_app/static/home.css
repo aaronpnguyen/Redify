@@ -124,10 +124,11 @@ input:focus-visible {
 
 .rightNav > .userName {
     font-family: 'FF Mark W05', sans-serif;
-    font-weight: bold;
+    font-weight: 400;
     font-size: 20px;
     color: var(--soft-white);
     padding-left: 10px;
+    margin-right: 10px;
 }
 
 .rightNav:hover {
@@ -411,8 +412,8 @@ input:focus-visible {
     text-decoration: none;
 }
 
-
-/* LEGAL TABLE */
+/*
+Legal was too much of a hassle for now, not really used atm
 
 .legal {
     background-color: #111111;
@@ -438,9 +439,8 @@ input:focus-visible {
     color:  var(--soft-white); 
     text-decoration: none;
     font-size: 1rem;
-
 }
-
+*/
 
 /* Create Post Form */
 .createFormContainer {

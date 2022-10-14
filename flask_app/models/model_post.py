@@ -136,5 +136,20 @@ class Post:
             return all_posts
         return []
     
-    # @staticmethod
-    # def validate_post(data):
+    @staticmethod
+    def validate_post(data):
+        is_valid = True
+        if len(data['title']) < 2:
+            flash("Title must contain more than 2 characters!", "title")
+            is_valid = False
+        if len(data['message']) < 2:
+            flash("Description must contain more than 2 characters!", "message")
+            is_valid = False
+        if data['link']:
+            if 'spotify' not in data['link']:
+                flash("Invalid spotify link!", "link")
+                is_valid = False
+        if not model_topic.Topic.get_one_by_id({'id': data['topic_id']}):
+            flash("Topic does not exist!", "Topic")
+            is_valid = False
+        return is_valid

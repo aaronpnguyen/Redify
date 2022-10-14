@@ -88,7 +88,7 @@ function medStatsTab() {
 	var c = document.getElementById("longStatsTab");
 
 	b.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
+	c.classList.remove("activeStatsTab");
 	a.classList.remove("activeStatsTab");
 }
 

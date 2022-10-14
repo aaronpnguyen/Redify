@@ -11,6 +11,7 @@ from flask_app.models.model_user import User
 app.config['session_spotify'] = 'spotify has logged'
 TOKEN_INFO = "session_token"
 
+# After spotify redirects, redirects user to page they originally intended to go to (instead of home)
 last_route = ""
 
 def create_spotify_oauth():
@@ -50,7 +51,7 @@ def spotifyRedirect():
     return redirect(session['last_route'])
     # return redirect(url_for('home', _external = False))
 
-# This is a user's profile
+# User Stats
 @app.route('/stats/<string:term>')
 def userStats(term):
     try:
@@ -118,9 +119,6 @@ def saveStats():
     
     allArtists = Artist.get_all_for_user({'user_id': session['user_id']})
     allTracks = Track.get_all_for_user({'user_id': session['user_id']})
-    print("xxxx")
-    print(allArtists)
-    print("xxxx")
 
     # Conditional to check whether we are updating or saving to database
     if allArtists:

@@ -8,13 +8,22 @@
     <title>Register</title>
 </head>
 <body>
-    {%with messages = get_flashed_messages()%}
-        {%if messages %}
-            {%for message in messages%}
-                <h3 style="color:red;">{{message}}</h3>
-            {%endfor%}
-        {%endif%}
-    {%endwith%}
+
+    <div class="error-container">
+        <div class="error-box">
+            {%with messages = get_flashed_messages(with_categories = True)%}
+                {%if messages %}
+                    <p class="error-alert">Error!</p>
+                    <div class="errorContainer">
+                        {%for category, message in messages%}
+                            <p class="errorMessage">{{message}}</p>
+                        {%endfor%}
+                    </div>
+                {%endif%}
+            {%endwith%}
+        </div>
+    </div>
+
     <form action="/register" method="post">
         <div class="loginTitle">
             <h1>Register</h1>
