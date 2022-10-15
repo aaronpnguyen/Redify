@@ -74,6 +74,7 @@
     </div>
 
     <div class="bodyContainer centerContainer">
+        <div>
         {%with messages = get_flashed_messages(with_categories = True)%}
             {%if messages %}
                 <div class="error-container">
@@ -88,6 +89,8 @@
                 </div>
             {%endif%}
         {%endwith%}
+        </div>
+
         <div class="createTopicContainer">
 
             <form action="/submit/form/topic" method="POST" class="createForm">
