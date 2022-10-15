@@ -12,6 +12,7 @@ class Topic:
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
         self.user = None
+        self.active_users = None
 
     # CREATE
 
@@ -28,12 +29,14 @@ class Topic:
     # GET
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM topics"
+        query = "SELECT *, COUNT(topic_id) AS active_users from favorite_topics RIGHT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY(topics.id)"
         results = connectToMySQL(DATABASE).query_db(query)
 
         if results:
             all_topics = []
-            for topic in results:
+            for data in results:
+                topic = cls(data) # Join active users
+                topic.active_users = data['active_users']
                 all_topics.append(topic)
             return all_topics
         return []
@@ -78,6 +81,7 @@ class Topic:
         if results:
             top_topics = []
             for topic in results:
+                print(topic)
                 top_topics.append(topic)
             return top_topics
         return []
@@ -125,6 +129,9 @@ class Topic:
             is_valid = False
         if len(data['title']) < 5:
             flash("Topic name must contain more than 5 characters!", "title")
+            is_valid = False
+        if len(data['title']) > 25:
+            flash("Topic name must contain less than 25 characters!", "title")
             is_valid = False
         if len(data['description']) < 2:
             flash("Topic description must contain more than 2 characters!", "description")
