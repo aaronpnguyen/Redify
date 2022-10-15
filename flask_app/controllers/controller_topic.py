@@ -15,9 +15,10 @@ def topicForm():
 @app.route('/all/topics')
 def allTopics():
     topics = Topic.get_all()
-    if 'user_id' not in session:
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    else:
         user = None
-    user = User.get_user_by_id({'id': session['user_id']})
     return render_template('topics.html', topics = topics, user = user)
 
 @app.route('/t/<string:topicName>')
