@@ -57,7 +57,9 @@ def viewPost(id):
     
     comments = Comment.get_comments_for_post({'post_id': id})
     activeCount = Topic.get_active({'id': post.topic_id})
-    user = User.get_user_by_id({'id': session['user_id']})
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    user = None
 
     return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount, user = user)
 
