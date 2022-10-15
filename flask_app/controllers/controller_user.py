@@ -72,11 +72,13 @@ def home():
         }
         user = model_user.User.get_user_by_id(data)
         topics = model_topic.Topic.get_favorite_topics_by_user_id({'user_id': session['user_id']})
-        userFeed = model_post.Post.show_favorite_posts(data)
+        userFeed = []
+        if model_post.Post.show_favorite_posts(data):
+            userFeed = model_post.Post.show_favorite_posts(data)
     else:
         user = None
         topics = model_topic.Topic.get_top_5_topics()
-        userFeed = None
+        userFeed = []
         
     posts = model_post.Post.get_all()
     return render_template('home.html', user = user, posts = posts, topics = topics, userFeed = userFeed)
@@ -107,12 +109,14 @@ def settings(username):
 def updateEmail(id):
     user = model_user.User.get_user_by_id({'id': id})
 
-    if 'user_id' in session != user.id:
+    if session['user_id'] != user.id:
         return redirect(f'/settings/{user.user_name}')
 
     if not model_user.User.validate_email_update(request.form):
+        print('hek no')
         return redirect(f'/settings/{user.user_name}')
 
+    print('updating!')
     model_user.User.update_email({
         'id': id,
         'email': request.form['email']
@@ -123,7 +127,7 @@ def updateEmail(id):
 def updatePassword(id):
     user = model_user.User.get_user_by_id({'id': id})
 
-    if 'user_id' in session != user.id:
+    if session['user_id'] != user.id:
         return redirect('home')
     if not model_user.User.validate_password_update(request.form):
         return redirect(f'/settings/{user.user_name}')

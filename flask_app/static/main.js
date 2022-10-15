@@ -1,8 +1,8 @@
 function lightDark() {
-	var a = document.getElementById("body");
-	var b = document.getElementById("lightDarkIconBtn");
-	var c = document.getElementById("lightBtnCase");
-	var d = document.getElementById("darkBtnCase");
+	let a = document.getElementById("body");
+	let b = document.getElementById("lightDarkIconBtn");
+	let c = document.getElementById("lightBtnCase");
+	let d = document.getElementById("darkBtnCase");
 
 	var legal = document.getElementById("legal");
 
@@ -23,9 +23,9 @@ function lightDark() {
 }
 
 function navDropdown() {
-    var x = document.getElementById("navDropdown");
-    var a = document.getElementById("navDropdownBtn");
-    var c = document.getElementById("downArrow");
+    let x = document.getElementById("navDropdown");
+    let a = document.getElementById("navDropdownBtn");
+    let c = document.getElementById("downArrow");
 
     x.style.display = "block";
     x.style.transition = "display ease-in 2s";
@@ -33,17 +33,17 @@ function navDropdown() {
 }
 
 function navDropdownRehide() {
-	var x = document.getElementById("navDropdown");
-	var a = document.getElementById("navDropdownBtn");
+	let x = document.getElementById("navDropdown");
+	let a = document.getElementById("navDropdownBtn");
 	x.style.display = "none";
 	a.style.backgroundColor = "#282828";
 }
 
 function showArtistsTab() {
-	var artistsContent = document.getElementById("favoriteArtists");
-	var tracksContent = document.getElementById("favoriteTracks");
-	var artistsTab = document.getElementById("artistsTab");
-	var tracksTab = document.getElementById("tracksTab");
+	let artistsContent = document.getElementById("favoriteArtists");
+	let tracksContent = document.getElementById("favoriteTracks");
+	let artistsTab = document.getElementById("artistsTab");
+	let tracksTab = document.getElementById("tracksTab");
 
 	// artistsContent.classList.add("activeTab");
 	// tracksContent.classList.remove("activeTab");
@@ -56,10 +56,10 @@ function showArtistsTab() {
 }
 
 function showTracksTab() {
-	var artistsContent = document.getElementById("favoriteArtists");
-	var tracksContent = document.getElementById("favoriteTracks");
-	var artistsTab = document.getElementById("artistsTab");
-	var tracksTab = document.getElementById("tracksTab");
+	let artistsContent = document.getElementById("favoriteArtists");
+	let tracksContent = document.getElementById("favoriteTracks");
+	let artistsTab = document.getElementById("artistsTab");
+	let tracksTab = document.getElementById("tracksTab");
 
 	// artistsContent.classList.remove("activeTab");
 	// tracksContent.classList.add("activeTab");
@@ -73,9 +73,9 @@ function showTracksTab() {
 
 
 function shortStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
+	let a = document.getElementById("shortStatsTab");
+	let b = document.getElementById("medStatsTab");
+	let c = document.getElementById("longStatsTab");
 
 	a.classList.add("activeStatsTab");
 	b.classList.remove("activeStatsTab");
@@ -83,9 +83,9 @@ function shortStatsTab() {
 }
 
 function medStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
+	let a = document.getElementById("shortStatsTab");
+	let b = document.getElementById("medStatsTab");
+	let c = document.getElementById("longStatsTab");
 
 	b.classList.add("activeStatsTab");
 	c.classList.remove("activeStatsTab");
@@ -93,40 +93,11 @@ function medStatsTab() {
 }
 
 function longStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
+	let a = document.getElementById("shortStatsTab");
+	let b = document.getElementById("medStatsTab");
+	let c = document.getElementById("longStatsTab");
 
 	c.classList.add("activeStatsTab");
 	b.classList.remove("activeStatsTab");
 	a.classList.remove("activeStatsTab");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

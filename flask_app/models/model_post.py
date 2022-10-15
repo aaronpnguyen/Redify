@@ -53,25 +53,29 @@ class Post:
     
     @classmethod
     def get_post_for_topic(cls, data):
-        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id WHERE topic_id = %(topic_id)s"
+        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN topics ON posts.topic_id = topics.id WHERE topic_id = %(topic_id)s"
         results = connectToMySQL(DATABASE).query_db(query, data)
         
         if results:
             all_posts = []
             for data in results:
                 post = cls(data)
+                print(data)
                 user_data = {
                     'id': data['users.id']
                 }
-                user = model_user.User.get_user_by_id(user_data)
-                post.user = user
+                topic_data = {
+                    'id': data['topics.id']
+                }
+                post.user = model_user.User.get_user_by_id(user_data)
+                post.topic = model_topic.Topic.get_one_by_id(topic_data)
                 all_posts.append(post)
             return all_posts
         return []
     
     @classmethod
     def get_posts_for_user(cls, data):
-        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN topics ON posts.topic_id = topics.id WHERE users.id = %(id)s"
+        query = "SELECT * FROM posts LEFT JOIN users ON posts.user_id = users.id LEFT JOIN topics ON posts.topic_id = topics.id WHERE users.id = %(id)s ORDER BY (posts.created_at) DESC"
         results = connectToMySQL(DATABASE).query_db(query, data)
 
         if results:
@@ -115,7 +119,7 @@ class Post:
 
     @classmethod
     def show_favorite_posts(cls, data):
-        query = "SELECT * FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id LEFT JOIN posts ON posts.topic_id = favorite_topics.topic_id WHERE favorite_topics.user_id = %(id)s"
+        query = "SELECT * FROM posts LEFT JOIN topics ON posts.topic_id = topics.id LEFT JOIN users ON posts.user_id = users.id LEFT JOIN favorite_topics ON posts.topic_id = favorite_topics.topic_id WHERE redify.favorite_topics.user_id = %(id)s ORDER BY (posts.created_at) DESC"
         results = connectToMySQL(DATABASE).query_db(query, data)
         
         if results:
@@ -131,8 +135,6 @@ class Post:
                 post.topic = model_topic.Topic.get_one_by_id(topic_data)
                 post.user = model_user.User.get_user_by_id(user_data)
                 all_posts.append(post)
-                print(post.user.user_name)
-                print(post.topic.title)
             return all_posts
         return []
     

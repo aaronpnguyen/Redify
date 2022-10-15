@@ -19,6 +19,8 @@
     --green: #1db352;
     --purple: #7D38A6;
     --light-btn:  #FBD38D;
+    --spotify-black: rgb(40, 40, 40);
+    --spotify-grey: rgba(104, 104, 104, 1)
 }
 
 #body {
@@ -184,7 +186,9 @@ input:focus-visible {
 
 .centerContainer {
     display: flex;
-    justify-content:  center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /*.cline {
@@ -449,7 +453,7 @@ Legal was too much of a hassle for now, not really used atm
     background-repeat: no-repeat;
     min-width:  600px;
     max-width: 60%;
-    max-height:  400px;
+    max-height: 400px;
     margin-top: 5%;
     border-radius: 20px;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
@@ -473,7 +477,7 @@ Legal was too much of a hassle for now, not really used atm
     background-repeat: no-repeat;
     min-width:  600px;
     max-width: 60%;
-    max-height:  400px;
+    max-height: 400px;
     margin-top: 5%;
     border-radius: 20px;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
@@ -608,6 +612,50 @@ Legal was too much of a hassle for now, not really used atm
     border: none;
 }
 
+/* Topics Container */
+.topicsContainer {
+    margin: 75px auto 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topic {
+    background-color: var(--charc);
+    width: 500px;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
+    border:  1px solid rgb(0, 0, 0, 0.2);
+}
+
+.topicHead {
+    color: var(--charc);
+    margin: 5px 5px 25px 5px;
+    padding: 25px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: var(--soft-white);
+}
+
+.topicBody {
+    margin: 5px 5px 25px 5px;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: var(--soft-white);
+    word-wrap: break-word;
+}
+
+.topic > a {
+    text-decoration: none;
+}
+
+.topicBody > * {
+    color: var(--charc);
+    padding: 5px;
+}
 
 /* Bounce In */
 .hvr-bounce-in {
@@ -615,7 +663,7 @@ Legal was too much of a hassle for now, not really used atm
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.2);
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
@@ -625,43 +673,3 @@ Legal was too much of a hassle for now, not really used atm
   -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

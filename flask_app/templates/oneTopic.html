@@ -105,7 +105,7 @@
                         <div class="postTopInfo">
                             <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{topic.title}}</a>
                             <span class="postTopSpan">&nbsp;created by&nbsp;</span>
-                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                            <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                         </div>
 
 
@@ -128,17 +128,19 @@
             <!-- Profile Body Right -->
             <div class="profileBodyRight">
                 <div class="topicAboutContainer messageContent noPadding">
-                    <p class="topicAboutTitle">  About   </p>
+                    <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{topic.description}}</p>
                     <p class="topicAboutText">Active Users: {{activeCount}}</p>
                     <p class="topicAboutText">Creator: <a href="/profile/{{topic.user.user_name}}">{{topic.user.user_name}}</a></p>
 
                     <!-- Create Post -->
-                    <div class="topicCreatePostContainer">
-                        <button class="topicCreatePost createFormSubmit hvr-grow-rotate">
-                            <a href="/form/post">Create a new post</a>
-                        </button>
-                    </div>
+                    {%if session['user_id']%}
+                        <div class="topicCreatePostContainer">
+                            <button class="topicCreatePost createFormSubmit hvr-grow-rotate">
+                                <a href="/form/post">Create a new post</a>
+                            </button>
+                        </div>
+                    {%endif%}
                 </div>
             </div>
         </div>

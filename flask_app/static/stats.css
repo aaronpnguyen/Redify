@@ -93,7 +93,7 @@
 .statsArtistCard {
 	display: flex;
 	align-items: center;
-	background-color: var(--light-red);
+	background-color: var(--spotify-black);
 	margin-bottom: 4%;
 	max-height: 80px;
 	min-height: 80px;
@@ -115,6 +115,7 @@
 }
 
 .artistCardName {
+    color: var(--soft-white);
 	font-size: 1.3rem;
 	font-weight: 600;
 	line-height: 1.6;
@@ -122,11 +123,13 @@
 
 .artistCardInfo {
 	font-size: 1rem;
-	color: var(--charc);
+	color: var(--soft-white);
 	margin-bottom: 3px;
 }
 
-
+.profile {
+    color: var(--charc);
+}
 
 /*Stats Tracks*/
 
@@ -135,7 +138,6 @@
 	min-height: 80px;
 	border-radius: 10px;
 	margin-bottom: 4%;
-	box-sizing: !important none;
 }
 
 #trackCardiFrame {

@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask_app import SPOTIFY_APP_ID, SPOTIFY_APP_SECRET, app
-import time
+import time, os
 from flask import redirect, url_for, session, request, render_template, flash
 from flask_app.models.model_artist import Artist
 from flask_app.models.model_track import Track
@@ -80,7 +80,7 @@ def userStats(term):
         if item['genres']:
             genre = item['genres'][0]
         else:
-            genre = ""
+            genre = "Unknown genre!"
         details = {
             'artistName': item['name'],
             'artistImage': item['images'][0]['url'],
@@ -171,3 +171,13 @@ def saveStats():
             }
             Track.create_track(data)
     return redirect(f'/profile/{user.user_name}')
+
+@app.route('/spotify/logout', methods = ['POST'])
+def spotify_logout():
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    user = User.get_user_by_id({'id': session['user_id']})
+    if os.path.exists(".cache"):
+        os.remove(".cache")
+    return redirect(f'/settings/{user.user_name}')

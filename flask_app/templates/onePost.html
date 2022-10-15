@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/home.css">
     <link rel="stylesheet" href="../static/view.css">
+    <link rel="stylesheet" href="../static/error.css">
     <link rel="stylesheet" href="../static/profile.css">
     <title>User Profile</title>
 </head>
@@ -124,22 +125,38 @@
                 </div>
 
 
-
-                <div class="postCommentContainer messageContent">
-                    <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
-                        <h3 class="newCommentTitle">New Comment</h3>
-                        <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
-                        <!-- <h3>spotify url</h3> -->
-                        <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
-                        <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
-                    </form>
-                </div>
+                {%if session['user_id']%}
+                    <div class="postCommentContainer messageContent">
+                        <div class="error-container">
+                            {%with messages = get_flashed_messages(with_categories = True)%}
+                                {%if messages %}
+                                    <div class="error-box">
+                                        <p class="error-alert">Error!</p>
+                                        <div class="errorContainer">
+                                            {%for category, message in messages%}
+                                                <p class="errorMessage">{{message}}</p>
+                                            {%endfor%}
+                                        </div>
+                                    </div>
+                                {%endif%}
+                            {%endwith%}
+                        </div>
+                        
+                        <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
+                            <h3 class="newCommentTitle">New Comment</h3>
+                            <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
+                            <!-- <h3>spotify url</h3> -->
+                            <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                            <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
+                        </form>
+                    </div>
+                {%endif%}
 
 
                 {%for comment in comments%}
                     <div class="comments messageContent">
                         <div class="postTopInfo">
-                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
+                            <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
                             <span class="postTopSpan">&nbsp;on&nbsp; {{comment.created_at}}</span>
                             <!-- <span href="profile/{{post.user.user_name}}" class="postTopAuthor">{{comment.created_at}}</a> -->
                         </div>
@@ -184,7 +201,7 @@
                     <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{post.topic.description}}</p>
                     <p class="topicAboutText">Active Users: {{activeCount}}</p>
-                    <p class="topicAboutText">Creator: {{post.user.user_name}}</p>
+                    <p class="topicAboutText">Creator: <a href="/profile/{{post.user.user_name}}">{{post.user.user_name}}</a></p>
                 </div>
             </div>
         </div>

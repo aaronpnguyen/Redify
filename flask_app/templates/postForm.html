@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/error.css">
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <title>Home Page</title>
 </head>
@@ -76,11 +77,23 @@
     </div>
 
     <div class="bodyContainer centerContainer">
+        {%with messages = get_flashed_messages(with_categories = True)%}
+            {%if messages %}
+                <div class="error-container">
+                    <div class="error-box">
+                        <p class="error-alert">Error!</p>
+                        <div class="errorContainer">
+                            {%for category, message in messages%}
+                                <p class="errorMessage">{{message}}</p>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+        {%endwith%}
         <div class="createFormContainer">
             <form action="/submit/form/post" method="POST" class="createForm">
-
                 <p class="createFormTitle"><span class="lightOpacityBg">Create a Post</span></p>
-
                 <div class="postForm">
                     <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="title" placeholder="Post Title">
                 </div>

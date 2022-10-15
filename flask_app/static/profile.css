@@ -119,6 +119,12 @@
     padding-top: 10px;
 }
 
+.artistCard > iframe {
+    margin: 0 auto;
+    align-items: center;
+    padding-top: 10px;
+}
+
 .artistCard:nth-child(odd) {
     background-color: rgba(220, 220, 220, 0.4);
 }

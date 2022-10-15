@@ -1,0 +1,20 @@
+/* ERROR CONTAINER */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-box {
+    background-color: var(--light-red);
+    width: 400px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.error-alert {
+    color: rgba(0,0,0,0.5);
+    font-size: 1.2rem;
+}
