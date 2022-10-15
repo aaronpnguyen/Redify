@@ -87,7 +87,7 @@
                 <p class=""><a href="#accountOverview">Account Overview</a></p>
                 <p class=""><a href="#redifyEmail">Redify Email</a></p>
                 <p class=""><a href="#managePassword">Manage Password</a></p>
-                <p class=""><a href="#">Linked Spotify</a></p>
+                <p class=""><a href="#spotifyAccount">Spotify Account</a></p>
             </div>
 
         </div>
@@ -106,7 +106,9 @@
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Account Overview</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">Your username is unchangable, as this is how others will recognize you.</p>
+                    <br>
+                    <p class="settingsCardDescriptionText"><strong>Remember:</strong> Redify will never ask for your email/password.</p>
                 </div>
                 <div class="settingsCardActions">
                     <!--Username should not be updated-->
@@ -117,15 +119,15 @@
                     </div>
                     <p class="settingsCardListP">Created On: {{user.created_at}}</p>
                 </div>
-                <div id="redifyEmail"></div>
             </div>
-
-
+            
+            
+            <div id="redifyEmail"></div>
             <!-- Change Email -->
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Redify Email</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">This is the email Redify will contact you at. Make sure your new email is one that you are able to access.</p>
                 </div>
                 <div class="settingsCardActions">
                     <h1>Change Email</h1>
@@ -137,14 +139,13 @@
                     </form>
                 </div>
             </div>
+            
             <div id="managePassword"></div>
-
-
             <!-- Change Password -->
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Manage Password</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">Change your current password.</p>
                 </div>
                 <div class="settingsCardActions">
                     <h1>Change Password</h1>
@@ -163,12 +164,20 @@
                 </div>
             </div>
 
-
-
-
-
-
-    </div>
+            <div id="spotifyAccount"></div>
+            <div class="settingsCard">
+                <div class="settingsCardDescription">
+                    <p class="settingsCardDescriptionTitle">Spotify</p>
+                    <p class="settingsCardDescriptionText">By signing out of Spotify, you must sign back in for Redify to access your stats.</p>
+                </div>
+                <div class="settingsCardActions">
+                    <h1>Spotify Account</h1>
+                    <form action="/spotify/logout" method="POST">
+                        <button type="submit" class="createFormSubmit hvr-grow-rotate">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <script src="../static/main.js"></script>
 
