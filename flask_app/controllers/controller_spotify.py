@@ -180,4 +180,6 @@ def spotify_logout():
     user = User.get_user_by_id({'id': session['user_id']})
     if os.path.exists(".cache"):
         os.remove(".cache")
+    session['last_route'] = None # Removes last route/redirect path
+    session['session_token'] = None # Deletes spotify token
     return redirect(f'/settings/{user.user_name}')
