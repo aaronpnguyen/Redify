@@ -85,7 +85,10 @@ def home():
 
 @app.route('/profile/<string:username>')
 def profile(username):
-    sUser = model_user.User.get_user_by_id({'id': session['user_id']})
+    if 'user_id' in session:
+        sUser = model_user.User.get_user_by_id({'id': session['user_id']})
+    else:
+        sUser = None
     user = model_user.User.get_user_by_name({'user_name': username})
     if not user:
         return redirect('/')
