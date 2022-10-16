@@ -116,8 +116,8 @@
                     <button class="createFormSubmit hvr-grow-rotate" type="submit">Create Post</button>
                 {%else%}
                     <div class="postForm">
-                        <p>You must join/create a topic to post!</p>
                         <button class="createFormSubmit hvr-grow-rotate"><a href="/form/topic">Create New Topic</a></button>
+                        <p class="form-reminder"><span><i class="fa-solid fa-circle-exclamation circle-exclamation"></i>Create or join a topic to post<i class="fa-solid fa-circle-exclamation circle-exclamation-two"></i></span></p>
                     </div>
                 {%endif%}
             </form>
