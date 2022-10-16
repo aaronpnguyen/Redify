@@ -153,6 +153,10 @@ def page_not_found(e):
 def page_not_found(e):
     return render_template('error.html', error = 500)
 
+@app.errorhandler(502)
+def page_not_found(e):
+    return render_template('error.html', error = 502)
+
 '''
     Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
     https://www.linkedin.com/in/aaronpnguyen/

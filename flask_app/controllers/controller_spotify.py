@@ -201,7 +201,7 @@ def api_error():
         os.remove(".cache")
     session['last_route'] = None # Removes last route/redirect path
     session['session_token'] = None # Deletes spotify token
-    return render_template('error.html', error = 403)
+    return render_template('error.html', error = 502)
 
 '''
     Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
