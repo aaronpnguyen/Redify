@@ -243,6 +243,57 @@ input:focus-visible {
     box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
 }
 
+.join-topics-container {
+    background-color: rgba(225, 225, 225, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 5px;
+    padding: 5%;
+    margin-top: 5%;
+}
+
+.hmm-nothing {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 3%;
+    text-align: center;
+    min-width: 100%;
+}
+
+.hmm-text {
+    padding-left: 70px;
+    padding-top: 1px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.hmm-text > p {
+    font-size: 1.2rem;
+}
+
+.hmm-speech {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 2rem;
+    padding-bottom: 10px;
+}
+
+.hmm-btn {
+    margin:15% 0 10% 0;
+}
+
+.hmm-btn > a {
+    background-color: rgb(225, 195, 160);
+    padding: 3% 6%;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--charc);
+}
+
 .rightMC {
     max-width: 100%;
 }
