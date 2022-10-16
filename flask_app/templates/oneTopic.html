@@ -103,30 +103,34 @@
         <div class="innerBodyContainer">
             <div class="profileBodyLeft">
 
+                {%if posts%}
+                    {%for post in posts%}
+                        <div class="post messageContent">
+                            
+                            <div class="postTopInfo">
+                                <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{topic.title}}</a>
+                                <span class="postTopSpan">&nbsp;created by&nbsp;</span>
+                                <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                            </div>
 
-                {%for post in posts%}
-                    <div class="post messageContent">
-                        
-                        <div class="postTopInfo">
-                            <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{topic.title}}</a>
-                            <span class="postTopSpan">&nbsp;created by&nbsp;</span>
-                            <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+
+                            <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
+                            <h3 class="postAudioDescription">{{post.message}}</h3>
+                            
+                            {%if post.type and post.link%}
+                                <iframe style="border-radius:12px"
+                                    src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                    width="100%" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                    loading="lazy">
+                                </iframe>
+                            {%endif%}
                         </div>
-
-
-                        <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
-                        <h3 class="postAudioDescription">{{post.message}}</h3>
-                        
-                        {%if post.type and post.link%}
-                            <iframe style="border-radius:12px"
-                                src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                width="100%" height="{{100 if post.type == 'track' else 200}}" frameBorder="0" allowfullscreen=""
-                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                loading="lazy">
-                            </iframe>
-                        {%endif%}
-                    </div>
-                {%endfor%}
+                    {%endfor%}
+                {%else%}
+                    <!--Topic does not have posts-->
+                    <p>no posts</p>
+                {%endif%}
             </div>
 
 
