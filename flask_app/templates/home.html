@@ -37,7 +37,8 @@
 
             {%if session['user_id']%}
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
-                <div class="rightNavDropdown">                    
+                <p class="userName">{{user.user_name}}</p>
+                <div class="rightNavDropdown">
                     <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
                         <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
                     </svg>
@@ -76,76 +77,126 @@
     <!-- Body Container -->
     <div class="bodyContainer">
         <div class="bodyLeft">
-            <div class="postsContainer"> 
-                <div class="createPostTopicContainer"> 
-                    <a href="/form/topic" class="hvr-bounce-in messageContent createPost homeCreateBtn">
-                        <p>Create a Topic</p>
-                    </a>
-                    <a href="/form/post" class="hvr-bounce-in messageContent createPost homeCreateBtn">
-                        <p>Create a New Post</p>
-                    </a>
-                </div>
-
-                <!-- All posts -->
-
-                
-                {%for post in posts%}
-                    <div class="messageContent">
-                        <div class="leftMC">
+            <div class="postsContainer">
+                {%if session['user_id']%}
+                    <div class="createPostTopicContainer"> 
+                        <a href="/form/topic" class="hvr-bounce-in messageContent createPost homeCreateBtn">
+                            <p>Create a Topic</p>
+                        </a>
+                        <a href="/form/post" class="hvr-bounce-in messageContent createPost homeCreateBtn">
+                            <p>Create a New Post</p>
+                        </a>
+                    </div>
+                    
+                    {%if not userFeed%}
+                    <div class="join-topics-container" id="joinTopics">
+                        <div class="hmm-speech">
+                            <i class="fa-regular fa-comment-dots"></i>
                         </div>
-                        <div class="rightMC">
-                            <div class="postContainer">
-                                <!-- Post Topic and Author -->
-                                <div class="postTopInfo">
-                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
-                                    <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
-                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
-                                <div class="postAudioDescription">{{post.message}}</div>
-                                {%if post.type and post.link%}
-                                    <iframe style="border-radius:12px"
-                                        src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                        loading="lazy">
-                                    </iframe>
-                                {%endif%}
+                        <p class="hmm-nothing">Hmm.. There is no posts</p>
+                        <div class="hmm-text">    
+                            <p>Join or create a topic to view posts.</p>
+                            <div class="hmm-btn-center">
+                                <a class="hmm-btn hvr-grow" href="/all/topics">Join a Topic!</a>
                             </div>
                         </div>
                     </div>
-                {%endfor%}
-
-                <!-- This is the user's feed -->
-                {#
-                {%for post in userFeed%}
-                    <div class="messageContent">
-                        <div class="leftMC">
-                        </div>
-                        <div class="rightMC">
-                            <div class="postTitle">
-                                <!-- Post Topic and Author -->
-                                <div class="postTopInfo">
-                                    <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
-                                    <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
-                                    <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                    {%else%}
+                    
+                        <!-- User feed -->
+                        <div class="userFeed">
+                            {%for post in userFeed%}
+                                <div class="messageContent">
+                                    <div class="leftMC">
+                                    </div>
+                                    <div class="rightMC">
+                                        <div class="postContainer">
+                                            <!-- Post Topic and Author -->
+                                            <div class="postTopInfo">
+                                                <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                                                <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                                                <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                                                <span class="postTopSpan">&nbsp;on {{post.created_at}}</span>
+                                            </div>
+                                            <!-- Post Content -->
+                                            <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
+                                            <div class="postAudioDescription">{{post.message}}</div>
+                                            {%if post.type and post.link%}
+                                                <iframe style="border-radius:12px"
+                                                    src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                                    width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                                    loading="lazy">
+                                                </iframe>
+                                            {%endif%}
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Post Content -->
-                                <div class="postAudioDescription postAudioTitle">{{post.title}}</div>
-                                <div class="postAudioDescription">{{post.message}}</div>
-                                {%if post.type and post.link%}
-                                    <iframe style="border-radius:12px"
-                                        src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
-                                        width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                        loading="lazy">
-                                    </iframe>
-                                {%endif%}
+                            {%endfor%}
+                        </div>
+
+                        <!--All posts-->
+                        <div hidden class="allPosts">
+                            {%for post in posts%}
+                                <div class="messageContent">
+                                    <div class="leftMC">
+                                    </div>
+                                    <div class="rightMC">
+                                        <div class="postContainer">
+                                            <!-- Post Topic and Author -->
+                                            <div class="postTopInfo">
+                                                <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                                                <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                                                <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                                            </div>
+                                            <!-- Post Content -->
+                                            <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
+                                            <div class="postAudioDescription">{{post.message}}</div>
+                                            {%if post.type and post.link%}
+                                                <iframe style="border-radius:12px"
+                                                    src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                                    width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                                    loading="lazy">
+                                                </iframe>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                </div>
+                           {%endfor%}
+                        </div>
+                    {%endif%}
+                {%else%}
+                    <!--All posts when not logged in-->
+                    {%for post in posts%}
+                        <div class="messageContent">
+                            <div class="leftMC">
+                            </div>
+                            <div class="rightMC">
+                                <div class="postContainer">
+                                    <!-- Post Topic and Author -->
+                                    <div class="postTopInfo">
+                                        <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
+                                        <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
+                                        <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                                    </div>
+                                    <!-- Post Content -->
+                                    <div class="postAudioTitle"><a href="/post/{{post.id}}"><h4>{{post.title}}</h4></a></div>
+                                    <div class="postAudioDescription">{{post.message}}</div>
+                                    {%if post.type and post.link%}
+                                        <iframe style="border-radius:12px"
+                                            src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
+                                            width="100%" height="{{100 if post.type == 'track' else 400}}" frameBorder="0" allowfullscreen=""
+                                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                            loading="lazy">
+                                        </iframe>
+                                    {%endif%}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {%endfor%}#}
+                    {%endfor%}
+                {%endif%}
+
             </div>
         </div>
         <div class="bodyRight">
@@ -154,14 +205,30 @@
 
                     {%if session['user_id']%}
                         <p class="trendingTableTitle">Your Topics</p>
+                        {%if not topics%}
+                            <p>Browse some topics!</p>
+                            <a class="all-topics-btn hvr-grow" href="/all/topics">All Topics</a>
+                        {%endif%}
                         <ul class="trendingTableTopicList">
-
-
-
-
-                        <!-- ---------------------------------------------------------------------------------------------------- -->
                         <!-- THIS PART IS INCOMPLETE -->
-
+                            <li>
+                                {%for i in range(topics | length)%}
+                                <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
+                                    <div class="trendingTopicCard">
+                                        <div class="trendingTopicCircleNumber">
+                                            <span class="trendingTopicCircleNumberText">{{i + 1}}</span>
+                                        </div>
+                                        <div class="trendingTopicCardText">
+                                            <span>t/{{topics[i].title}}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                {%endfor%}
+                            </li>
+                        </ul>
+                    {%else%}
+                        <p class="trendingTableTitle">Trending Topics</p>
+                        <ul class="trendingTableTopicList">
                             <li>
                                 {%for i in range(topics | length)%}
                                 <a class="topicCardHoldingLink" href="/t/{{topics[i].title}}">
@@ -174,28 +241,15 @@
                                                 <span>t/{{topics[i].title}}</span>
                                             </div>
                                         </div>
-
                                 </a>
                                 {%endfor%}
-
                             </li>
-                        </ul>
-
-                    {%else%}
-
-                    <!-- Maybe a please login to view person topics here -->
-
-                        <p class="trendingTableTitle">Trending Topics</p>
-                        <ul class="trendingTableTopicList">
-                            {%for i in range(topics | length)%}
-                                <p>{{i + 1}}</p>
-                                <li><a href="/t/{{topics[i].title}}">{{topics[i].title}}</a></li>
-                            {%endfor%}
                         </ul>
                     {%endif%}
 
                 </div>
-                <div class="legal">
+                <!-- Redacting legal (not in use for now)
+                <div class="legal" id="legal">
                     <div class="legalInfo">
                         <ul>
                             <li><a href="/about">About</a></li>
@@ -205,27 +259,10 @@
                         </ul>
                     </div>
                 </div>
+                -->
             </div>
         </div>
     </div>
 <script src="../static/main.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

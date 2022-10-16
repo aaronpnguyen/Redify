@@ -15,7 +15,11 @@ def topicForm():
 @app.route('/all/topics')
 def allTopics():
     topics = Topic.get_all()
-    return render_template('topics.html', topics = topics)
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    else:
+        user = None
+    return render_template('topics.html', topics = topics, user = user)
 
 @app.route('/t/<string:topicName>')
 def oneTopic(topicName):
@@ -25,7 +29,7 @@ def oneTopic(topicName):
         activeCount = Topic.get_active({'id': topic.id})
     else:
         return redirect('/home')
-        
+    # print(posts.topic.title)
     if 'user_id' in session:
         favorited = Topic.check_favorited({'user_id': session['user_id'], 'topic_id': topic.id})
         user = User.get_user_by_id({'id': session['user_id']})
@@ -38,7 +42,10 @@ def oneTopic(topicName):
 def submitTopic():
     if 'user_id' not in session:
         return redirect('/home')
-        
+    
+    if not Topic.validate_topic(request.form):
+        return redirect('/form/topic')
+
     data = {
         'title': request.form['title'],
         'description': request.form['description'],

@@ -119,6 +119,12 @@
     padding-top: 10px;
 }
 
+.artistCard > iframe {
+    margin: 0 auto;
+    align-items: center;
+    padding-top: 10px;
+}
+
 .artistCard:nth-child(odd) {
     background-color: rgba(220, 220, 220, 0.4);
 }
@@ -158,6 +164,16 @@
 
 .favoritesBtn:hover {
     background-color: #1db352;
+}
+
+.columnStats {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.no-posts > a {
+    color: rgb(40, 100, 250);
 }
 
 .hvr-grow {

@@ -38,13 +38,14 @@
                 <input class="searchInput" type="text" placeholder="Search Redify">
             </div>
             {%if session['user_id']%}
-            <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
-                <div class="rightNavDropdown">                    
-                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
-                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
-                    </svg>
-                </div>
-            </button>
+                <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                    <p class="userName">{{user.user_name}}</p>
+                    <div class="rightNavDropdown">                    
+                        <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                            <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                        </svg>
+                    </div>
+                </button>
             {%else%}
                 <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
             {%endif%}
@@ -94,12 +95,13 @@
             </div>
 
             <div class="postContainer">
-                {%for post in posts%}
+                {%if posts%}
+                    {%for post in posts%}
                     <div class="post messageContent">
 
                         <div class="postTopInfo">
                             <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
-                            <span class="postTopSpan">&nbsp;posted on&nbsp; {{post.user.created_at}}</span>
+                            <span class="postTopSpan">&nbsp;posted on {{post.created_at}}</span>
                             <!-- <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a> -->
                         </div>
 
@@ -115,10 +117,28 @@
                                 loading="lazy">
                             </iframe>
                         {%endif%}
-                    </div>
-                {%endfor%}
-            </div>
 
+                    </div>
+                    {%endfor%}
+
+                {%else%}
+                    {%if session['user_id']%}
+                    <div class="join-topics-container">
+                        <div class="hmm-speech">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </div>
+                        <p class="hmm-nothing">Hmm.. You have no posts</p>
+                        <div class="hmm-text">    
+                            <p>Join or create a topic in order to create a post.</p>
+                            <div class="hmm-btn-row">
+                                <a class="hmm-btn hvr-grow" href="/all/topics">Join a Topic!</a>
+                                <a class="hmm-btn hvr-grow" href="/form/topic">Create a Topic!</a>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                {%endif%}
+            </div>
         </div>
 
 
@@ -141,9 +161,9 @@
                             <img width="100" src="{{artist.artist_image}}">
 
                             <div class="artistCardInfo">
-                                <p class="artistCardName">{{artist.artist_name}}</p>
-                                <p class="artistCardInfo">Followers: {{"{:,}".format(artist.followers | int)}}</p>
-                                <p class="artistCardInfo">Genre: {{artist.genre}}</p>
+                                <p class="artistCardName profile">{{artist.artist_name}}</p>
+                                <p class="artistCardInfo profile">Followers: {{"{:,}".format(artist.followers | int)}}</p>
+                                <p class="artistCardInfo profile">Genre: {{artist.genre}}</p>
                             </div>
                         </div>
                     {%endfor%}
@@ -155,7 +175,7 @@
                         <div class="artistCard">    
                             <iframe style="border-radius:0px"
                                 src="https://open.spotify.com/embed/track/{{track.track_id}}?utm_source=generator&theme=0"
-                                width="100%" height="{{100}}" frameBorder="0" allowfullscreen=""
+                                width="80%" height="100" frameBorder="0" allowfullscreen=""
                                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                                 loading="lazy">
                             </iframe>
@@ -171,8 +191,10 @@
                         {%if artists%}
                             <button class="favoritesBtn hvr-grow" type="submit">Update</button>
                         {%else%}
+                        <div class="columnStats">    
                             <p>Get your top 5 stats.</p>
-                            <button class="favoritesBtn hvr-grow" type="submit">Save</button>
+                                <button class="favoritesBtn hvr-grow" type="submit">Get Stats</button>
+                            </div>
                         {%endif%}
                         </form>
                     {%endif%}

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/error.css">
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <title>Home Page</title>
 </head>
@@ -36,6 +37,7 @@
             </div>
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
                 {%if session['user_id']%}
+                <p class="userName">{{user.user_name}}</p>
                 <div class="rightNavDropdown">                    
                     <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
                         <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
@@ -75,11 +77,23 @@
     </div>
 
     <div class="bodyContainer centerContainer">
+        {%with messages = get_flashed_messages(with_categories = True)%}
+            {%if messages %}
+                <div class="error-container">
+                    <div class="error-box">
+                        <p class="error-alert">Error!</p>
+                        <div class="errorContainer">
+                            {%for category, message in messages%}
+                                <p class="errorMessage">{{message}}</p>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+        {%endwith%}
         <div class="createFormContainer">
             <form action="/submit/form/post" method="POST" class="createForm">
-
                 <p class="createFormTitle"><span class="lightOpacityBg">Create a Post</span></p>
-
                 <div class="postForm">
                     <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="title" placeholder="Post Title">
                 </div>
@@ -89,17 +103,22 @@
                 <div class="postForm">
                     <textarea class="postInput charcOutline postURL" type="text" name="link" placeholder="Spotify URL"></textarea>
                 </div>
-                <div class="postForm">
-                    <!-- <span class="postInputTopicLabel lightOpacityBg TenBorderRadius">Select a Topic:</span> -->
-                    <select class="postSelectInput" name="topic_id">
-                        <option value="" disabled selected hidden>Select a Topic</option>
-                        {%for topic in topics%}
-                            <option class="postSelectValue" value="{{topic.id}}">{{topic.title}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-                
-                <button class="createFormSubmit hvr-grow-rotate" type="submit">Create Post</button>
+                {%if topics%}
+                    <div class="postForm">
+                        <!-- <span class="postInputTopicLabel lightOpacityBg TenBorderRadius">Select a Topic:</span> -->
+                        <select class="postSelectInput" name="topic_id">
+                            {%for topic in topics%}
+                                <option class="postSelectValue" value="{{topic.id}}">{{topic.title}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    
+                    <button class="createFormSubmit hvr-grow-rotate" type="submit">Create Post</button>
+                {%else%}
+                    <div class="postForm">
+                        <p class="form-reminder"><span><i class="fa-solid fa-circle-exclamation circle-exclamation"></i>Create or join a topic to post<i class="fa-solid fa-circle-exclamation circle-exclamation-two"></i></span></p>
+                    </div>
+                {%endif%}
             </form>
 
         </div>

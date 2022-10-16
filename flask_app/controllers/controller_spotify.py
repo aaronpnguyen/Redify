@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask_app import SPOTIFY_APP_ID, SPOTIFY_APP_SECRET, app
-import time
+import time, os
 from flask import redirect, url_for, session, request, render_template, flash
 from flask_app.models.model_artist import Artist
 from flask_app.models.model_track import Track
@@ -11,6 +11,7 @@ from flask_app.models.model_user import User
 app.config['session_spotify'] = 'spotify has logged'
 TOKEN_INFO = "session_token"
 
+# After spotify redirects, redirects user to page they originally intended to go to (instead of home)
 last_route = ""
 
 def create_spotify_oauth():
@@ -18,7 +19,7 @@ def create_spotify_oauth():
     return SpotifyOAuth(
         client_id = SPOTIFY_APP_ID,
         client_secret = SPOTIFY_APP_SECRET,
-        show_dialog = False,
+        show_dialog = True,
         redirect_uri = url_for('spotifyRedirect', _external = True),
         scope = scope
     )
@@ -50,7 +51,7 @@ def spotifyRedirect():
     return redirect(session['last_route'])
     # return redirect(url_for('home', _external = False))
 
-# This is a user's profile
+# User Stats
 @app.route('/stats/<string:term>')
 def userStats(term):
     try:
@@ -79,7 +80,7 @@ def userStats(term):
         if item['genres']:
             genre = item['genres'][0]
         else:
-            genre = ""
+            genre = "Unknown genre!"
         details = {
             'artistName': item['name'],
             'artistImage': item['images'][0]['url'],
@@ -96,9 +97,14 @@ def userStats(term):
             'songId': item['id']
         }
         tracks.append(details)
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    else:
+        user = None
     
+    print(term)
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('stats.html', tracks = tracks, artists = artists)
+    return render_template('stats.html', tracks = tracks, artists = artists, user = user, term = term)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
@@ -120,22 +126,30 @@ def saveStats():
     # Conditional to check whether we are updating or saving to database
     if allArtists:
         for i, artist in enumerate(topArtists):
+            if artist['genres']:
+                genre = artist['genres'][0]
+            else:
+                genre = "Unkown genre!"
             data = {
                 'id': allArtists[i]['id'],
                 'artist_name': artist['name'],
                 'artist_image': artist['images'][0]['url'],
                 'followers': artist['followers']['total'],
-                'genre': artist['genres'][0]
+                'genre': genre
             }
             Artist.update_artist(data)
     else:
         for artist in topArtists:
+            if artist['genres']:
+                genre = artist['genres'][0]
+            else:
+                genre = "Unkown genre!"
             data = {
                 'artist_name': artist['name'],
                 'artist_image': artist['images'][0]['url'],
                 'user_id': session['user_id'],
                 'followers': artist['followers']['total'],
-                'genre': artist['genres'][0]
+                'genre': genre
             }
             Artist.create_artist(data)
 
@@ -160,3 +174,15 @@ def saveStats():
             }
             Track.create_track(data)
     return redirect(f'/profile/{user.user_name}')
+
+@app.route('/spotify/logout', methods = ['POST'])
+def spotify_logout():
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    user = User.get_user_by_id({'id': session['user_id']})
+    if os.path.exists(".cache"):
+        os.remove(".cache")
+    session['last_route'] = None # Removes last route/redirect path
+    session['session_token'] = None # Deletes spotify token
+    return redirect(f'/settings/{user.user_name}')

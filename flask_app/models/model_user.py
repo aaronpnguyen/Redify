@@ -72,19 +72,19 @@ class User:
     def validate_user(data):
         is_valid = True
         if len(data['user_name']) < 2: # Checks if the user name is valid
-            flash("Invalid user name, must have more than 2 characters.")
+            flash("Invalid user name, must have more than 2 characters.", "user_name")
             is_valid = False
         if User.get_user_by_email(data): # Checks if the email already exists (if its true, it exists)
-            flash("This email already exists.")
+            flash("This email already exists.", "email")
             is_valid = False
         if not EMAIL_REGEX.match(data['email']): # Checks if the email is valid
-            flash("Invalid email, please try again.")
+            flash("Invalid email, please try again.", "email")
             is_valid = False
         if len(data['password']) < 8:
-            flash("Invalid password, must be longer than 8 characters.")
+            flash("Invalid password, must be longer than 8 characters.", "password")
             is_valid = False
         if data['password'] != data['confirm_password']:
-            flash("Passwords must match")
+            flash("Passwords must match", "password")
             is_valid = False
         
         return is_valid
@@ -93,10 +93,10 @@ class User:
     def validate_email_update(data):
         is_valid = True
         if User.get_user_by_email(data):
-            flash("This email is already in use.")
+            flash("This email is already in use.", "email")
             is_valid = False
         if not EMAIL_REGEX.match(data['email']): # Checks if the email is valid
-            flash("Invalid email, please try again.")
+            flash("Invalid email, please try again.", "email")
             is_valid = False
         return is_valid
     
@@ -104,10 +104,10 @@ class User:
     def validate_password_update(data):
         is_valid = True
         if data['new_password'] != data['confirm_new']:
-            flash("Passwords do not match")
+            flash("Passwords do not match", "password")
             is_valid = False
         if len(data['new_password']) < 8:
-            flash("Invalid password, must be longer than 8 characters.")
+            flash("Invalid password, must be longer than 8 characters.", "new_password")
             is_valid = False
         return is_valid
 

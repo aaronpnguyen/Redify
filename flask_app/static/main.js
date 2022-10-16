@@ -1,27 +1,34 @@
 function lightDark() {
-	var a = document.getElementById("body");
-	var b = document.getElementById("lightDarkIconBtn");
-	var c = document.getElementById("lightBtnCase");
-	var d = document.getElementById("darkBtnCase");
+	let a = document.getElementById("body");
+	let b = document.getElementById("lightDarkIconBtn");
+	let c = document.getElementById("lightBtnCase");
+	let d = document.getElementById("darkBtnCase");
+
+	let topicsContainer = document.getElementById("joinTopics");
+
+	// var legal = document.getElementById("legal");
 
 	if (a.style.backgroundColor !== "var(--dark-charc)") {
 		a.style.backgroundColor = "var(--dark-charc)";
 		b.style.backgroundColor = "var(--light-btn)"
 		c.style.display = "none";
 		d.style.display = "inline-block";
-    } else {
-    	a.style.backgroundColor = "rgb(225, 225, 225)";
-    	b.style.backgroundColor = "var(--purple)"
+		// legal.style.backgroundColor = "rgb(100,100,100)"
+		topicsContainer.style.backgroundColor = "var(--soft-white)";
+	} else {
+		a.style.backgroundColor = "rgb(225, 225, 225)";
+		b.style.backgroundColor = "var(--purple)"
 		c.style.display = "inline-block";
 		d.style.display = "none";
-    }
-
+	// legal.style.backgroundColor = "#111111"
+		topicsContainer.style.backgroundColor = "rgb(225,225,225)";
+	}
 }
 
 function navDropdown() {
-    var x = document.getElementById("navDropdown");
-    var a = document.getElementById("navDropdownBtn");
-    var c = document.getElementById("downArrow");
+    let x = document.getElementById("navDropdown");
+    let a = document.getElementById("navDropdownBtn");
+    let c = document.getElementById("downArrow");
 
     x.style.display = "block";
     x.style.transition = "display ease-in 2s";
@@ -29,17 +36,17 @@ function navDropdown() {
 }
 
 function navDropdownRehide() {
-	var x = document.getElementById("navDropdown");
-	var a = document.getElementById("navDropdownBtn");
+	let x = document.getElementById("navDropdown");
+	let a = document.getElementById("navDropdownBtn");
 	x.style.display = "none";
 	a.style.backgroundColor = "#282828";
 }
 
 function showArtistsTab() {
-	var artistsContent = document.getElementById("favoriteArtists");
-	var tracksContent = document.getElementById("favoriteTracks");
-	var artistsTab = document.getElementById("artistsTab");
-	var tracksTab = document.getElementById("tracksTab");
+	let artistsContent = document.getElementById("favoriteArtists");
+	let tracksContent = document.getElementById("favoriteTracks");
+	let artistsTab = document.getElementById("artistsTab");
+	let tracksTab = document.getElementById("tracksTab");
 
 	// artistsContent.classList.add("activeTab");
 	// tracksContent.classList.remove("activeTab");
@@ -52,10 +59,10 @@ function showArtistsTab() {
 }
 
 function showTracksTab() {
-	var artistsContent = document.getElementById("favoriteArtists");
-	var tracksContent = document.getElementById("favoriteTracks");
-	var artistsTab = document.getElementById("artistsTab");
-	var tracksTab = document.getElementById("tracksTab");
+	let artistsContent = document.getElementById("favoriteArtists");
+	let tracksContent = document.getElementById("favoriteTracks");
+	let artistsTab = document.getElementById("artistsTab");
+	let tracksTab = document.getElementById("tracksTab");
 
 	// artistsContent.classList.remove("activeTab");
 	// tracksContent.classList.add("activeTab");
@@ -66,63 +73,3 @@ function showTracksTab() {
 	artistsTab.classList.remove("activeTab");
 	tracksTab.classList.add("activeTab");
 }
-
-
-function shortStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
-
-	a.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
-	c.classList.remove("activeStatsTab");
-}
-
-function medStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
-
-	b.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
-	a.classList.remove("activeStatsTab");
-}
-
-function longStatsTab() {
-	var a = document.getElementById("shortStatsTab");
-	var b = document.getElementById("medStatsTab");
-	var c = document.getElementById("longStatsTab");
-
-	c.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
-	a.classList.remove("activeStatsTab");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

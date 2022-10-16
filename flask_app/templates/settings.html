@@ -7,7 +7,8 @@
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/home.css">
     <link rel="stylesheet" href="../static/profile.css">
-        <link rel="stylesheet" href="../static/settings.css">
+    <link rel="stylesheet" href="../static/settings.css">
+    <link rel="stylesheet" href="../static/error.css">
     <title>User Profile</title>
 </head>
 <body id="body">
@@ -40,11 +41,12 @@
             </div>
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
                 {%if session['user_id']%}
-                <div class="rightNavDropdown">                    
-                    <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
-                        <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
-                    </svg>
-                </div>
+                    <p class="userName">{{user.user_name}}</p>
+                    <div class="rightNavDropdown">                    
+                        <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                            <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
+                        </svg>
+                    </div>
                 {%else%}
                     <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
                 {%endif%}
@@ -69,7 +71,7 @@
                 <p class="navDropdownLink">Stats</p>
             </div>
         </a>
-        <a href="#">
+        <a href="/settings/{{user.user_name}}">
             <div class="navDropdownCard">
                 <p class="navDropdownLink">Settings</p>
             </div>
@@ -86,7 +88,7 @@
                 <p class=""><a href="#accountOverview">Account Overview</a></p>
                 <p class=""><a href="#redifyEmail">Redify Email</a></p>
                 <p class=""><a href="#managePassword">Manage Password</a></p>
-                <p class=""><a href="#">Linked Spotify</a></p>
+                <p class=""><a href="#spotifyAccount">Spotify Account</a></p>
             </div>
 
         </div>
@@ -96,7 +98,14 @@
             {%with messages = get_flashed_messages()%}
                 {%if messages %}
                     {%for message in messages%}
-                        <h3 style="color:red;">{{message}}</h3>
+                        <div class="error-container">
+                            <div class="error-box">
+                                <p class="error-alert">Error!</p>
+                                <div class="errorContainer">
+                                    <p class="errorMessage">{{message}}</p>
+                                </div>
+                            </div>
+                        </div>
                     {%endfor%}
                 {%endif%}
             {%endwith%}
@@ -105,7 +114,9 @@
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Account Overview</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">Your username is unchangable, as this is how others will recognize you.</p>
+                    <br>
+                    <p class="settingsCardDescriptionText"><strong>Remember:</strong> Redify will never ask for your email/password.</p>
                 </div>
                 <div class="settingsCardActions">
                     <!--Username should not be updated-->
@@ -116,15 +127,15 @@
                     </div>
                     <p class="settingsCardListP">Created On: {{user.created_at}}</p>
                 </div>
-                <div id="redifyEmail"></div>
             </div>
-
-
+            
+            
+            <div id="redifyEmail"></div>
             <!-- Change Email -->
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Redify Email</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">This is the email Redify will contact you at. Make sure your new email is one that you are able to access.</p>
                 </div>
                 <div class="settingsCardActions">
                     <h1>Change Email</h1>
@@ -136,14 +147,13 @@
                     </form>
                 </div>
             </div>
+            
             <div id="managePassword"></div>
-
-
             <!-- Change Password -->
             <div class="settingsCard">
                 <div class="settingsCardDescription">
                     <p class="settingsCardDescriptionTitle">Manage Password</p>
-                    <p class="settingsCardDescriptionText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, aliquid.</p>
+                    <p class="settingsCardDescriptionText">Change your current password.</p>
                 </div>
                 <div class="settingsCardActions">
                     <h1>Change Password</h1>
@@ -162,12 +172,20 @@
                 </div>
             </div>
 
-
-
-
-
-
-    </div>
+            <div id="spotifyAccount"></div>
+            <div class="settingsCard">
+                <div class="settingsCardDescription">
+                    <p class="settingsCardDescriptionTitle">Spotify</p>
+                    <p class="settingsCardDescriptionText">By signing out of Spotify, you must sign back in for Redify to access your stats.</p>
+                </div>
+                <div class="settingsCardActions">
+                    <h1>Spotify Account</h1>
+                    <form action="/spotify/logout" method="POST">
+                        <button type="submit" class="createFormSubmit hvr-grow-rotate">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <script src="../static/main.js"></script>
 

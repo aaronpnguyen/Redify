@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/home.css">
     <link rel="stylesheet" href="../static/view.css">
+    <link rel="stylesheet" href="../static/error.css">
     <link rel="stylesheet" href="../static/profile.css">
     <title>User Profile</title>
 </head>
@@ -38,6 +39,7 @@
             </div>
             {%if session['user_id']%}
             <button class="rightNav" onmouseover="navDropdown()" onmouseout="navDropdownRehide()" id="navDropdownBtn">
+                <p class="userName">{{user.user_name}}</p>
                 <div class="rightNavDropdown">                    
                     <svg id="downArrow" class="rightNavDropdownArrow" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
                         <path d="M98.9 184.7l1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z"/>
@@ -123,22 +125,38 @@
                 </div>
 
 
-
-                <div class="postCommentContainer messageContent">
-                    <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
-                        <h3 class="newCommentTitle">New Comment</h3>
-                        <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
-                        <!-- <h3>spotify url</h3> -->
-                        <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
-                        <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
-                    </form>
-                </div>
+                {%if session['user_id']%}
+                    <div class="postCommentContainer messageContent">
+                        <div class="error-container">
+                            {%with messages = get_flashed_messages(with_categories = True)%}
+                                {%if messages %}
+                                    <div class="error-box">
+                                        <p class="error-alert">Error!</p>
+                                        <div class="errorContainer">
+                                            {%for category, message in messages%}
+                                                <p class="errorMessage">{{message}}</p>
+                                            {%endfor%}
+                                        </div>
+                                    </div>
+                                {%endif%}
+                            {%endwith%}
+                        </div>
+                        
+                        <form action="/submit/form/comment/{{post.id}}" method="POST" class="postCommentForm">
+                            <h3 class="newCommentTitle">New Comment</h3>
+                            <textarea class="postInput charcOutline postTitle newCommentArea" type="text" spellcheck="false" name="message" placeholder="Comment message"></textarea>
+                            <!-- <h3>spotify url</h3> -->
+                            <input class="postInput charcOutline postTitle" type="text" spellcheck="false" name="link" placeholder="Spotify URL">
+                            <button class="favoritesBtn hvr-grow" id="commentBtn" type="submit">Submit Comment</button>
+                        </form>
+                    </div>
+                {%endif%}
 
 
                 {%for comment in comments%}
                     <div class="comments messageContent">
                         <div class="postTopInfo">
-                            <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
+                            <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{comment.user.user_name}}</a>
                             <span class="postTopSpan">&nbsp;on&nbsp; {{comment.created_at}}</span>
                             <!-- <span href="profile/{{post.user.user_name}}" class="postTopAuthor">{{comment.created_at}}</a> -->
                         </div>
@@ -183,7 +201,7 @@
                     <p class="topicAboutTitle">About</p>
                     <p class="topicAboutText">Description: {{post.topic.description}}</p>
                     <p class="topicAboutText">Active Users: {{activeCount}}</p>
-                    <p class="topicAboutText">Creator: {{post.user.user_name}}</p>
+                    <p class="topicAboutText">Creator: <a href="/profile/{{post.user.user_name}}">{{post.user.user_name}}</a></p>
                 </div>
             </div>
         </div>

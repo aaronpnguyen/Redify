@@ -2,8 +2,22 @@
     font-family: 'FF Mark W05', sans-serif;
 }
 
+:root {
+    --light-red: rgba(235, 130, 130, 1);
+    --dark-red:  rgba(203, 106, 106, 1);
+    --dark-charc: rgb(15,15,15);
+    --charc: rgb(50,50,50);
+    --light-charc:  rgb(100,100,100);
+    --light-gray: rgba(180,180,180,1);
+    --soft-white: rgb(247, 247, 247);
+    --light-green: rgb(210,255,195);
+    --green: #1db352;
+    --purple: #7D38A6;
+    --light-btn:  #FBD38D;
+}
+
 body {
-    padding: 200px;
+    padding: 100px;
     background-color: #202124;
 }
 
@@ -14,7 +28,7 @@ form {
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
-    height: 600px;
+    height: 700px;
     width: 500px;
     border-radius: 10px;
 }

@@ -17,7 +17,11 @@ def postForm():
 def submitPost():
     if 'user_id' not in session:
         return redirect('/home')
-        
+    
+    if not Post.validate_post(request.form):
+        return redirect('/form/post')
+
+    # Breaking down spotify link into digestable (parsed) data for database
     link = request.form['link']
     if link:
         try:
@@ -48,19 +52,25 @@ def submitPost():
 @app.route('/post/<int:id>')
 def viewPost(id):
     post = Post.get_one_by_id({'id': id})
-
     if not post:
-        return redirect('/home')
+        return redirect('/home') # If post doesn't exist, return home
     
     comments = Comment.get_comments_for_post({'post_id': id})
     activeCount = Topic.get_active({'id': post.topic_id})
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    user = None
 
-    return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount)
+    return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount, user = user)
 
 @app.route('/submit/form/comment/<int:post_id>', methods=['POST'])
 def submitComment(post_id):
     link = request.form['link']
 
+    if not Comment.validate_comment(request.form):
+        return redirect(f'/post/{post_id}')
+
+    # Breaking down spotify link into digestable (parsed) data for database
     if link:
         try:
             valid = link.index('spotify.com/')

@@ -5,20 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/login.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/error.css">
+    <title>Login</title>
 </head>
 <body>
-    {%with messages = get_flashed_messages()%}
-        {%if messages %}
-            {%for message in messages%}
-                <h3 style="color:red;">{{message}}</h3>
-            {%endfor%}
-        {%endif%}
-    {%endwith%}
     <form action="/login" method="POST">
         <div class="loginTitle">
             <h1>Sign In</h1>
         </div>
+        {%with messages = get_flashed_messages(with_categories = True)%}
+            {%if messages %}
+                <div class="error-container">
+                    <div class="error-box">
+                        <p class="error-alert">Error!</p>
+                        <div class="errorContainer">
+                            {%for category, message in messages%}
+                                <p class="errorMessage">{{message}}</p>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+        {%endwith%}
         <div class="loginForm">
             <input class="credentials" type="text" spellcheck="false" name="user_name" placeholder="USERNAME">
         </div>
