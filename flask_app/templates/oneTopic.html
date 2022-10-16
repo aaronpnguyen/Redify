@@ -134,13 +134,15 @@
                         <div class="hmm-speech">
                             <i class="fa-regular fa-comment-dots"></i>
                         </div>
-                        <p class="hmm-nothing">Hmm.. There is no posts</p>
+                        <p class="hmm-nothing">Hmm.. There are no posts</p>
+                        {%if session['user_id']%}
                         <div class="hmm-text">    
                             <p>Create a new post for this topic!</p>
                             <div class="hmm-btn-center">
                                 <a class="hmm-btn hvr-grow" href="/form/post">Create Post</a>
                             </div>
                         </div>
+                        {%endif%}
                     </div>
                 {%endif%}
             </div>
