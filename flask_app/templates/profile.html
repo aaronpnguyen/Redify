@@ -123,9 +123,19 @@
 
                 {%else%}
                     {%if session['user_id']%}
-                        <div class="post messageContent">
-                            <p class="no-posts">You have no posts! <a href="/">Create Post</a></p>
+                    <div class="join-topics-container">
+                        <div class="hmm-speech">
+                            <i class="fa-regular fa-comment-dots"></i>
                         </div>
+                        <p class="hmm-nothing">Hmm.. You have no posts</p>
+                        <div class="hmm-text">    
+                            <p>Join or create a topic in order to create a post.</p>
+                            <div class="hmm-btn-row">
+                                <a class="hmm-btn hvr-grow" href="/all/topics">Join a Topic!</a>
+                                <a class="hmm-btn hvr-grow" href="/form/topic">Create a Topic!</a>
+                            </div>
+                        </div>
+                    </div>
                     {%endif%}
                 {%endif%}
             </div>
