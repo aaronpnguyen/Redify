@@ -150,11 +150,11 @@ def page_not_found(e):
     return render_template('error.html', error = 404)
 
 @app.errorhandler(500)
-def page_not_found(e):
+def nginx_error(e):
     return render_template('error.html', error = 500)
 
 @app.errorhandler(502)
-def page_not_found(e):
+def gateway_error(e):
     return render_template('error.html', error = 502)
 
 '''
