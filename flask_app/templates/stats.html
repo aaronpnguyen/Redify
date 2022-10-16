@@ -81,13 +81,13 @@
 
         <div class="statsTabContainer">
             <div class="statsTop">
-                <a class="statsTab firstTab activeStatsTab" href="/stats/short_term" id="shortStatsTab">
+                <a class="statsTab firstTab {%if term == 'short_term'%} activeStatsTab {%endif%}" href="/stats/short_term" id="shortStatsTab">
                     <p>Short</p>
                 </a>
-                <a class="statsTab middleTab" href="/stats/medium_term" id="medStatsTab">
+                <a class="statsTab middleTab {%if term == 'medium_term'%} activeStatsTab {%endif%}" href="/stats/medium_term" id="medStatsTab">
                     <p>Medium</p>
                 </a>
-                <a class="statsTab lastTab" href="/stats/long_term" id="longStatsTab">
+                <a class="statsTab lastTab {%if term == 'long_term'%} activeStatsTab {%endif%}" href="/stats/long_term" id="longStatsTab">
                     <p>Long</p>
                 </a>
             </div>
