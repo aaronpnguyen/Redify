@@ -7,7 +7,8 @@
     <script src="https://kit.fontawesome.com/4229a7500a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/home.css">
     <link rel="stylesheet" href="../static/profile.css">
-        <link rel="stylesheet" href="../static/settings.css">
+    <link rel="stylesheet" href="../static/settings.css">
+    <link rel="stylesheet" href="../static/error.css">
     <title>User Profile</title>
 </head>
 <body id="body">
@@ -97,7 +98,14 @@
             {%with messages = get_flashed_messages()%}
                 {%if messages %}
                     {%for message in messages%}
-                        <h3 style="color:red;">{{message}}</h3>
+                        <div class="error-container">
+                            <div class="error-box">
+                                <p class="error-alert">Error!</p>
+                                <div class="errorContainer">
+                                    <p class="errorMessage">{{message}}</p>
+                                </div>
+                            </div>
+                        </div>
                     {%endfor%}
                 {%endif%}
             {%endwith%}
