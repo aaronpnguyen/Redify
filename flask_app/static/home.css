@@ -295,6 +295,14 @@ input:focus-visible {
     color: var(--charc);
 }
 
+.hmm-btn-row {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3% 10%;
+}
+
 .rightMC {
     max-width: 100%;
 }
