@@ -86,6 +86,8 @@ def home():
 @app.route('/profile/<string:username>')
 def profile(username):
     user = model_user.User.get_user_by_name({'user_name': username})
+    if not user:
+        return redirect('/')
     user_id = {'user_id': user.id} # Parse out user_id
     favorite_tracks = model_track.Track.get_all_for_user(user_id)
     favorite_artists = model_artist.Artist.get_all_for_user(user_id)

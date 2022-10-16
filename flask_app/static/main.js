@@ -69,34 +69,3 @@ function showTracksTab() {
 	artistsTab.classList.remove("activeTab");
 	tracksTab.classList.add("activeTab");
 }
-
-
-function shortStatsTab() {
-	let a = document.getElementById("shortStatsTab");
-	let b = document.getElementById("medStatsTab");
-	let c = document.getElementById("longStatsTab");
-
-	a.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
-	c.classList.remove("activeStatsTab");
-}
-
-function medStatsTab() {
-	let a = document.getElementById("shortStatsTab");
-	let b = document.getElementById("medStatsTab");
-	let c = document.getElementById("longStatsTab");
-
-	b.classList.add("activeStatsTab");
-	c.classList.remove("activeStatsTab");
-	a.classList.remove("activeStatsTab");
-}
-
-function longStatsTab() {
-	let a = document.getElementById("shortStatsTab");
-	let b = document.getElementById("medStatsTab");
-	let c = document.getElementById("longStatsTab");
-
-	c.classList.add("activeStatsTab");
-	b.classList.remove("activeStatsTab");
-	a.classList.remove("activeStatsTab");
-}

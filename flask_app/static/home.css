@@ -244,12 +244,13 @@ input:focus-visible {
 }
 
 .join-topics-container {
-    background-color: rgba(225, 225, 225, 1);
+    background-color: var(--soft-white);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    border-radius: 5px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
     padding: 5%;
     margin-top: 5%;
 }
@@ -263,8 +264,7 @@ input:focus-visible {
 }
 
 .hmm-text {
-    padding-left: 70px;
-    padding-top: 1px;
+    padding-top: 2px;
     color: rgba(0, 0, 0, 0.5);
 }
 
