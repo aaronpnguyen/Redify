@@ -18,6 +18,8 @@
         <div class="flaskError {%if error == 404%} pnf {%endif%}">
             {%if error == 404%}
                 <h1 class="errorTitle">Page Does Not Exist</h1>
+            {%elseif error == 500%}
+                <h1 class="errorTitle">Page Does Not Exist</h1>
             {%else%}
                 <h1 class="errorTitle">API ERROR</h1>
                 <h3 class="apiError">We apologize, but due to Spotify's API restrictions we are unable to access your Spotify account. Please notify the developers if you would like to have full-access to this project.</h3>
