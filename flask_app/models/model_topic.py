@@ -137,3 +137,8 @@ class Topic:
             flash("Topic description must contain more than 2 characters!", "description")
             is_valid = False
         return is_valid
+
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

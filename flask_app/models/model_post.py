@@ -144,6 +144,9 @@ class Post:
         if len(data['title']) < 2:
             flash("Title must contain more than 2 characters!", "title")
             is_valid = False
+        if len(data['title']) > 25:
+            flash("Title must contain less than 25 characters!", "title")
+            is_valid = False
         if len(data['message']) < 2:
             flash("Description must contain more than 2 characters!", "message")
             is_valid = False
@@ -155,3 +158,8 @@ class Post:
             flash("Topic does not exist!", "Topic")
             is_valid = False
         return is_valid
+
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

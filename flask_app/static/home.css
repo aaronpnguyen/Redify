@@ -419,7 +419,7 @@ input:focus-visible {
 /* TRENDING TABLE */
 
 .trending {
-    background-color: var(--dark-red);
+    background-color: var(--charc);
     max-width: 100%;
     height: auto;
     margin-bottom: 25px;
@@ -427,14 +427,14 @@ input:focus-visible {
     display:  flex;
     flex-direction: column;
     align-items: center;
-    border: 10px solid var(--dark-red);
+    border: 10px solid var(--charc);
     border-radius:  20px;
     box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.2);
 }
 
 .trendingTableTitle {
-    color: black;
-    background-color: var(--dark-red);
+    color: var(--soft-white);
+    background-color: var(--charc);
     min-width: 100%;
     text-align: center;
     padding: 3% 0 5% 0;
@@ -443,6 +443,10 @@ input:focus-visible {
 
 .topicCardHoldingLink {
     text-decoration: none;
+    font-family: 'FF Mark W05', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--soft-white);
 }
 
 .trendingTableTopicList {
@@ -461,18 +465,18 @@ input:focus-visible {
     min-width: 100%;
     padding: 4% 2% 4% 10%;
     /*background-color: var(--soft-white);*/
-    border-bottom: 1px solid var(--dark-red);
+    border-bottom: 1px solid var(--charc);
 }
 
 .trendingTopicCircleNumber {
-    background-color: var(--dark-red);
+    background-color: var(--charc);
     border-radius:  180px;
     padding: 2.5% 4%;
     margin-right: 5%;
 }
 
 .trendingTopicCircleNumberText {
-    color: var(--charc);
+    color: var(--soft-white);
 }
 
 .trendingTopicCardText > span {
@@ -488,6 +492,10 @@ input:focus-visible {
     background-color: var(--soft-white);
     padding: 2% 4%;
     border-radius: 5px;
+}
+
+.margin {
+    margin-top: 0.5%;
 }
 
 /*
@@ -619,6 +627,10 @@ Legal was too much of a hassle for now, not really used atm
     background-color: var(--charc);
     cursor: pointer;
     font-weight:  bold;
+}
+
+#logoutBtn {
+    width: 100px;
 }
 
 .postDescription {
@@ -800,3 +812,11 @@ Legal was too much of a hassle for now, not really used atm
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
+
+/*
+
+    Styling done by Corbin Crawford (minor edits by Aaron Nguyen)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+    
+*/

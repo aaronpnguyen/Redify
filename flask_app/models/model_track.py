@@ -38,3 +38,8 @@ class Track:
     def update_track(cls, data):
         query = "UPDATE favorite_tracks SET track_name = %(track_name)s, track_artist = %(track_artist)s, track_image = %(track_image)s, track_id = %(track_id)s, updated_at = NOW() WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
+
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

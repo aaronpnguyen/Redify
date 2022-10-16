@@ -47,3 +47,8 @@ class Comment:
                 flash("Invalid spotify link!", "link")
                 is_valid = False
         return is_valid
+
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

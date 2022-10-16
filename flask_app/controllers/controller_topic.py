@@ -82,3 +82,9 @@ def removeFavorite(topic_id):
     Topic.delete_favorited(data)
     topic = Topic.get_one_by_id({'id': topic_id})
     return redirect(f'/t/{topic.title}')
+
+'''
+    Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''

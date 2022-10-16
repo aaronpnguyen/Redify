@@ -3,3 +3,9 @@ from flask_app import app
 
 if __name__ == "__main__":
     app.run(debug = True)
+
+'''
+    Created by Aaron Nguyen and Corbin Crawford
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''

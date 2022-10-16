@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="../static/home.css">
     <title>Home Page</title>
 </head>
+
+    <!--Joint collaboration between Aaron Nguyen and Corbin Crawford-->
+    <!--https://www.linkedin.com/in/aaronpnguyen/-->
+    <!--https://www.linkedin.com/in/corbin-crawford/-->
+
 <body id="body">
     <div class="navContainer">
         <div class="navBar">
@@ -202,13 +207,12 @@
         <div class="bodyRight">
             <div class="information">
                 <div class="trending">
-
                     {%if session['user_id']%}
                         <p class="trendingTableTitle">Your Topics</p>
                         {%if not topics%}
                             <p>Browse some topics!</p>
-                            <a class="all-topics-btn hvr-grow" href="/all/topics">All Topics</a>
                         {%endif%}
+                        <a class="all-topics-btn hvr-grow {%if topics%} margin {%endif%}" href="/all/topics">All Topics</a>
                         <ul class="trendingTableTopicList">
                         <!-- THIS PART IS INCOMPLETE -->
                             <li>
@@ -228,6 +232,7 @@
                         </ul>
                     {%else%}
                         <p class="trendingTableTitle">Trending Topics</p>
+                        <a class="all-topics-btn hvr-grow margin" href="/all/topics">All Topics</a>
                         <ul class="trendingTableTopicList">
                             <li>
                                 {%for i in range(topics | length)%}

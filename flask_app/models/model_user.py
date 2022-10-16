@@ -111,3 +111,7 @@ class User:
             is_valid = False
         return is_valid
 
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

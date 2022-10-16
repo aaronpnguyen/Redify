@@ -59,7 +59,8 @@ def viewPost(id):
     activeCount = Topic.get_active({'id': post.topic_id})
     if 'user_id' in session:
         user = User.get_user_by_id({'id': session['user_id']})
-    user = None
+    else:
+        user = None
 
     return render_template('onePost.html', post = post, comments = comments, activeCount = activeCount, user = user)
 
@@ -95,3 +96,9 @@ def submitComment(post_id):
     }
     Comment.create_comment(data)
     return redirect(f'/post/{post_id}')
+
+'''
+    Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''

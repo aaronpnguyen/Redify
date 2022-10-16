@@ -53,5 +53,9 @@ class Artist:
     @classmethod
     def update_artist(cls, data):
         query = "UPDATE favorite_artists SET artist_name = %(artist_name)s, artist_image = %(artist_image)s, followers = %(followers)s, genre = %(genre)s, updated_at = NOW() WHERE id = %(id)s;"
-        return connectToMySQL(DATABASE).query_db(query, data)
-        
+        return connectToMySQL(DATABASE).query_db(query, data) 
+
+'''
+    Queries created by Aaron Nguyen
+    https://www.linkedin.com/in/aaronpnguyen/
+'''

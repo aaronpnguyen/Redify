@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="../static/view.css">
     <link rel="stylesheet" href="../static/error.css">
     <link rel="stylesheet" href="../static/profile.css">
-    <title>User Profile</title>
+    <title>{{post.title}}</title>
 </head>
+
+    <!--Joint collaboration between Aaron Nguyen and Corbin Crawford-->
+    <!--https://www.linkedin.com/in/aaronpnguyen/-->
+    <!--https://www.linkedin.com/in/corbin-crawford/-->
+
 <body id="body">
     <div class="navContainer">
         <div class="navBar">
@@ -47,7 +52,7 @@
                 </div>
             </button>
             {%else%}
-                <a href="/login/user" class="homeLoginBtn" ><p>Login</p></a>
+                <a href="/login/user" class="homeLoginBtn"><p>Login</p></a>
             {%endif%}
         </div>
     </div>
@@ -81,39 +86,18 @@
 
     <div class="bodyContainer" id="columnContainer">
         <div class="padding-fiftypx"></div>
-
-            <!-- <div class="topicTop">
-
-            <h1 class="topicTopTitle">t/{{post.topic.title}}</h1>
-            Button to follow/save topic
-            {%if favorited%}
-                <form action="/remove/favorite/topic/{{post.topic.id}}" method="POST">
-                    <button type="submit">Remove from favorites?</button>
-                </form>
-            {%elif not favorited and 'user_id' in session%}
-                <form action="/add/favorite/topic/{{post.topic.id}}" method="POST">
-                    <button type="submit">Join the Conversation?</button>
-                </form>
-            {%endif%}
-
-            </div> -->
-
         <div class="innerBodyContainer">
             <div class="commentBodyLeft">
-
                 <!-- Create Post -->
                 <div class="onePostContainer messageContent">
-
                     <div class="postTopInfo">
                         <a href="/t/{{post.topic.title}}" class="postTopTopic">t/{{post.topic.title}}</a>
                         <span class="postTopSpan">&nbsp;posted by&nbsp;</span>
-                        <a href="profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
+                        <a href="/profile/{{post.user.user_name}}" class="postTopAuthor">p/{{post.user.user_name}}</a>
                     </div>
-
                     <p class="postAudioTitle">{{post.title}}</p>
                     <p class="postAudioDescription">{{post.message}}</p>
 
-                    
                     {%if post.type and post.link%}
                         <iframe style="border-radius:12px"
                             src="https://open.spotify.com/embed/{{post.type}}/{{post.link}}?utm_source=generator"
@@ -123,7 +107,6 @@
                         </iframe>
                     {%endif%}
                 </div>
-
 
                 {%if session['user_id']%}
                     <div class="postCommentContainer messageContent">

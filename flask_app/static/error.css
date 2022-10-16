@@ -18,3 +18,65 @@
     color: rgba(0,0,0,0.5);
     font-size: 1.2rem;
 }
+
+.flaskError {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto;
+    width: 550px;
+    background-color: var(--charc);
+    color: var(--soft-white);
+    border-radius: 10px;
+    padding: 2%;
+}
+
+.pnf {
+    width: 400px;
+}
+
+.errorTitle {
+    margin-bottom: 10px;
+}
+
+.errorBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.button {
+    background-color: rgb(225, 195, 160);
+    padding: 3% 6%;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--charc);
+}
+
+.apiError {
+    text-align: center;
+    padding: 1%;
+    margin: 1%;
+}
+
+.contactRow {
+    display: flex;
+    padding: 1%;
+    margin: 1%;
+    justify-content: space-evenly;
+    width: 500px;
+}
+
+.contactRow > .button {
+    background-color: var(--green);
+}
+
+/*
+
+    Styling done by Corbin Crawford (minor edits by Aaron Nguyen)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+    
+*/

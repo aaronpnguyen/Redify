@@ -68,9 +68,12 @@ def userStats(term):
     else:
         term = "short_term"
 
-    # Running query for API call
-    topArtists = request.current_user_top_artists(50, 0, term)['items']
-    topTracks = request.current_user_top_tracks(50, 0, term)['items']
+    # Running query for API call, if we run into error we can send user to error
+    try:
+        topArtists = request.current_user_top_artists(50, 0, term)['items']
+        topTracks = request.current_user_top_tracks(50, 0, term)['items']
+    except:
+        return redirect('/api/error')
 
     artists = []
     tracks = []
@@ -101,9 +104,7 @@ def userStats(term):
         user = User.get_user_by_id({'id': session['user_id']})
     else:
         user = None
-    
-    print(term)
-    # return request.current_user_top_artists(50, 0, term) # Show JSON
+
     return render_template('stats.html', tracks = tracks, artists = artists, user = user, term = term)
 
 @app.route('/save/spotify_stats', methods=['POST'])
@@ -117,8 +118,12 @@ def saveStats():
         return redirect(url_for('spotifyLogin', _external = False))
     request = spotipy.Spotify(auth = token['access_token'])
 
-    topArtists = request.current_user_top_artists(5, 0, "long_term")['items']
-    topTracks = request.current_user_top_tracks(5, 0, "long_term")['items']
+    # Running query for API call, if we run into error we can send user to error
+    try:
+        topArtists = request.current_user_top_artists(5, 0, "long_term")['items']
+        topTracks = request.current_user_top_tracks(5, 0, "long_term")['items']
+    except:
+        return redirect('/api/error')
     
     allArtists = Artist.get_all_for_user({'user_id': session['user_id']})
     allTracks = Track.get_all_for_user({'user_id': session['user_id']})
@@ -185,4 +190,21 @@ def spotify_logout():
         os.remove(".cache")
     session['last_route'] = None # Removes last route/redirect path
     session['session_token'] = None # Deletes spotify token
+
     return redirect(f'/settings/{user.user_name}')
+
+@app.route('/api/error')
+def api_error():
+
+    # We have no use for cache if we hit this error
+    if os.path.exists(".cache"):
+        os.remove(".cache")
+    session['last_route'] = None # Removes last route/redirect path
+    session['session_token'] = None # Deletes spotify token
+    return render_template('error.html', error = 403)
+
+'''
+    Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''

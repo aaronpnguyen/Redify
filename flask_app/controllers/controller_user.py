@@ -85,6 +85,7 @@ def home():
 
 @app.route('/profile/<string:username>')
 def profile(username):
+    sUser = model_user.User.get_user_by_id({'id': session['user_id']})
     user = model_user.User.get_user_by_name({'user_name': username})
     if not user:
         return redirect('/')
@@ -94,7 +95,7 @@ def profile(username):
     topics = model_topic.Topic.get_favorite_topics_by_user_id(user_id)
     created_topics = model_topic.Topic.get_topics_user_created(user_id)
     posts = model_post.Post.get_posts_for_user({'id': user.id})
-    return render_template('profile.html', user = user, topics = topics, created_topics = created_topics, tracks = favorite_tracks, artists = favorite_artists, posts = posts)
+    return render_template('profile.html', user = user, topics = topics, created_topics = created_topics, tracks = favorite_tracks, artists = favorite_artists, posts = posts, sUser = sUser)
 
 @app.route('/settings/<string:username>')
 def settings(username):
@@ -143,3 +144,13 @@ def updatePassword(id):
         'password': pw_hash
     })
     return redirect(f'/settings/{user.user_name}')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error = 404)
+
+'''
+    Backend created by Aaron Nguyen (minor edits by Corbin Crawford)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''

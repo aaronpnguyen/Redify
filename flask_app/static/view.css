@@ -111,14 +111,10 @@
     min-width: 60%;
     max-width: 60%;
     margin-top: 50px;
-    background-color: var(--light-red);
+    background-color: var(--light-gray);
     border-radius: 20px;
     padding: 4% 3%;
     box-shadow: 0 0 9px 3px rgba(0, 0, 0,  0.2);
-}
-
-.onePostContainer {
-
 }
 
 .postCommentForm {
@@ -143,34 +139,10 @@
 	font-size: 16px;
 }
 
+/*
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Styling done by Corbin Crawford (minor edits by Aaron Nguyen)
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+    
+*/

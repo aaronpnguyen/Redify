@@ -4,7 +4,7 @@ class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(host = 'localhost',
                                     user = 'root', 
-                                    password = 'rootroot', # This must change depending on who is editing
+                                    password = 'root', # This must change depending on who is editing
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
@@ -32,3 +32,9 @@ class MySQLConnection:
 
 def connectToMySQL(db):
     return MySQLConnection(db)
+
+'''
+    Created by Aaron Nguyen and Corbin Crawford
+    https://www.linkedin.com/in/aaronpnguyen/
+    https://www.linkedin.com/in/corbin-crawford/
+'''
