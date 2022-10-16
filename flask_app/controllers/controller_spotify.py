@@ -97,11 +97,14 @@ def userStats(term):
             'songId': item['id']
         }
         tracks.append(details)
+    if 'user_id' in session:
+        user = User.get_user_by_id({'id': session['user_id']})
+    else:
+        user = None
     
-    user = User.get_user_by_id({'id': session['user_id']})
-    
+    print(term)
     # return request.current_user_top_artists(50, 0, term) # Show JSON
-    return render_template('stats.html', tracks = tracks, artists = artists, user = user)
+    return render_template('stats.html', tracks = tracks, artists = artists, user = user, term = term)
 
 @app.route('/save/spotify_stats', methods=['POST'])
 def saveStats():
