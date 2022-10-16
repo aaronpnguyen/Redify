@@ -129,7 +129,18 @@
                     {%endfor%}
                 {%else%}
                     <!--Topic does not have posts-->
-                    <p>no posts</p>
+                    <div class="join-topics-container" id="joinTopics">
+                        <div class="hmm-speech">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </div>
+                        <p class="hmm-nothing">Hmm.. There is no posts</p>
+                        <div class="hmm-text">    
+                            <p>Create a new post for this topic!</p>
+                            <div class="hmm-btn-center">
+                                <a class="hmm-btn hvr-grow" href="/form/post">Create Post</a>
+                            </div>
+                        </div>
+                    </div>
                 {%endif%}
             </div>
 
