@@ -29,13 +29,14 @@ class Topic:
     # GET
     @classmethod
     def get_all(cls):
-        query = "SELECT *, COUNT(topic_id) AS active_users from favorite_topics RIGHT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY(topics.id)"
+        query = "SELECT topics.id, topics.title, topics.description, topics.created_at, topics.updated_at, topics.user_id, COUNT(topic_id) AS active_users from favorite_topics RIGHT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY(topics.id)"
         results = connectToMySQL(DATABASE).query_db(query)
 
         if results:
             all_topics = []
             for data in results:
                 topic = cls(data) # Join active users
+                topic.id = None
                 topic.active_users = data['active_users']
                 all_topics.append(topic)
             return all_topics
