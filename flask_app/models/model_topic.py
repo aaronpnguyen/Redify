@@ -76,7 +76,7 @@ class Topic:
     
     @classmethod
     def get_top_5_topics(cls):
-        query = "SELECT *, COUNT(topic_id) FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY topic_id ORDER BY COUNT(topic_id) DESC LIMIT 5"
+        query = "SELECT topics.id, topics.title, topics.description, topics.created_at, topics.updated_at, topics.user_id, COUNT(topic_id) FROM favorite_topics LEFT JOIN topics ON favorite_topics.topic_id = topics.id GROUP BY topic_id ORDER BY COUNT(topic_id) DESC LIMIT 5"
         results = connectToMySQL(DATABASE).query_db(query)
 
         if results:
