@@ -89,8 +89,18 @@
                     </div>
                     
                     {%if not userFeed%}
-                        <p>Join some topics!</p>
-                        <a href="/all/topics">All Topics</a>
+                    <div class="join-topics-container">
+                        <div class="hmm-speech">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </div>
+                        <p class="hmm-nothing">Hmm.. There is no posts</p>
+                        <div class="hmm-text">    
+                            <p>Join or create a topic to view posts.</p>
+                            <div class="hmm-btn-row">
+                                <a class="hmm-btn hvr-grow" href="/all/topics">Join a Topic!</a>
+                            </div>
+                        </div>
+                    </div>
                     {%else%}
                     
                         <!-- User feed -->
