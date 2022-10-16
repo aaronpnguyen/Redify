@@ -2,6 +2,9 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 
+if os.path.exists(".cache"):
+    os.remove(".cache")
+
 app = Flask(__name__)
 app.secret_key = "Corbin/Aaron/Crawford/Nguyen/Redify/https://www.linkedin.com/in/aaronpnguyen/_/https://www.linkedin.com/in/corbin-crawford/"
 
