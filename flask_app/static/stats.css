@@ -28,7 +28,7 @@
 
 .statsTab:hover {
 	cursor: pointer;
-	background-color: var(--light-gray);
+	background-color: var(--light-charc);
 }
 
 .statsTab > p {
@@ -52,17 +52,13 @@
 	border-radius: 0 10px 0 0;
 }
 
-/*.activeStatsTab {
-	background-color: rgba(20,20,20,1);
-}
-
-.activeStatsTab:hover {
-	background-color: rgba(20, 20, 20, 1.0);
+.activeStatsTab {
+	background-color: var(--light-gray);
 }
 
 .activeStatsTab > p {
-	color: var(--charc);
-}*/
+	color: var(--soft-white);
+}
 
 
 .innerStatsContainer {
